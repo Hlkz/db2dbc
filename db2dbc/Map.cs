@@ -1,28 +1,35 @@
 using System;
-using System.Runtime.InteropServices;
+
 namespace DBtoDBC
 {
     public struct achievement_criteriaMap {
         public achievement_criteriaRecord record;
-        public UInt32[] Description; };
+        public string[] Description; }
 
     public struct achievementMap {
-        public achievementRecord record; };
+        public achievementRecord record;
+        public string[] Name;
+        public string[] Description;
+        public string[] Reward; }
 
     public struct areagroupMap {
         public areagroupRecord record; };
 
     public struct areapoiMap {
-        public areapoiRecord record; };
+        public areapoiRecord record;
+        public string[] Name;
+        public string[] Description; }
 
     public struct areatableMap {
-        public areatableRecord record; };
+        public areatableRecord record;
+        public string[] Name; }
 
     public struct areatriggerMap {
         public areatriggerRecord record; };
 
     public struct auctionhouseMap {
-        public auctionhouseRecord record; };
+        public auctionhouseRecord record;
+        public string[] Name; }
 
     public struct bankbagslotpricesMap {
         public bankbagslotpricesRecord record; };
@@ -31,25 +38,37 @@ namespace DBtoDBC
         public bannedaddonsRecord record; };
 
     public struct barbershopstyleMap {
-        public barbershopstyleRecord record; };
+        public barbershopstyleRecord record;
+        public string[] Name; }
 
     public struct battlemasterlistMap {
-        public battlemasterlistRecord record; };
+        public battlemasterlistRecord record;
+        public string[] Name; }
 
     public struct charstartoutfitMap {
         public charstartoutfitRecord record; };
 
     public struct chartitlesMap {
-        public chartitlesRecord record; };
+        public chartitlesRecord record;
+        public string[] Male;
+        public string[] Female; }
 
     public struct chatchannelsMap {
-        public chatchannelsRecord record; };
+        public chatchannelsRecord record;
+        public string[] Pattern;
+        public string[] Name; }
 
     public struct chrclassesMap {
-        public chrclassesRecord record; };
+        public chrclassesRecord record;
+        public string[] Name;
+        public string[] Female;
+        public string[] Male; }
 
     public struct chrracesMap {
-        public chrracesRecord record; };
+        public chrracesRecord record;
+        public string[] Name;
+        public string[] NameFemale;
+        public string[] NameMale; }
 
     public struct cinematicsequencesMap {
         public cinematicsequencesRecord record; };
@@ -61,7 +80,8 @@ namespace DBtoDBC
         public creaturedisplayinfoextraRecord record; };
 
     public struct creaturefamilyMap {
-        public creaturefamilyRecord record; };
+        public creaturefamilyRecord record;
+        public string[] Name; }
 
     public struct creaturemodeldataMap {
         public creaturemodeldataRecord record; };
@@ -70,7 +90,8 @@ namespace DBtoDBC
         public creaturespelldataRecord record; };
 
     public struct creaturetypeMap {
-        public creaturetypeRecord record; };
+        public creaturetypeRecord record;
+        public string[] Name; }
 
     public struct currencytypesMap {
         public currencytypesRecord record; };
@@ -79,7 +100,8 @@ namespace DBtoDBC
         public destructiblemodeldataRecord record; };
 
     public struct dungeonencounterMap {
-        public dungeonencounterRecord record; };
+        public dungeonencounterRecord record;
+        public string[] EncounterName; }
 
     public struct durabilitycostsMap {
         public durabilitycostsRecord record; };
@@ -94,7 +116,9 @@ namespace DBtoDBC
         public emotestextRecord record; };
 
     public struct factionMap {
-        public factionRecord record; };
+        public factionRecord record;
+        public string[] Name;
+        public string[] Description; }
 
     public struct factiontemplateMap {
         public factiontemplateRecord record; };
@@ -115,25 +139,32 @@ namespace DBtoDBC
         public holidaysRecord record; };
 
     public struct itembagfamilyMap {
-        public itembagfamilyRecord record; };
+        public itembagfamilyRecord record;
+        public string[] Name; }
 
     public struct itemextendedcostMap {
         public itemextendedcostRecord record; };
 
     public struct itemlimitcategoryMap {
-        public itemlimitcategoryRecord record; };
+        public itemlimitcategoryRecord record;
+        public string[] Name; }
 
     public struct itemrandompropertiesMap {
-        public itemrandompropertiesRecord record; };
+        public itemrandompropertiesRecord record;
+        public string[] Name; }
 
     public struct itemrandomsuffixMap {
-        public itemrandomsuffixRecord record; };
+        public itemrandomsuffixRecord record;
+        public string[] Name; }
 
     public struct itemsetMap {
-        public itemsetRecord record; };
+        public itemsetRecord record;
+        public string[] Name; }
 
     public struct lfgdungeonsMap {
-        public lfgdungeonsRecord record; };
+        public lfgdungeonsRecord record;
+        public string[] Name;
+        public string[] Description; }
 
     public struct lightMap {
         public lightRecord record; };
@@ -145,13 +176,19 @@ namespace DBtoDBC
         public lockRecord record; };
 
     public struct mailtemplateMap {
-        public mailtemplateRecord record; };
+        public mailtemplateRecord record;
+        public string[] Subject;
+        public string[] Content; }
 
     public struct mapMap {
-        public mapRecord record; };
+        public mapRecord record;
+        public string[] Name;
+        public string[] HordeIntro;
+        public string[] AllianceIntro; }
 
     public struct mapdifficultyMap {
-        public mapdifficultyRecord record; };
+        public mapdifficultyRecord record;
+        public string[] AreaTriggerText; }
 
     public struct movieMap {
         public movieRecord record; };
@@ -169,7 +206,8 @@ namespace DBtoDBC
         public questfactionrewRecord record; };
 
     public struct questsortMap {
-        public questsortRecord record; };
+        public questsortRecord record;
+        public string[] Name; }
 
     public struct questxpMap {
         public questxpRecord record; };
@@ -187,7 +225,10 @@ namespace DBtoDBC
         public skilllineabilityRecord record; };
 
     public struct skilllineMap {
-        public skilllineRecord record; };
+        public skilllineRecord record;
+        public string[] Name;
+        public string[] Description;
+        public string[] AlternateVerb; }
 
     public struct soundentriesMap {
         public soundentriesRecord record; };
@@ -199,7 +240,11 @@ namespace DBtoDBC
         public spellcategoryRecord record; };
 
     public struct spellMap {
-        public spellRecord record; };
+        public spellRecord record;
+        public string[] Name;
+        public string[] Rank;
+        public string[] Description;
+        public string[] Tooltip; }
 
     public struct spelldifficultyMap {
         public spelldifficultyRecord record; };
@@ -208,25 +253,30 @@ namespace DBtoDBC
         public spelldurationRecord record; };
 
     public struct spellfocusobjectMap {
-        public spellfocusobjectRecord record; };
+        public spellfocusobjectRecord record;
+        public string[] Name; }
 
     public struct spellitemenchantmentconditionMap {
         public spellitemenchantmentconditionRecord record; };
 
     public struct spellitemenchantmentMap {
-        public spellitemenchantmentRecord record; };
+        public spellitemenchantmentRecord record;
+        public string[] Description; }
 
     public struct spellradiusMap {
         public spellradiusRecord record; };
 
     public struct spellrangeMap {
-        public spellrangeRecord record; };
+        public spellrangeRecord record;
+        public string[] Name;
+        public string[] Name2; }
 
     public struct spellrunecostMap {
         public spellrunecostRecord record; };
 
     public struct spellshapesshiftMap {
-        public spellshapesshiftRecord record; };
+        public spellshapesshiftRecord record;
+        public string[] Name; }
 
     public struct stableslotpricesMap {
         public stableslotpricesRecord record; };
@@ -238,10 +288,12 @@ namespace DBtoDBC
         public talentRecord record; };
 
     public struct talenttabMap {
-        public talenttabRecord record; };
+        public talenttabRecord record;
+        public string[] Name; }
 
     public struct taxinodesMap {
-        public taxinodesRecord record; };
+        public taxinodesRecord record;
+        public string[] Name; }
 
     public struct taxipathMap {
         public taxipathRecord record; };
@@ -253,7 +305,8 @@ namespace DBtoDBC
         public teamcontributionpointsRecord record; };
 
     public struct totemcategoryMap {
-        public totemcategoryRecord record; };
+        public totemcategoryRecord record;
+        public string[] Name; }
 
     public struct transportanimationMap {
         public transportanimationRecord record; };
@@ -268,12 +321,13 @@ namespace DBtoDBC
         public vehicleseatRecord record; };
 
     public struct wmoareatableMap {
-        public wmoareatableRecord record; };
+        public wmoareatableRecord record;
+        public string[] Name; }
 
     public struct worldmapoverlayMap {
         public worldmapoverlayRecord record; };
 
     public struct worldsafelocsMap {
-        public worldsafelocsRecord record; };
-
+        public worldsafelocsRecord record;
+        public string[] Name; }
 }

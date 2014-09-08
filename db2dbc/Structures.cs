@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+
 namespace DBtoDBC
 {
     public struct achievement_criteriaRecord {
@@ -18,26 +19,26 @@ namespace DBtoDBC
         public Int32 TimerAssetId;
         public Int32 TimerStartEvent;
         public Int32 TimerTime;
-        public Int32 UIOrder; };
+        public Int32 UIOrder; }
 
     public struct achievementRecord {
         public Int32 Id;
         public Int32 Faction;
         public Int32 MapId;
         public Int32 Previous;
-        public string Name;
-        public string Name_loc2;
-        public string Description;
-        public string Description_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Description;
         public Int32 Category;
         public Int32 Points;
         public Int32 OrderInGroup;
         public Int32 Flags;
         public Int32 SpellIcon;
-        public string Reward;
-        public string Reward_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Reward;
         public Int32 Demands;
-        public Int32 ReferencedAchievement; };
+        public Int32 ReferencedAchievement; }
 
     public struct areagroupRecord {
         public Int32 Id;
@@ -47,7 +48,7 @@ namespace DBtoDBC
         public Int32 AreaId4;
         public Int32 AreaId5;
         public Int32 AreaId6;
-        public Int32 NextGroup; };
+        public Int32 NextGroup; }
 
     public struct areapoiRecord {
         public Int32 Id;
@@ -68,14 +69,12 @@ namespace DBtoDBC
         public Int32 MapId;
         public Int32 Flags;
         public Int32 Area;
-        public string Name;
-        public string Name_loc2;
-        public Int32 Nameflags;
-        public string Description;
-        public string Description_loc2;
-        public Int32 Descriptionflags;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Description;
         public Int32 WorldState;
-        public Int32 WorldMapLink; };
+        public Int32 WorldMapLink; }
 
     public struct areatableRecord {
         public Int32 Id;
@@ -89,9 +88,8 @@ namespace DBtoDBC
         public Int32 ZoneMusic;
         public Int32 ZoneIntroMusic;
         public Int32 ExplorationLevel;
-        public string Name;
-        public string Name_loc2;
-        public Int32 Nameflags;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 FactionGroup;
         public Int32 LiquidTypeWater;
         public Int32 LiquidTypeOcean;
@@ -99,7 +97,7 @@ namespace DBtoDBC
         public Int32 LiquidTypeSlime;
         public float MinElevation;
         public float AmbientMultiplier;
-        public Int32 Light; };
+        public Int32 Light; }
 
     public struct areatriggerRecord {
         public Int32 Id;
@@ -111,19 +109,19 @@ namespace DBtoDBC
         public float BoxX;
         public float BoxY;
         public float BoxZ;
-        public float BoxOrientation; };
+        public float BoxOrientation; }
 
     public struct auctionhouseRecord {
         public Int32 HouseId;
         public Int32 Faction;
         public Int32 DepositPercent;
         public Int32 CutPercent;
-        public string Name;
-        public string Name_loc2; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name; }
 
     public struct bankbagslotpricesRecord {
         public Int32 Id;
-        public Int32 Price; };
+        public Int32 Price; }
 
     public struct bannedaddonsRecord {
         public Int32 Id;
@@ -136,17 +134,17 @@ namespace DBtoDBC
         public Int32 VersionMD53;
         public Int32 VersionMD54;
         public Int32 Timestamp;
-        public Int32 State; };
+        public Int32 State; }
 
     public struct barbershopstyleRecord {
         public Int32 Id;
         public Int32 Type;
-        public string Name;
-        public string Name_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public float CostMultiplier;
         public Int32 Race;
         public Int32 Gender;
-        public Int32 HairId; };
+        public Int32 HairId; }
 
     public struct battlemasterlistRecord {
         public Int32 Id;
@@ -160,13 +158,12 @@ namespace DBtoDBC
         public Int32 Instance8;
         public Int32 InstanceType;
         public Int32 JoinAsGroup;
-        public string Name;
-        public string Name_loc2;
-        public Int32 Nameflags;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 MaxGroupSize;
         public Int32 HolidayWorldStateId;
         public Int32 MinLevel;
-        public Int32 MaxLevel; };
+        public Int32 MaxLevel; }
 
     public struct charstartoutfitRecord {
         public Int32 Id;
@@ -245,42 +242,42 @@ namespace DBtoDBC
         public Int32 ItemInventorySlot21;
         public Int32 ItemInventorySlot22;
         public Int32 ItemInventorySlot23;
-        public Int32 ItemInventorySlot24; };
+        public Int32 ItemInventorySlot24; }
 
     public struct chartitlesRecord {
         public Int32 Id;
         public Int32 UnkRef;
-        public string Male;
-        public string Male_loc2;
-        public string Female;
-        public string Female_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Male;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Female;
         public Int32 TitleMask;
-        public Int32 InGameOrder; };
+        public Int32 InGameOrder; }
 
     public struct chatchannelsRecord {
         public Int32 ChannelId;
         public Int32 Flags;
-        public string Pattern;
-        public string Patern_loc2;
-        public string Name;
-        public string Name_loc2; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Pattern;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name; }
 
     public struct chrclassesRecord {
         public Int32 Id;
         public Int32 Unused;
         public Int32 PowerType;
         public Int32 DispayPower;
-        public string Name;
-        public string Name_loc2;
-        public string Female;
-        public string Female_loc2;
-        public string Male;
-        public string Male_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Female;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Male;
         public string FileName;
         public Int32 SpellFamily;
         public Int32 Flags;
         public Int32 CinematicSequence;
-        public Int32 Expansion; };
+        public Int32 Expansion; }
 
     public struct chrracesRecord {
         public Int32 Id;
@@ -297,16 +294,16 @@ namespace DBtoDBC
         public string InternalName;
         public Int32 CinematicSequence;
         public Int32 TeamId;
-        public string Name;
-        public string Name_loc2;
-        public string NameFemale;
-        public string NameFemale_loc2;
-        public string NameMale;
-        public string NameMale_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] NameFemale;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] NameMale;
         public string FacialHairCustomization1;
         public string FacialHairCustomization2;
         public string HairCustomization;
-        public Int32 Expansion; };
+        public Int32 Expansion; }
 
     public struct cinematicsequencesRecord {
         public Int32 Id;
@@ -318,7 +315,7 @@ namespace DBtoDBC
         public Int32 Camera4;
         public Int32 Camera5;
         public Int32 Camera6;
-        public Int32 Camera7; };
+        public Int32 Camera7; }
 
     public struct creaturedisplayinfoRecord {
         public Int32 DisplayId;
@@ -336,7 +333,7 @@ namespace DBtoDBC
         public Int32 NPCSounds;
         public Int32 Particles;
         public Int32 CreatureGeoosetData;
-        public Int32 ObjectEffectPackageId; };
+        public Int32 ObjectEffectPackageId; }
 
     public struct creaturedisplayinfoextraRecord {
         public Int32 Id;
@@ -359,7 +356,7 @@ namespace DBtoDBC
         public Int32 TabardDisplayId;
         public Int32 CloakDisplayId;
         public Int32 CanEquip;
-        public string Texture; };
+        public string Texture; }
 
     public struct creaturefamilyRecord {
         public Int32 Id;
@@ -372,9 +369,9 @@ namespace DBtoDBC
         public Int32 PetFoodMask;
         public Int32 PetTalentType;
         public Int32 CategoryEnumID;
-        public string Name;
-        public string Name_loc2;
-        public string IconFile; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
+        public string IconFile; }
 
     public struct creaturemodeldataRecord {
         public Int32 Id;
@@ -404,7 +401,7 @@ namespace DBtoDBC
         public float Unk8;
         public float Unk9;
         public Int32 Unk10;
-        public Int32 Unk11; };
+        public Int32 Unk11; }
 
     public struct creaturespelldataRecord {
         public Int32 Id;
@@ -415,19 +412,19 @@ namespace DBtoDBC
         public Int32 Availability1;
         public Int32 Availability2;
         public Int32 Availability3;
-        public Int32 Availability4; };
+        public Int32 Availability4; }
 
     public struct creaturetypeRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NoExperience; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
+        public Int32 NoExperience; }
 
     public struct currencytypesRecord {
         public Int32 Id;
         public Int32 ItemId;
         public Int32 Category;
-        public Int32 BitIndex; };
+        public Int32 BitIndex; }
 
     public struct destructiblemodeldataRecord {
         public Int32 Id;
@@ -448,7 +445,7 @@ namespace DBtoDBC
         public Int32 SmokeDisplayId;
         public Int32 SmokeUnk3;
         public Int32 Unk4;
-        public Int32 Unk5; };
+        public Int32 Unk5; }
 
     public struct dungeonencounterRecord {
         public Int32 Id;
@@ -456,9 +453,9 @@ namespace DBtoDBC
         public Int32 Difficulty;
         public Int32 OrderIndex;
         public Int32 EncounterIndex;
-        public string EncounterName;
-        public string EncounterName_loc2;
-        public Int32 SpellIconId; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] EncounterName;
+        public Int32 SpellIconId; }
 
     public struct durabilitycostsRecord {
         public Int32 ItemLevel;
@@ -490,11 +487,11 @@ namespace DBtoDBC
         public Int32 Multiplier26;
         public Int32 Multiplier27;
         public Int32 Multiplier28;
-        public Int32 Multiplier29; };
+        public Int32 Multiplier29; }
 
     public struct durabilityqualityRecord {
         public Int32 Id;
-        public float QualityMod; };
+        public float QualityMod; }
 
     public struct emotesRecord {
         public Int32 Id;
@@ -503,11 +500,11 @@ namespace DBtoDBC
         public Int32 Flags;
         public Int32 EmoteType;
         public Int32 UnitStandState;
-        public Int32 SoundId; };
+        public Int32 SoundId; }
 
     public struct emotestextRecord {
         public Int32 Id;
-        public string Textid; };
+        public string Textid; }
 
     public struct factionRecord {
         public Int32 Id;
@@ -533,12 +530,10 @@ namespace DBtoDBC
         public float SpilloverRateOut;
         public Int32 SpilloverMaxRankIn;
         public Int32 SpilloverRankUnk;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NameFlags;
-        public string Description;
-        public string Description_loc2;
-        public Int32 DescriptionFlags; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Description; }
 
     public struct factiontemplateRecord {
         public Int32 Id;
@@ -554,7 +549,7 @@ namespace DBtoDBC
         public Int32 FriendFaction1;
         public Int32 FriendFaction2;
         public Int32 FriendFaction3;
-        public Int32 FriendFaction4; };
+        public Int32 FriendFaction4; }
 
     public struct gameobjectdisplayinfoRecord {
         public Int32 DisplayId;
@@ -575,25 +570,25 @@ namespace DBtoDBC
         public float MaxX;
         public float MaxY;
         public float MaxZ;
-        public Int32 Transport; };
+        public Int32 Transport; }
 
     public struct gempropertiesRecord {
         public Int32 Id;
         public Int32 SpellItemEnchantment;
         public Int32 MaxCountInventory;
         public Int32 MaxCountItem;
-        public Int32 Color; };
+        public Int32 Color; }
 
     public struct glyphpropertiesRecord {
         public Int32 Id;
         public Int32 SpellId;
         public Int32 TypeFlags;
-        public Int32 Unk1; };
+        public Int32 Unk1; }
 
     public struct glyphslotRecord {
         public Int32 Id;
         public Int32 TypeFlags;
-        public Int32 Order; };
+        public Int32 Order; }
 
     public struct holidaysRecord {
         public Int32 Id;
@@ -650,12 +645,12 @@ namespace DBtoDBC
         public string TextureFilename;
         public Int32 Priority;
         public Int32 CalendarFilterType;
-        public Int32 Flags; };
+        public Int32 Flags; }
 
     public struct itembagfamilyRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name; }
 
     public struct itemextendedcostRecord {
         public Int32 Id;
@@ -673,14 +668,14 @@ namespace DBtoDBC
         public Int32 ReqItemCount4;
         public Int32 ReqItemCount5;
         public Int32 ReqPersonalArenaRating;
-        public Int32 PurchaseGroup; };
+        public Int32 PurchaseGroup; }
 
     public struct itemlimitcategoryRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 MaxCount;
-        public Int32 Mode; };
+        public Int32 Mode; }
 
     public struct itemrandompropertiesRecord {
         public Int32 Id;
@@ -690,13 +685,13 @@ namespace DBtoDBC
         public Int32 EnchantId3;
         public Int32 EnchantId4;
         public Int32 EnchantId5;
-        public string Name;
-        public string Name_loc2; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name; }
 
     public struct itemrandomsuffixRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public string InternalName;
         public Int32 EnchantId1;
         public Int32 EnchantId2;
@@ -707,12 +702,12 @@ namespace DBtoDBC
         public Int32 Prefix2;
         public Int32 Prefix3;
         public Int32 Prefix4;
-        public Int32 Prefix5; };
+        public Int32 Prefix5; }
 
     public struct itemsetRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 ItemId1;
         public Int32 ItemId2;
         public Int32 ItemId3;
@@ -747,12 +742,12 @@ namespace DBtoDBC
         public Int32 ItemsToTriggerSpell7;
         public Int32 ItemsToTriggerSpell8;
         public Int32 RequiredSkillId;
-        public Int32 RequiredSkillValue; };
+        public Int32 RequiredSkillValue; }
 
     public struct lfgdungeonsRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 MinLevel;
         public Int32 MaxLevel;
         public Int32 RecLevel;
@@ -767,8 +762,8 @@ namespace DBtoDBC
         public Int32 Expansion;
         public Int32 Unk2;
         public Int32 GroupType;
-        public string Description;
-        public string Description_loc2; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Description; }
 
     public struct lightRecord {
         public Int32 Id;
@@ -785,7 +780,7 @@ namespace DBtoDBC
         public Int32 DeathParams;
         public Int32 Unk1;
         public Int32 Unk2;
-        public Int32 Unk3; };
+        public Int32 Unk3; }
 
     public struct liquidtypeRecord {
         public Int32 Id;
@@ -832,7 +827,7 @@ namespace DBtoDBC
         public Int32 UnkB1;
         public Int32 UnkB2;
         public Int32 UnkB3;
-        public Int32 UnkB4; };
+        public Int32 UnkB4; }
 
     public struct lockRecord {
         public Int32 Id;
@@ -867,14 +862,14 @@ namespace DBtoDBC
         public Int32 Action5;
         public Int32 Action6;
         public Int32 Action7;
-        public Int32 Action8; };
+        public Int32 Action8; }
 
     public struct mailtemplateRecord {
         public Int32 Id;
-        public string Subject;
-        public string Subject_loc2;
-        public string Content;
-        public string Content_loc2; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Subject;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Content; }
 
     public struct mapRecord {
         public Int32 Id;
@@ -882,13 +877,13 @@ namespace DBtoDBC
         public Int32 MapType;
         public Int32 Flags;
         public Int32 IsBattleground;
-        public string Name;
-        public string Name_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 LinkedZone;
-        public string HordeIntro;
-        public string HordeIntro_loc2;
-        public string AllianceIntro;
-        public string AllianceIntro_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] HordeIntro;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] AllianceIntro;
         public Int32 MultiMapId;
         public float BattlefieldMapIconScale;
         public Int32 EntranceMap;
@@ -897,23 +892,22 @@ namespace DBtoDBC
         public Int32 TimeOfDayOverride;
         public Int32 Addon;
         public Int32 UnkTime;
-        public Int32 MaxPlayers; };
+        public Int32 MaxPlayers; }
 
     public struct mapdifficultyRecord {
         public Int32 Id;
         public Int32 MapId;
         public Int32 Difficulty;
-        public string AreaTriggerText;
-        public string AreaTriggerText_loc2;
-        public Int32 AreaTriggerTextFlags;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] AreaTriggerText;
         public Int32 ResetTime;
         public Int32 MaxPlayers;
-        public string DifficultyString; };
+        public string DifficultyString; }
 
     public struct movieRecord {
         public Int32 Id;
         public string Filename;
-        public Int32 Unk; };
+        public Int32 Unk; }
 
     public struct overridespelldataRecord {
         public Int32 Id;
@@ -927,7 +921,7 @@ namespace DBtoDBC
         public Int32 SpellId8;
         public Int32 SpellId9;
         public Int32 SpellId10;
-        public Int32 Unk; };
+        public Int32 Unk; }
 
     public struct powerdisplayRecord {
         public Int32 Id;
@@ -935,7 +929,7 @@ namespace DBtoDBC
         public Int32 Name;
         public Int32 R;
         public Int32 G;
-        public Int32 B; };
+        public Int32 B; }
 
     public struct pvpdifficultyRecord {
         public Int32 Id;
@@ -943,7 +937,7 @@ namespace DBtoDBC
         public Int32 BracketId;
         public Int32 MinLevel;
         public Int32 MaxLevel;
-        public Int32 Difficulty; };
+        public Int32 Difficulty; }
 
     public struct questfactionrewRecord {
         public Int32 Id;
@@ -956,12 +950,12 @@ namespace DBtoDBC
         public Int32 QuestRewFactionValue7;
         public Int32 QuestRewFactionValue8;
         public Int32 QuestRewFactionValue9;
-        public Int32 QuestRewFactionValue10; };
+        public Int32 QuestRewFactionValue10; }
 
     public struct questsortRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name; }
 
     public struct questxpRecord {
         public Int32 Id;
@@ -974,7 +968,7 @@ namespace DBtoDBC
         public Int32 Exp7;
         public Int32 Exp8;
         public Int32 Exp9;
-        public Int32 Exp10; };
+        public Int32 Exp10; }
 
     public struct randproppointsRecord {
         public Int32 Id;
@@ -993,7 +987,7 @@ namespace DBtoDBC
         public Int32 UncommonPropertiesPoints2;
         public Int32 UncommonPropertiesPoints3;
         public Int32 UncommonPropertiesPoints4;
-        public Int32 UncommonPropertiesPoints5; };
+        public Int32 UncommonPropertiesPoints5; }
 
     public struct scalingstatdistributionRecord {
         public Int32 Id;
@@ -1017,7 +1011,7 @@ namespace DBtoDBC
         public Int32 Modifier8;
         public Int32 Modifier9;
         public Int32 Modifier10;
-        public Int32 MaxLevel; };
+        public Int32 MaxLevel; }
 
     public struct scalingstatvaluesRecord {
         public Int32 Id;
@@ -1043,7 +1037,7 @@ namespace DBtoDBC
         public Int32 ArmorModB2;
         public Int32 ArmorModB3;
         public Int32 ArmorModB4;
-        public Int32 ArmorModB5; };
+        public Int32 ArmorModB5; }
 
     public struct skilllineabilityRecord {
         public Int32 Id;
@@ -1059,20 +1053,20 @@ namespace DBtoDBC
         public Int32 MaxValue;
         public Int32 MinValue;
         public Int32 CharacterPoints1;
-        public Int32 CharacterPoints2; };
+        public Int32 CharacterPoints2; }
 
     public struct skilllineRecord {
         public Int32 Id;
         public Int32 CategoryId;
         public Int32 SkillCostId;
-        public string Name;
-        public string Name_loc2;
-        public string Description;
-        public string Description_loc2;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Description;
         public Int32 SpellIcon;
-        public string AlternateVerb;
-        public string AlternateVerb_loc2;
-        public Int32 CanLink; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] AlternateVerb;
+        public Int32 CanLink; }
 
     public struct soundentriesRecord {
         public Int32 Id;
@@ -1104,17 +1098,17 @@ namespace DBtoDBC
         public Int32 MinDistance;
         public float DistanceCutOff;
         public Int32 EAXDef;
-        public Int32 SoundEntriesAdvancedId; };
+        public Int32 SoundEntriesAdvancedId; }
 
     public struct spellcasttimesRecord {
         public Int32 Id;
         public Int32 CastTime;
         public Int32 CastTimePetLevel;
-        public Int32 MinCastTime; };
+        public Int32 MinCastTime; }
 
     public struct spellcategoryRecord {
         public Int32 Id;
-        public Int32 Flags; };
+        public Int32 Flags; }
 
     public struct spellRecord {
         public Int32 Entry;
@@ -1291,26 +1285,25 @@ namespace DBtoDBC
         public float EffectBonusMultiplier2;
         public float EffectBonusMultiplier3;
         public Int32 spellDescriptionVariableID;
-        public Int32 SpellDifficultyId; };
+        public Int32 SpellDifficultyId; }
 
     public struct spelldifficultyRecord {
         public Int32 id;
         public Int32 spellid0;
         public Int32 spellid1;
         public Int32 spellid2;
-        public Int32 spellid3; };
+        public Int32 spellid3; }
 
     public struct spelldurationRecord {
         public Int32 Id;
         public Int32 Duration1;
         public Int32 Duration2;
-        public Int32 Duration3; };
+        public Int32 Duration3; }
 
     public struct spellfocusobjectRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NameFlags; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name; }
 
     public struct spellitemenchantmentconditionRecord {
         public Int32 Id;
@@ -1343,7 +1336,7 @@ namespace DBtoDBC
         public Int32 Logic2;
         public Int32 Logic3;
         public Int32 Logic4;
-        public Int32 Logic5; };
+        public Int32 Logic5; }
 
     public struct spellitemenchantmentRecord {
         public Int32 Id;
@@ -1360,22 +1353,21 @@ namespace DBtoDBC
         public Int32 SpellId1;
         public Int32 SpellId2;
         public Int32 SpellId3;
-        public string Description;
-        public string Description_loc2;
-        public Int32 DescriptionFlags;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Description;
         public Int32 AuraId;
         public Int32 Slot;
         public Int32 GemId;
         public Int32 EnchantmentCondition;
         public Int32 RequiredSkill;
         public Int32 RequiredSkillValue;
-        public Int32 RequiredLevel; };
+        public Int32 RequiredLevel; }
 
     public struct spellradiusRecord {
         public Int32 Id;
         public float RadiusMin;
         public float RadiusPerLevel;
-        public float RadiusMax; };
+        public float RadiusMax; }
 
     public struct spellrangeRecord {
         public Int32 Id;
@@ -1384,26 +1376,23 @@ namespace DBtoDBC
         public float MaxRangeHostile;
         public float MaxRangeFriend;
         public Int32 Type;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NameFlags;
-        public string Name2;
-        public string Name2_loc2;
-        public Int32 Name2Flags; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name2; }
 
     public struct spellrunecostRecord {
         public Int32 Id;
         public Int32 RuneCostBlood;
         public Int32 RuneCostFrost;
         public Int32 RuneCostUnholy;
-        public Int32 RunePowerGain; };
+        public Int32 RunePowerGain; }
 
     public struct spellshapesshiftRecord {
         public Int32 Id;
         public Int32 ButtonPosition;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NameFlags;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 Flags1;
         public Int32 CreatureType;
         public Int32 Unk1;
@@ -1419,11 +1408,11 @@ namespace DBtoDBC
         public Int32 StanceSpell5;
         public Int32 StanceSpell6;
         public Int32 StanceSpell7;
-        public Int32 StanceSpell8; };
+        public Int32 StanceSpell8; }
 
     public struct stableslotpricesRecord {
         public Int32 Slot;
-        public Int32 Price; };
+        public Int32 Price; }
 
     public struct summonpropertiesRecord {
         public Int32 Id;
@@ -1431,7 +1420,7 @@ namespace DBtoDBC
         public Int32 Faction;
         public Int32 Type;
         public Int32 Slot;
-        public Int32 Flags; };
+        public Int32 Flags; }
 
     public struct talentRecord {
         public Int32 TalentID;
@@ -1448,19 +1437,18 @@ namespace DBtoDBC
         public Int32 needAddInSpellBook;
         public Int32 unk0;
         public Int32 allowForPetHigh;
-        public Int32 allowForPetLow; };
+        public Int32 allowForPetLow; }
 
     public struct talenttabRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NameFlags;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 SpellIcon;
         public Int32 Name14;
         public Int32 ClassMask;
         public Int32 PetTalentMask;
         public Int32 TabPage;
-        public string InternalName; };
+        public string InternalName; }
 
     public struct taxinodesRecord {
         public Int32 Id;
@@ -1468,17 +1456,16 @@ namespace DBtoDBC
         public float X;
         public float Y;
         public float Z;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NameFlags;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 MountCreatureId1;
-        public Int32 MountCreatureId2; };
+        public Int32 MountCreatureId2; }
 
     public struct taxipathRecord {
         public Int32 Id;
         public Int32 From;
         public Int32 To;
-        public Int32 Price; };
+        public Int32 Price; }
 
     public struct taxipathnodeRecord {
         public Int32 Id;
@@ -1491,19 +1478,18 @@ namespace DBtoDBC
         public Int32 ActionFlag;
         public Int32 Delay;
         public Int32 ArrivalEventId;
-        public Int32 DepartureEventId; };
+        public Int32 DepartureEventId; }
 
     public struct teamcontributionpointsRecord {
         public Int32 Id;
-        public float Value; };
+        public float Value; }
 
     public struct totemcategoryRecord {
         public Int32 Id;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NameFlags;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name;
         public Int32 CategoryType;
-        public Int32 CategoryMask; };
+        public Int32 CategoryMask; }
 
     public struct transportanimationRecord {
         public Int32 Id;
@@ -1512,7 +1498,7 @@ namespace DBtoDBC
         public float X;
         public float Y;
         public float Z;
-        public Int32 MovementId; };
+        public Int32 MovementId; }
 
     public struct transportrotationRecord {
         public Int32 Id;
@@ -1521,7 +1507,7 @@ namespace DBtoDBC
         public float X;
         public float Y;
         public float Z;
-        public float W; };
+        public float W; }
 
     public struct vehicleRecord {
         public Int32 Id;
@@ -1563,7 +1549,7 @@ namespace DBtoDBC
         public Int32 UiSeatIndicatorType;
         public Int32 PowerDisplayId1;
         public Int32 PowerDisplayId2;
-        public Int32 PowerDisplayId3; };
+        public Int32 PowerDisplayId3; }
 
     public struct vehicleseatRecord {
         public Int32 Id;
@@ -1623,7 +1609,7 @@ namespace DBtoDBC
         public Int32 CameraSeatZoomMin;
         public Int32 CameraSeatZoomMax;
         public Int32 EnterAnimKitId;
-        public Int32 RideAnimKitId; };
+        public Int32 RideAnimKitId; }
 
     public struct wmoareatableRecord {
         public Int32 Id;
@@ -1637,9 +1623,8 @@ namespace DBtoDBC
         public Int32 IntroSound;
         public Int32 Flags;
         public Int32 AreaId;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NameFlags; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name; }
 
     public struct worldmapoverlayRecord {
         public Int32 Id;
@@ -1658,7 +1643,7 @@ namespace DBtoDBC
         public Int32 HitRectTop;
         public Int32 HitRectLeft;
         public Int32 HitRectBottom;
-        public Int32 HitRectRight; };
+        public Int32 HitRectRight; }
 
     public struct worldsafelocsRecord {
         public Int32 Id;
@@ -1666,7 +1651,6 @@ namespace DBtoDBC
         public float X;
         public float Y;
         public float Z;
-        public string Name;
-        public string Name_loc2;
-        public Int32 NameFlags; };
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] Name; }
 }
