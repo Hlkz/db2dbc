@@ -45,14 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Body.cs" />
+    <Compile Include="Fill.cs" />
+    <Compile Include="Functions.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="dbc\Achievement.cs" />
-    <Compile Include="dbc\AchievementStructure.cs" />
-    <Compile Include="dbc\Spelldbc.cs" />
-    <Compile Include="dbc\SpelldbcStruct.cs" />
-    <Compile Include="dbc\Talent.cs" />
-    <Compile Include="dbc\TalentStruct.cs" />
+    <Compile Include="Structures.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

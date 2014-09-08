@@ -13,19 +13,11 @@ namespace DBtoDBC
             connectionString = "SERVER=" + server + ";" + "DATABASE=" + database
                 + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
             MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
 
-            Achievementdbc achievementdbc = new Achievementdbc();
-            achievementdbc.LoadDB(connection);
-            achievementdbc.SaveDBC("Achievement.dbc");
+            DB2DBC.ExtractAll(connection);
 
-            Spelldbc spelldbc = new Spelldbc();
-            spelldbc.LoadDB(connection);
-            spelldbc.SaveDBC("Spell.dbc");
-
-            Talentdbc talentdbc = new Talentdbc();
-            talentdbc.LoadDB(connection);
-            talentdbc.SaveDBC("Talent.dbc");
-
+            connection.Close();
             //Console.ReadKey();
         }
     }
