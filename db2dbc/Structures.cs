@@ -141,6 +141,8 @@ namespace DBtoDBC
         public Int32 Type;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Name;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] AdditionalName;
         public float CostMultiplier;
         public Int32 Race;
         public Int32 Gender;
@@ -251,12 +253,12 @@ namespace DBtoDBC
         public UInt32[] Male;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Female;
-        public Int32 TitleMask;
         public Int32 InGameOrder; }
 
     public struct chatchannelsRecord {
         public Int32 ChannelId;
         public Int32 Flags;
+        public Int32 FactionGroup;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Pattern;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
@@ -273,7 +275,7 @@ namespace DBtoDBC
         public UInt32[] Female;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Male;
-        public string FileName;
+        public UInt32 FileName; // string
         public Int32 SpellFamily;
         public Int32 Flags;
         public Int32 CinematicSequence;
@@ -286,12 +288,12 @@ namespace DBtoDBC
         public Int32 Exploration;
         public Int32 ModelMale;
         public Int32 ModelFemale;
-        public string ClientPrefix;
+        public UInt32 ClientPrefix; // string
         public Int32 BaseLanguage;
         public Int32 CreatureType;
         public Int32 ResSicknessSpellId;
         public Int32 SplashSoundId;
-        public string InternalName;
+        public UInt32 InternalName; // string
         public Int32 CinematicSequence;
         public Int32 TeamId;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
@@ -300,9 +302,9 @@ namespace DBtoDBC
         public UInt32[] NameFemale;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] NameMale;
-        public string FacialHairCustomization1;
-        public string FacialHairCustomization2;
-        public string HairCustomization;
+        public UInt32 FacialHairCustomization1; // string
+        public UInt32 FacialHairCustomization2; // string
+        public UInt32 HairCustomization; // string
         public Int32 Expansion; }
 
     public struct cinematicsequencesRecord {
@@ -324,10 +326,10 @@ namespace DBtoDBC
         public Int32 ExtraId;
         public float Scale;
         public Int32 Opacity;
-        public string Skin1;
-        public string Skin2;
-        public string Skin3;
-        public string PortraitTextureName;
+        public UInt32 Skin1; // string
+        public UInt32 Skin2; // string
+        public UInt32 Skin3; // string
+        public UInt32 PortraitTextureName; // string
         public Int32 BloodLevel;
         public Int32 Blood;
         public Int32 NPCSounds;
@@ -356,7 +358,7 @@ namespace DBtoDBC
         public Int32 TabardDisplayId;
         public Int32 CloakDisplayId;
         public Int32 CanEquip;
-        public string Texture; }
+        public UInt32 Texture; } // string
 
     public struct creaturefamilyRecord {
         public Int32 Id;
@@ -371,12 +373,12 @@ namespace DBtoDBC
         public Int32 CategoryEnumID;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Name;
-        public string IconFile; }
+        public UInt32 IconFile; } // string
 
     public struct creaturemodeldataRecord {
         public Int32 Id;
         public Int32 Flags;
-        public string ModelPath;
+        public UInt32 ModelPath; // string
         public Int32 Unused;
         public float Scale;
         public Int32 ModelScale;
@@ -495,7 +497,7 @@ namespace DBtoDBC
 
     public struct emotesRecord {
         public Int32 Id;
-        public string Name;
+        public UInt32 Name; // string
         public Int32 AnimationId;
         public Int32 Flags;
         public Int32 EmoteType;
@@ -504,7 +506,7 @@ namespace DBtoDBC
 
     public struct emotestextRecord {
         public Int32 Id;
-        public string Textid; }
+        public UInt32 Textid; } // string
 
     public struct factionRecord {
         public Int32 Id;
@@ -553,7 +555,7 @@ namespace DBtoDBC
 
     public struct gameobjectdisplayinfoRecord {
         public Int32 DisplayId;
-        public string FileName;
+        public UInt32 FileName; // string
         public Int32 Unk1;
         public Int32 Unk2;
         public Int32 Unk3;
@@ -642,7 +644,7 @@ namespace DBtoDBC
         public Int32 CalendarFlags10;
         public Int32 HolidayNameId;
         public Int32 HolidayDescriptionId;
-        public string TextureFilename;
+        public UInt32 TextureFilename; // string
         public Int32 Priority;
         public Int32 CalendarFilterType;
         public Int32 Flags; }
@@ -679,7 +681,7 @@ namespace DBtoDBC
 
     public struct itemrandompropertiesRecord {
         public Int32 Id;
-        public string InternalName;
+        public UInt32 InternalName; // string
         public Int32 EnchantId1;
         public Int32 EnchantId2;
         public Int32 EnchantId3;
@@ -692,7 +694,7 @@ namespace DBtoDBC
         public Int32 Id;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Name;
-        public string InternalName;
+        public UInt32 InternalName; // string
         public Int32 EnchantId1;
         public Int32 EnchantId2;
         public Int32 EnchantId3;
@@ -758,7 +760,7 @@ namespace DBtoDBC
         public Int32 Flags;
         public Int32 Type;
         public Int32 Unk;
-        public string IconName;
+        public UInt32 IconName; // string
         public Int32 Expansion;
         public Int32 Unk2;
         public Int32 GroupType;
@@ -784,7 +786,7 @@ namespace DBtoDBC
 
     public struct liquidtypeRecord {
         public Int32 Id;
-        public string Name;
+        public UInt32 Name; // string
         public Int32 Flags;
         public Int32 Type;
         public Int32 SoundId;
@@ -798,12 +800,12 @@ namespace DBtoDBC
         public Int32 ParticleMovement;
         public Int32 ParticleTexSlots;
         public Int32 LiquidMaterialID;
-        public string Texture1;
-        public string Texture2;
-        public string Texture3;
-        public string Texture4;
-        public string Texture5;
-        public string Texture6;
+        public UInt32 Texture1; // string
+        public UInt32 Texture2; // string
+        public UInt32 Texture3; // string
+        public UInt32 Texture4; // string
+        public UInt32 Texture5; // string
+        public UInt32 Texture6; // string
         public Int32 Color1;
         public Int32 Color2;
         public float UnkA1;
@@ -873,7 +875,7 @@ namespace DBtoDBC
 
     public struct mapRecord {
         public Int32 Id;
-        public string InternalName;
+        public UInt32 InternalName; // string
         public Int32 MapType;
         public Int32 Flags;
         public Int32 IsBattleground;
@@ -902,11 +904,11 @@ namespace DBtoDBC
         public UInt32[] AreaTriggerText;
         public Int32 ResetTime;
         public Int32 MaxPlayers;
-        public string DifficultyString; }
+        public UInt32 DifficultyString; } // string
 
     public struct movieRecord {
         public Int32 Id;
-        public string Filename;
+        public UInt32 Filename; // string
         public Int32 Unk; }
 
     public struct overridespelldataRecord {
@@ -1071,17 +1073,17 @@ namespace DBtoDBC
     public struct soundentriesRecord {
         public Int32 Id;
         public Int32 Type;
-        public string InternalName;
-        public string FileName1;
-        public string FileName2;
-        public string FileName3;
-        public string FileName4;
-        public string FileName5;
-        public string FileName6;
-        public string FileName7;
-        public string FileName8;
-        public string FileName9;
-        public string FileName10;
+        public UInt32 InternalName; // string
+        public UInt32 FileName1; // string
+        public UInt32 FileName2; // string
+        public UInt32 FileName3; // string
+        public UInt32 FileName4; // string
+        public UInt32 FileName5; // string
+        public UInt32 FileName6; // string
+        public UInt32 FileName7; // string
+        public UInt32 FileName8; // string
+        public UInt32 FileName9; // string
+        public UInt32 FileName10; // string
         public Int32 Freq1;
         public Int32 Freq2;
         public Int32 Freq3;
@@ -1092,7 +1094,7 @@ namespace DBtoDBC
         public Int32 Freq8;
         public Int32 Freq9;
         public Int32 Freq10;
-        public string Path;
+        public UInt32 Path; // string
         public float Volume;
         public Int32 Flags;
         public Int32 MinDistance;
@@ -1111,54 +1113,53 @@ namespace DBtoDBC
         public Int32 Flags; }
 
     public struct spellRecord {
-        public Int32 Entry;
-        public Int32 Type;
-        public Int32 Category;
-        public Int32 Dispel;
-        public Int32 Mechanic;
-        public Int32 Attributes;
-        public Int32 AttributesEx;
-        public Int32 AttributesEx2;
-        public Int32 AttributesEx3;
-        public Int32 AttributesEx4;
-        public Int32 AttributesEx5;
-        public Int32 AttributesEx6;
-        public Int32 AttributesEx7;
-        public Int32 Stances;
-        public Int32 unk320_2;
-        public Int32 StancesNot;
-        public Int32 unk320_3;
-        public Int32 Targets;
-        public Int32 TargetCreatureType;
-        public Int32 RequiresSpellFocus;
-        public Int32 FacingCasterFlags;
-        public Int32 CasterAuraState;
-        public Int32 TargetAuraState;
-        public Int32 CasterAuraStateNot;
-        public Int32 TargetAuraStateNot;
-        public Int32 casterAuraSpell;
-        public Int32 targetAuraSpell;
-        public Int32 excludeCasterAuraSpell;
-        public Int32 excludeTargetAuraSpell;
-        public Int32 CastingTimeIndex;
-        public Int32 RecoveryTime;
-        public Int32 CategoryRecoveryTime;
-        public Int32 InterruptFlags;
-        public Int32 AuraInterruptFlags;
-        public Int32 ChannelInterruptFlags;
-        public Int32 procFlags;
-        public Int32 procChance;
-        public Int32 procCharges;
-        public Int32 maxLevel;
-        public Int32 baseLevel;
-        public Int32 spellLevel;
-        public Int32 DurationIndex;
-        public Int32 powerType;
-        public Int32 manaCost;
-        public Int32 manaCostPerlevel;
-        public Int32 manaPerSecond;
-        public Int32 manaPerSecondPerLevel;
-        public Int32 rangeIndex;
+        public UInt32 Entry;
+        public UInt32 Category;
+        public UInt32 Dispel;
+        public UInt32 Mechanic;
+        public UInt32 Attributes;
+        public UInt32 AttributesEx;
+        public UInt32 AttributesEx2;
+        public UInt32 AttributesEx3;
+        public UInt32 AttributesEx4;
+        public UInt32 AttributesEx5;
+        public UInt32 AttributesEx6;
+        public UInt32 AttributesEx7;
+        public UInt32 Stances;
+        public UInt32 unk320_2;
+        public UInt32 StancesNot;
+        public UInt32 unk320_3;
+        public UInt32 Targets;
+        public UInt32 TargetCreatureType;
+        public UInt32 RequiresSpellFocus;
+        public UInt32 FacingCasterFlags;
+        public UInt32 CasterAuraState;
+        public UInt32 TargetAuraState;
+        public UInt32 CasterAuraStateNot;
+        public UInt32 TargetAuraStateNot;
+        public UInt32 casterAuraSpell;
+        public UInt32 targetAuraSpell;
+        public UInt32 excludeCasterAuraSpell;
+        public UInt32 excludeTargetAuraSpell;
+        public UInt32 CastingTimeIndex;
+        public UInt32 RecoveryTime;
+        public UInt32 CategoryRecoveryTime;
+        public UInt32 InterruptFlags;
+        public UInt32 AuraInterruptFlags;
+        public UInt32 ChannelInterruptFlags;
+        public UInt32 procFlags;
+        public UInt32 procChance;
+        public UInt32 procCharges;
+        public UInt32 maxLevel;
+        public UInt32 baseLevel;
+        public UInt32 spellLevel;
+        public UInt32 DurationIndex;
+        public UInt32 powerType;
+        public UInt32 manaCost;
+        public UInt32 manaCostPerlevel;
+        public UInt32 manaPerSecond;
+        public UInt32 manaPerSecondPerLevel;
+        public UInt32 rangeIndex;
         public float speed;
         public Int32 modalNextSpell;
         public Int32 StackAmount;
@@ -1234,15 +1235,15 @@ namespace DBtoDBC
         public float EffectPointsPerComboPoint1;
         public float EffectPointsPerComboPoint2;
         public float EffectPointsPerComboPoint3;
-        public Int32 EffectSpellClassMaskA1;
-        public Int32 EffectSpellClassMaskA2;
-        public Int32 EffectSpellClassMaskA3;
-        public Int32 EffectSpellClassMaskB1;
-        public Int32 EffectSpellClassMaskB2;
-        public Int32 EffectSpellClassMaskB3;
-        public Int32 EffectSpellClassMaskC1;
-        public Int32 EffectSpellClassMaskC2;
-        public Int32 EffectSpellClassMaskC3;
+        public UInt32 EffectSpellClassMaskA1;
+        public UInt32 EffectSpellClassMaskA2;
+        public UInt32 EffectSpellClassMaskA3;
+        public UInt32 EffectSpellClassMaskB1;
+        public UInt32 EffectSpellClassMaskB2;
+        public UInt32 EffectSpellClassMaskB3;
+        public UInt32 EffectSpellClassMaskC1;
+        public UInt32 EffectSpellClassMaskC2;
+        public UInt32 EffectSpellClassMaskC3;
         public Int32 SpellVisual1;
         public Int32 SpellVisual2;
         public Int32 SpellIconID;
@@ -1256,36 +1257,36 @@ namespace DBtoDBC
         public UInt32[] Description;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Tooltip;
-        public Int32 ManaCostPercentage;
-        public Int32 StartRecoveryCategory;
-        public Int32 StartRecoveryTime;
-        public Int32 MaxTargetLevel;
-        public Int32 SpellFamilyName;
-        public Int32 SpellFamilyFlagsLow;
-        public Int32 SpellFamilyFlagsHigh;
-        public Int32 SpellFamilyFlags2;
-        public Int32 MaxAffectedTargets;
-        public Int32 DmgClass;
-        public Int32 PreventionType;
-        public Int32 StanceBarOrder;
+        public UInt32 ManaCostPercentage;
+        public UInt32 StartRecoveryCategory;
+        public UInt32 StartRecoveryTime;
+        public UInt32 MaxTargetLevel;
+        public UInt32 SpellFamilyName;
+        public UInt32 SpellFamilyFlagsLow;
+        public UInt32 SpellFamilyFlagsHigh;
+        public UInt32 SpellFamilyFlags2;
+        public UInt32 MaxAffectedTargets;
+        public UInt32 DmgClass;
+        public UInt32 PreventionType;
+        public UInt32 StanceBarOrder;
         public float EffectDamageMultiplier1;
         public float EffectDamageMultiplier2;
         public float EffectDamageMultiplier3;
-        public Int32 MinFactionId;
-        public Int32 MinReputation;
-        public Int32 RequiredAuraVision;
-        public Int32 TotemCategory1;
-        public Int32 TotemCategory2;
+        public UInt32 MinFactionId;
+        public UInt32 MinReputation;
+        public UInt32 RequiredAuraVision;
+        public UInt32 TotemCategory1;
+        public UInt32 TotemCategory2;
         public Int32 AreaGroupId;
-        public Int32 SchoolMask;
-        public Int32 runeCostID;
-        public Int32 spellMissileID;
-        public Int32 PowerDisplayId;
+        public UInt32 SchoolMask;
+        public UInt32 runeCostID;
+        public UInt32 spellMissileID;
+        public UInt32 PowerDisplayId;
         public float EffectBonusMultiplier1;
         public float EffectBonusMultiplier2;
         public float EffectBonusMultiplier3;
-        public Int32 spellDescriptionVariableID;
-        public Int32 SpellDifficultyId; }
+        public UInt32 spellDescriptionVariableID;
+        public UInt32 SpellDifficultyId; }
 
     public struct spelldifficultyRecord {
         public Int32 id;
@@ -1388,7 +1389,7 @@ namespace DBtoDBC
         public Int32 RuneCostUnholy;
         public Int32 RunePowerGain; }
 
-    public struct spellshapesshiftRecord {
+    public struct spellshapeshiftformRecord {
         public Int32 Id;
         public Int32 ButtonPosition;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
@@ -1448,7 +1449,7 @@ namespace DBtoDBC
         public Int32 ClassMask;
         public Int32 PetTalentMask;
         public Int32 TabPage;
-        public string InternalName; }
+        public UInt32 InternalName; } // string
 
     public struct taxinodesRecord {
         public Int32 Id;
@@ -1539,8 +1540,8 @@ namespace DBtoDBC
         public float MSSLTrgtArcWidth;
         public float MSSLTrgtImpactRadius1;
         public float MSSLTrgtImpactRadius2;
-        public string MSSLTrgtArcTexture;
-        public string MSSLTrgtImpactTexture;
+        public UInt32 MSSLTrgtArcTexture; // string
+        public UInt32 MSSLTrgtImpactTexture; // string
         public Int32 MSSLTrgtImpactModel1;
         public Int32 MSSLTrgtImpactModel2;
         public float CameraYawOffset;
@@ -1635,7 +1636,7 @@ namespace DBtoDBC
         public Int32 AreaTableId4;
         public Int32 MapPointX;
         public Int32 MapPointY;
-        public string TextureName;
+        public UInt32 TextureName; // string
         public Int32 TextureWidth;
         public Int32 TextureHeight;
         public Int32 OffsetX;

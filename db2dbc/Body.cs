@@ -231,8 +231,8 @@ namespace DBtoDBC
     public struct spellrunecostBody {
         public spellrunecostMap[] records; };
 
-    public struct spellshapesshiftBody {
-        public spellshapesshiftMap[] records; };
+    public struct spellshapeshiftformBody {
+        public spellshapeshiftformMap[] records; };
 
     public struct stableslotpricesBody {
         public stableslotpricesMap[] records; };

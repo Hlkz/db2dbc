@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Body.cs" />
+    <Compile Include="Extract.cs" />
     <Compile Include="Fill.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="Map.cs" />
