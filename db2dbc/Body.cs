@@ -281,5 +281,4 @@ namespace DBtoDBC
 
     public struct worldsafelocsBody {
         public worldsafelocsMap[] records; };
-
 }

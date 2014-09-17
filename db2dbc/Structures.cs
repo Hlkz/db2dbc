@@ -506,7 +506,24 @@ namespace DBtoDBC
 
     public struct emotestextRecord {
         public Int32 Id;
-        public UInt32 Textid; } // string
+        public UInt32 Name; // string
+        public UInt32 EmoteId;
+        public Int32 TextData1;
+        public Int32 TextData2;
+        public Int32 TextData3;
+        public Int32 TextData4;
+        public Int32 TextData5;
+        public Int32 TextData6;
+        public Int32 TextData7;
+        public Int32 TextData8;
+        public Int32 TextData9;
+        public Int32 TextData10;
+        public Int32 TextData11;
+        public Int32 TextData12;
+        public Int32 TextData13;
+        public Int32 TextData14;
+        public Int32 TextData15;
+        public Int32 TextData16; }
 
     public struct factionRecord {
         public Int32 Id;
@@ -925,13 +942,14 @@ namespace DBtoDBC
         public Int32 SpellId10;
         public Int32 Unk; }
 
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct powerdisplayRecord {
         public Int32 Id;
         public Int32 PowerType;
-        public Int32 Name;
-        public Int32 R;
-        public Int32 G;
-        public Int32 B; }
+        public UInt32 Name; // string
+        public Byte R;
+        public Byte G;
+        public Byte B; }
 
     public struct pvpdifficultyRecord {
         public Int32 Id;
@@ -973,7 +991,6 @@ namespace DBtoDBC
         public Int32 Exp10; }
 
     public struct randproppointsRecord {
-        public Int32 Id;
         public Int32 ItemLevel;
         public Int32 EpicPropertiesPoints1;
         public Int32 EpicPropertiesPoints2;
@@ -1306,38 +1323,39 @@ namespace DBtoDBC
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Name; }
 
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct spellitemenchantmentconditionRecord {
         public Int32 Id;
-        public Int32 Color1;
-        public Int32 Color2;
-        public Int32 Color3;
-        public Int32 Color4;
-        public Int32 Color5;
+        public Byte Color1;
+        public Byte Color2;
+        public Byte Color3;
+        public Byte Color4;
+        public Byte Color5;
         public Int32 LTOperand1;
         public Int32 LTOperand2;
         public Int32 LTOperand3;
         public Int32 LTOperand4;
         public Int32 LTOperand5;
-        public Int32 Comparator1;
-        public Int32 Comparator2;
-        public Int32 Comparator3;
-        public Int32 Comparator4;
-        public Int32 Comparator5;
-        public Int32 CompareColor1;
-        public Int32 CompareColor2;
-        public Int32 CompareColor3;
-        public Int32 CompareColor4;
-        public Int32 CompareColor5;
+        public Byte Comparator1;
+        public Byte Comparator2;
+        public Byte Comparator3;
+        public Byte Comparator4;
+        public Byte Comparator5;
+        public Byte CompareColor1;
+        public Byte CompareColor2;
+        public Byte CompareColor3;
+        public Byte CompareColor4;
+        public Byte CompareColor5;
         public Int32 Value1;
         public Int32 Value2;
         public Int32 Value3;
         public Int32 Value4;
         public Int32 Value5;
-        public Int32 Logic1;
-        public Int32 Logic2;
-        public Int32 Logic3;
-        public Int32 Logic4;
-        public Int32 Logic5; }
+        public Byte Logic1;
+        public Byte Logic2;
+        public Byte Logic3;
+        public Byte Logic4;
+        public Byte Logic5; }
 
     public struct spellitemenchantmentRecord {
         public Int32 Id;
@@ -1372,8 +1390,8 @@ namespace DBtoDBC
 
     public struct spellrangeRecord {
         public Int32 Id;
-        public Int32 MinRangeHostile;
-        public Int32 MinRangeFriend;
+        public float MinRangeHostile;
+        public float MinRangeFriend;
         public float MaxRangeHostile;
         public float MaxRangeFriend;
         public Int32 Type;
@@ -1424,7 +1442,7 @@ namespace DBtoDBC
         public Int32 Flags; }
 
     public struct talentRecord {
-        public Int32 TalentID;
+        public Int32 Id;
         public Int32 TalentTab;
         public Int32 Row;
         public Int32 Col;
@@ -1433,8 +1451,16 @@ namespace DBtoDBC
         public Int32 Rank3;
         public Int32 Rank4;
         public Int32 Rank5;
-        public Int32 DependsOn;
-        public Int32 DependsOnRank;
+        public Int32 Rank6;
+        public Int32 Rank7;
+        public Int32 Rank8;
+        public Int32 Rank9;
+        public Int32 DependsOn1;
+        public Int32 DependsOn2;
+        public Int32 DependsOn3;
+        public Int32 DependsOnRank1;
+        public Int32 DependsOnRank2;
+        public Int32 DependsOnRank3;
         public Int32 needAddInSpellBook;
         public Int32 unk0;
         public Int32 allowForPetHigh;

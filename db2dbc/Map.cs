@@ -129,7 +129,7 @@ namespace DBtoDBC
 
     public struct emotestextMap {
         public emotestextRecord record;
-        public string Textid; };
+        public string Name; };
 
     public struct factionMap {
         public factionRecord record;
@@ -228,7 +228,8 @@ namespace DBtoDBC
         public overridespelldataRecord record; };
 
     public struct powerdisplayMap {
-        public powerdisplayRecord record; };
+        public powerdisplayRecord record;
+        public string Name; }
 
     public struct pvpdifficultyMap {
         public pvpdifficultyRecord record; };

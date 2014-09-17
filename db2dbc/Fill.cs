@@ -1406,7 +1406,7 @@ namespace DBtoDBC {
 
                 header.magic = 1128416343;
                 header.record_count = rowCount;
-                header.field_count = 36;
+                header.field_count = 37;
                 header.record_size = (UInt32)Marshal.SizeOf(typeof(chatchannelsRecord));
 
                 UInt32 i = 0;
@@ -3134,7 +3134,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM emotestextdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Textid FROM emotestextdbc ORDER BY Id ASC";
+                string query = "SELECT Id, Name, EmoteId, TextData1, TextData2, TextData3, TextData4, TextData5, TextData6, TextData7, TextData8, TextData9, TextData10, TextData11, TextData12, TextData13, TextData14, TextData15, TextData16 FROM emotestextdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -3143,13 +3143,30 @@ namespace DBtoDBC {
 
                 header.magic = 1128416343;
                 header.record_count = rowCount;
-                header.field_count = 2;
+                header.field_count = 19;
                 header.record_size = (UInt32)Marshal.SizeOf(typeof(emotestextRecord));
 
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
                     body.records[i].record.Id = reader.GetInt32("Id");
-                    body.records[i].Textid = reader.GetString("Textid");
+                    body.records[i].Name = reader.GetString("Name");
+                    body.records[i].record.EmoteId = reader.GetUInt32("EmoteId");
+                    body.records[i].record.TextData1 = reader.GetInt32("TextData1");
+                    body.records[i].record.TextData2 = reader.GetInt32("TextData2");
+                    body.records[i].record.TextData3 = reader.GetInt32("TextData3");
+                    body.records[i].record.TextData4 = reader.GetInt32("TextData4");
+                    body.records[i].record.TextData5 = reader.GetInt32("TextData5");
+                    body.records[i].record.TextData6 = reader.GetInt32("TextData6");
+                    body.records[i].record.TextData7 = reader.GetInt32("TextData7");
+                    body.records[i].record.TextData8 = reader.GetInt32("TextData8");
+                    body.records[i].record.TextData9 = reader.GetInt32("TextData9");
+                    body.records[i].record.TextData10 = reader.GetInt32("TextData10");
+                    body.records[i].record.TextData11 = reader.GetInt32("TextData11");
+                    body.records[i].record.TextData12 = reader.GetInt32("TextData12");
+                    body.records[i].record.TextData13 = reader.GetInt32("TextData13");
+                    body.records[i].record.TextData14 = reader.GetInt32("TextData14");
+                    body.records[i].record.TextData15 = reader.GetInt32("TextData15");
+                    body.records[i].record.TextData16 = reader.GetInt32("TextData16");
                     i++; }
                 reader.Close(); }
             catch (Exception ex) {
@@ -3165,18 +3182,21 @@ namespace DBtoDBC {
                 UInt32 stringBlockOffset = 1; // first character is always \0
 
                 for (UInt32 i = 0; i < header.record_count; ++i) { // Generate some string offsets...
-                    // Textid
-                    if (body.records[i].Textid.Length == 0)
-                        body.records[i].record.Textid = 0;
+                    // Name
+                    if (body.records[i].Name.Length == 0)
+                        body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Textid.GetHashCode();
+                        int key = body.records[i].Name.GetHashCode();
                         if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Textid = offsetStorage[key];
+                            body.records[i].record.Name = offsetStorage[key];
                         else {
-                            body.records[i].record.Textid = stringBlockOffset;
-                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Textid) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Textid);
-                            reverseStorage.Add(body.records[i].record.Textid, body.records[i].Textid); } } }
+                            body.records[i].record.Name = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
+                            offsetStorage.Add(key, body.records[i].record.Name);
+                            reverseStorage.Add(body.records[i].record.Name, body.records[i].Name);
+                        }
+                    }
+                }
 
                 header.string_block_size = (int)stringBlockOffset;
 
@@ -5652,10 +5672,10 @@ namespace DBtoDBC {
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
                     body.records[i].record.Id = reader.GetInt32("Id");
                     body.records[i].record.PowerType = reader.GetInt32("PowerType");
-                    body.records[i].record.Name = reader.GetInt32("Name");
-                    body.records[i].record.R = reader.GetInt32("R");
-                    body.records[i].record.G = reader.GetInt32("G");
-                    body.records[i].record.B = reader.GetInt32("B");
+                    body.records[i].Name = reader.GetString("Name");
+                    body.records[i].record.R = reader.GetByte("R");
+                    body.records[i].record.G = reader.GetByte("G");
+                    body.records[i].record.B = reader.GetByte("B");
                     i++; }
                 reader.Close(); }
             catch (Exception ex) {
@@ -5669,6 +5689,20 @@ namespace DBtoDBC {
                 Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
+
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Generate some string offsets...
+                    // Name
+                    if (body.records[i].Name.Length == 0)
+                        body.records[i].record.Name = 0;
+                    else {
+                        int key = body.records[i].Name.GetHashCode();
+                        if (offsetStorage.ContainsKey(key))
+                            body.records[i].record.Name = offsetStorage[key];
+                        else {
+                            body.records[i].record.Name = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
+                            offsetStorage.Add(key, body.records[i].record.Name);
+                            reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
 
                 header.string_block_size = (int)stringBlockOffset;
 
@@ -5701,6 +5735,7 @@ namespace DBtoDBC {
                 fs.Close(); }
             catch (Exception ex) {
                 Console.WriteLine(ex.ToString());
+                Console.ReadLine();
                 return false; }
 
             return true; } } // powerdisplay
@@ -6053,7 +6088,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM randproppointsdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, ItemLevel, EpicPropertiesPoints1, EpicPropertiesPoints2, EpicPropertiesPoints3, EpicPropertiesPoints4, EpicPropertiesPoints5, RarePropertiesPoints1, RarePropertiesPoints2, RarePropertiesPoints3, RarePropertiesPoints4, RarePropertiesPoints5, UncommonPropertiesPoints1, UncommonPropertiesPoints2, UncommonPropertiesPoints3, UncommonPropertiesPoints4, UncommonPropertiesPoints5 FROM randproppointsdbc ORDER BY Id ASC";
+                string query = "SELECT ItemLevel, EpicPropertiesPoints1, EpicPropertiesPoints2, EpicPropertiesPoints3, EpicPropertiesPoints4, EpicPropertiesPoints5, RarePropertiesPoints1, RarePropertiesPoints2, RarePropertiesPoints3, RarePropertiesPoints4, RarePropertiesPoints5, UncommonPropertiesPoints1, UncommonPropertiesPoints2, UncommonPropertiesPoints3, UncommonPropertiesPoints4, UncommonPropertiesPoints5 FROM randproppointsdbc ORDER BY ItemLevel ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -6062,12 +6097,11 @@ namespace DBtoDBC {
 
                 header.magic = 1128416343;
                 header.record_count = rowCount;
-                header.field_count = 17;
+                header.field_count = 16;
                 header.record_size = (UInt32)Marshal.SizeOf(typeof(randproppointsRecord));
 
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
-                    body.records[i].record.Id = reader.GetInt32("Id");
                     body.records[i].record.ItemLevel = reader.GetInt32("ItemLevel");
                     body.records[i].record.EpicPropertiesPoints1 = reader.GetInt32("EpicPropertiesPoints1");
                     body.records[i].record.EpicPropertiesPoints2 = reader.GetInt32("EpicPropertiesPoints2");
@@ -7520,36 +7554,36 @@ namespace DBtoDBC {
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
                     body.records[i].record.Id = reader.GetInt32("Id");
-                    body.records[i].record.Color1 = reader.GetInt32("Color1");
-                    body.records[i].record.Color2 = reader.GetInt32("Color2");
-                    body.records[i].record.Color3 = reader.GetInt32("Color3");
-                    body.records[i].record.Color4 = reader.GetInt32("Color4");
-                    body.records[i].record.Color5 = reader.GetInt32("Color5");
+                    body.records[i].record.Color1 = reader.GetByte("Color1");
+                    body.records[i].record.Color2 = reader.GetByte("Color2");
+                    body.records[i].record.Color3 = reader.GetByte("Color3");
+                    body.records[i].record.Color4 = reader.GetByte("Color4");
+                    body.records[i].record.Color5 = reader.GetByte("Color5");
                     body.records[i].record.LTOperand1 = reader.GetInt32("LTOperand1");
                     body.records[i].record.LTOperand2 = reader.GetInt32("LTOperand2");
                     body.records[i].record.LTOperand3 = reader.GetInt32("LTOperand3");
                     body.records[i].record.LTOperand4 = reader.GetInt32("LTOperand4");
                     body.records[i].record.LTOperand5 = reader.GetInt32("LTOperand5");
-                    body.records[i].record.Comparator1 = reader.GetInt32("Comparator1");
-                    body.records[i].record.Comparator2 = reader.GetInt32("Comparator2");
-                    body.records[i].record.Comparator3 = reader.GetInt32("Comparator3");
-                    body.records[i].record.Comparator4 = reader.GetInt32("Comparator4");
-                    body.records[i].record.Comparator5 = reader.GetInt32("Comparator5");
-                    body.records[i].record.CompareColor1 = reader.GetInt32("CompareColor1");
-                    body.records[i].record.CompareColor2 = reader.GetInt32("CompareColor2");
-                    body.records[i].record.CompareColor3 = reader.GetInt32("CompareColor3");
-                    body.records[i].record.CompareColor4 = reader.GetInt32("CompareColor4");
-                    body.records[i].record.CompareColor5 = reader.GetInt32("CompareColor5");
+                    body.records[i].record.Comparator1 = reader.GetByte("Comparator1");
+                    body.records[i].record.Comparator2 = reader.GetByte("Comparator2");
+                    body.records[i].record.Comparator3 = reader.GetByte("Comparator3");
+                    body.records[i].record.Comparator4 = reader.GetByte("Comparator4");
+                    body.records[i].record.Comparator5 = reader.GetByte("Comparator5");
+                    body.records[i].record.CompareColor1 = reader.GetByte("CompareColor1");
+                    body.records[i].record.CompareColor2 = reader.GetByte("CompareColor2");
+                    body.records[i].record.CompareColor3 = reader.GetByte("CompareColor3");
+                    body.records[i].record.CompareColor4 = reader.GetByte("CompareColor4");
+                    body.records[i].record.CompareColor5 = reader.GetByte("CompareColor5");
                     body.records[i].record.Value1 = reader.GetInt32("Value1");
                     body.records[i].record.Value2 = reader.GetInt32("Value2");
                     body.records[i].record.Value3 = reader.GetInt32("Value3");
                     body.records[i].record.Value4 = reader.GetInt32("Value4");
                     body.records[i].record.Value5 = reader.GetInt32("Value5");
-                    body.records[i].record.Logic1 = reader.GetInt32("Logic1");
-                    body.records[i].record.Logic2 = reader.GetInt32("Logic2");
-                    body.records[i].record.Logic3 = reader.GetInt32("Logic3");
-                    body.records[i].record.Logic4 = reader.GetInt32("Logic4");
-                    body.records[i].record.Logic5 = reader.GetInt32("Logic5");
+                    body.records[i].record.Logic1 = reader.GetByte("Logic1");
+                    body.records[i].record.Logic2 = reader.GetByte("Logic2");
+                    body.records[i].record.Logic3 = reader.GetByte("Logic3");
+                    body.records[i].record.Logic4 = reader.GetByte("Logic4");
+                    body.records[i].record.Logic5 = reader.GetByte("Logic5");
                     i++; }
                 reader.Close(); }
             catch (Exception ex) {
@@ -8256,7 +8290,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM talentdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT TalentID, TalentTab, Row, Col, Rank1, Rank2, Rank3, Rank4, Rank5, DependsOn, DependsOnRank, needAddInSpellBook, unk0, allowForPetHigh, allowForPetLow FROM talentdbc ORDER BY TalentID ASC";
+                string query = "SELECT Id, TalentTab, Row, Col, Rank1, Rank2, Rank3, Rank4, Rank5, DependsOn, DependsOnRank, needAddInSpellBook, unk0, allowForPetHigh, allowForPetLow FROM talentdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -8265,12 +8299,12 @@ namespace DBtoDBC {
 
                 header.magic = 1128416343;
                 header.record_count = rowCount;
-                header.field_count = 15;
+                header.field_count = 23;
                 header.record_size = (UInt32)Marshal.SizeOf(typeof(talentRecord));
 
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
-                    body.records[i].record.TalentID = reader.GetInt32("TalentID");
+                    body.records[i].record.Id = reader.GetInt32("Id");
                     body.records[i].record.TalentTab = reader.GetInt32("TalentTab");
                     body.records[i].record.Row = reader.GetInt32("Row");
                     body.records[i].record.Col = reader.GetInt32("Col");
@@ -8279,8 +8313,16 @@ namespace DBtoDBC {
                     body.records[i].record.Rank3 = reader.GetInt32("Rank3");
                     body.records[i].record.Rank4 = reader.GetInt32("Rank4");
                     body.records[i].record.Rank5 = reader.GetInt32("Rank5");
-                    body.records[i].record.DependsOn = reader.GetInt32("DependsOn");
-                    body.records[i].record.DependsOnRank = reader.GetInt32("DependsOnRank");
+                    body.records[i].record.Rank6 = 0;
+                    body.records[i].record.Rank7 = 0;
+                    body.records[i].record.Rank8 = 0;
+                    body.records[i].record.Rank9 = 0;
+                    body.records[i].record.DependsOn1 = reader.GetInt32("DependsOn");
+                    body.records[i].record.DependsOn2 = 0;
+                    body.records[i].record.DependsOn3 = 0;
+                    body.records[i].record.DependsOnRank1 = reader.GetInt32("DependsOnRank");
+                    body.records[i].record.DependsOnRank2 = 0;
+                    body.records[i].record.DependsOnRank3 = 0;
                     body.records[i].record.needAddInSpellBook = reader.GetInt32("needAddInSpellBook");
                     body.records[i].record.unk0 = reader.GetInt32("unk0");
                     body.records[i].record.allowForPetHigh = reader.GetInt32("allowForPetHigh");
@@ -8456,7 +8498,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM taxinodesdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, MapId, X, Y, Z, Name, Name_loc2, NameFlags, MountCreatureId1, MountCreatureId2 FROM taxinodesdbc ORDER BY Id ASC";
+                string query = "SELECT Id, MapId, X, Y, Z, Name, Name_loc2, MountCreatureId1, MountCreatureId2 FROM taxinodesdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -8469,7 +8511,7 @@ namespace DBtoDBC {
                 header.record_size = (UInt32)Marshal.SizeOf(typeof(taxinodesRecord));
 
                 UInt32 i = 0;
-                while (reader.Read()) { //if (!reader.HasRows) return false; 
+                while (reader.Read()) { //if (!reader.HasRows) return false;
                     body.records[i].record.Id = reader.GetInt32("Id");
                     body.records[i].record.MapId = reader.GetInt32("MapId");
                     body.records[i].record.X = reader.GetFloat("X");
