@@ -320,7 +320,7 @@ namespace DBtoDBC
         public Int32 Camera7; }
 
     public struct creaturedisplayinfoRecord {
-        public Int32 DisplayId;
+        public Int32 Id;
         public Int32 ModelId;
         public Int32 Sound;
         public Int32 ExtraId;
@@ -378,32 +378,32 @@ namespace DBtoDBC
     public struct creaturemodeldataRecord {
         public Int32 Id;
         public Int32 Flags;
-        public UInt32 ModelPath; // string
-        public Int32 Unused;
+        public UInt32 Model; // string
+        public Int32 SizeClass;
         public float Scale;
-        public Int32 ModelScale;
         public Int32 BloodLevel;
-        public Int32 Footprint;
-        public Int32 FootprintTextureLength;
+        public Int32 FootprintTexture;
+        public float FootprintTextureLength;
         public float FootprintTextureWidth;
-        public Int32 FootprintParticleScla;
+        public float FootprintParticleScale;
         public Int32 FoleyMaterialId;
         public Int32 FootstepShakeSize;
-        public Int32 SoundData;
+        public Int32 DeathThudShakeSize;
+        public Int32 Sound;
         public float CollisionWidth;
         public float CollisionHeight;
         public float MountHeight;
-        public float GeoBoxMin;
-        public float GeoBoxMax;
-        public float Unk3;
-        public float Unk4;
-        public float Unk5;
-        public float Unk6;
-        public float Unk7;
-        public float Unk8;
-        public float Unk9;
-        public Int32 Unk10;
-        public Int32 Unk11; }
+        public float GeoBoxMin1;
+        public float GeoBoxMin2;
+        public float GeoBoxMin3;
+        public float GeoBoxMax1;
+        public float GeoBoxMax2;
+        public float GeoBoxMax3;
+        public float WorldEffectScale;
+        public float AttachedEffectScale;
+        public float MissileCollisionRadius;
+        public Int32 MissileCollisionPush;
+        public Int32 MissileCollisionRaise; }
 
     public struct creaturespelldataRecord {
         public Int32 Id;
@@ -571,7 +571,7 @@ namespace DBtoDBC
         public Int32 FriendFaction4; }
 
     public struct gameobjectdisplayinfoRecord {
-        public Int32 DisplayId;
+        public Int32 Id;
         public UInt32 FileName; // string
         public Int32 Unk1;
         public Int32 Unk2;
@@ -959,7 +959,7 @@ namespace DBtoDBC
         public Int32 MaxLevel;
         public Int32 Difficulty; }
 
-    public struct questfactionrewRecord {
+    public struct questfactionrewardRecord {
         public Int32 Id;
         public Int32 QuestRewFactionValue1;
         public Int32 QuestRewFactionValue2;

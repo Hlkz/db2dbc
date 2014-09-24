@@ -171,8 +171,8 @@ namespace DBtoDBC
     public struct pvpdifficultyBody {
         public pvpdifficultyMap[] records; };
 
-    public struct questfactionrewBody {
-        public questfactionrewMap[] records; };
+    public struct questfactionrewardBody {
+        public questfactionrewardMap[] records; };
 
     public struct questsortBody {
         public questsortMap[] records; };

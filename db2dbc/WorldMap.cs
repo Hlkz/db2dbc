@@ -98,7 +98,7 @@ namespace DBtoDBC
 
     public struct creaturemodeldataMap {
         public creaturemodeldataRecord record;
-        public string ModelPath; };
+        public string Model; };
 
     public struct creaturespelldataMap {
         public creaturespelldataRecord record; };
@@ -234,8 +234,8 @@ namespace DBtoDBC
     public struct pvpdifficultyMap {
         public pvpdifficultyRecord record; };
 
-    public struct questfactionrewMap {
-        public questfactionrewRecord record; };
+    public struct questfactionrewardMap {
+        public questfactionrewardRecord record; };
 
     public struct questsortMap {
         public questsortRecord record;

@@ -9,16 +9,14 @@ namespace DBtoDBC
         static void Main(string[] args)
         {
             string instruc = "all";
-            DB2DBC.GlobalLocalization = 2; // Default localization
+            DB2DBC.GlobalLocalization = 0; // Default localization
 
             if (args != null) {
                 if (args.Length > 0) instruc = args[0]; // Arg 0 is Instruction
                 if (args.Length > 1) DB2DBC.GlobalLocalization = Convert.ToUInt32(args[1]); } // Arg 1 is Localization
 
-            string connectionString, server, database, uid, password;
-            server = "localhost"; database = "iwpw"; uid = "root"; password = "";
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" + database
-                + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            string connectionString = "SERVER=" + DB2DBC.ConnectionServer + ";DATABASE=" + DB2DBC.WorldDatabase + ";"
+                    + "UID=" + DB2DBC.ConnectionUsername + ";PASSWORD=" + DB2DBC.ConnectionPassword + ";";
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
