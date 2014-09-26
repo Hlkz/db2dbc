@@ -116,7 +116,7 @@ namespace DBtoDBC
 
     public struct creaturemovementinfoRecord {
         public Int32 Id;
-        public Int32 SmoothFacingChaseRate; }
+        public Single SmoothFacingChaseRate; }
 
     public struct creaturesounddataRecord {
         public Int32 ID;
@@ -230,8 +230,8 @@ namespace DBtoDBC
         public Int32 Id;
         public Int32 Xp;
         public Single Factor;
-        public Int32 OutdoorHours;
-        public Int32 InnHours;
+        public Single OutdoorHours;
+        public Single InnHours;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Name;
         public Int32 Threshold; }
@@ -330,6 +330,32 @@ namespace DBtoDBC
         public Int32 Weight4;
         public Int32 Amount;
         public Int32 TerrainType; }
+    
+    public struct gtbarbershopcostbaseRecord {
+        public float Value; }
+    public struct gtchancetomeleecritRecord {
+        public float Value; }
+    public struct gtchancetomeleecritbaseRecord {
+        public float Value; }
+    public struct gtchancetospellcritRecord {
+        public float Value; }
+    public struct gtchancetospellcritbaseRecord {
+        public float Value; }
+    public struct gtcombatratingsRecord {
+        public float Value; }
+    public struct gtnpcmanacostscalerRecord {
+        public float Value; }
+    public struct gtoctclasscombatratingscalarRecord {
+        public Int32 Id;
+        public float Value; }
+    public struct gtoctregenhpRecord {
+        public float Value; }
+    public struct gtoctregenmpRecord {
+        public float Value; }
+    public struct gtregenhppersptRecord {
+        public float Value; }
+    public struct gtregenmppersptRecord {
+        public float Value; }
 
     public struct helmetgeosetvisdataRecord {
         public Int32 Id;
@@ -773,7 +799,7 @@ namespace DBtoDBC
         public Int32 Id;
         public UInt32 Name; // string
         public Int32 Type;
-        public Single Color;
+        public Int32 Color;
         public Int32 Edge;
         public Int32 BlackWhite;
         public Int32 Unk;
@@ -969,6 +995,57 @@ namespace DBtoDBC
     public struct spammessagesRecord {
         public Int32 Id;
         public UInt32 RegEx; } // string
+    
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct spellchaineffectsRecord {
+        public Int32 ID;
+        public float AvgSegLen;
+        public float Width;
+        public float NoiseScale;
+        public float TexCoordScale;
+        public Int32 SegDuration;
+        public Int32 SegDelay;
+        public UInt32 Texture; // string
+        public Int32 Flags;
+        public Int32 JointCount;
+        public float JointOffsetRadius;
+        public Int32 JointsPerMinorJoint;
+        public Int32 MinorJointsPerMajorJoint;
+        public float MinorJointScale;
+        public float MajorJointScale;
+        public float JointMoveSpeed;
+        public float JointSmoothness;
+        public float MinDurationBetweenJointJumps;
+        public float MaxDurationBetweenJointJumps;
+        public float WaveHeight;
+        public float WaveFreq;
+        public float WaveSpeed;
+        public float MinWaveAngle;
+        public float MaxWaveAngle;
+        public float MinWaveSpin;
+        public float MaxWaveSpin;
+        public float ArcHeight;
+        public float MinArcAngle;
+        public float MaxArcAngle;
+        public float MinArcSpin;
+        public float MaxArcSpin;
+        public float DelayBetweenEffects;
+        public float MinFlickerOnDuration;
+        public float MaxFlickerOnDuration;
+        public float MinFlickerOffDuration;
+        public float MaxFlickerOffDuration;
+        public float PulseSpeed;
+        public float PulseOnLength;
+        public float PulseFadeLength;
+        public Byte Alpha;
+        public Byte Red;
+        public Byte Green;
+        public Byte Blue;
+        public Byte BlendMode;
+        public Int32 Combo;
+        public Int32 RenderLayer;
+        public float TextureLength;
+        public float WavePhase; }
 
     public struct spelldescriptionvariablesRecord {
         public Int32 Id;
@@ -1086,21 +1163,21 @@ namespace DBtoDBC
         public Int32 Unk2;
         public Int32 Unk3;
         public Int32 Unk4;
-        public Single Unk5;
-        public Single Unk6;
-        public Single Unk7;
-        public Int32 Unk8;
+        public Int32 Unk5;
+        public Int32 Unk6;
+        public Int32 Unk7;
+        public Single Unk8;
         public Single Unk9;
         public Single Unk10;
         public Single Unk11;
-        public Int32 Unk12;
+        public Single Unk12;
         public Single Unk13;
-        public Int32 Unk14;
-        public Int32 Unk15;
-        public Int32 Unk16;
+        public Single Unk14;
+        public Single Unk15;
+        public Single Unk16;
         public Single Unk17;
-        public Int32 Unk18;
-        public Int32 Unk19;
+        public Single Unk18;
+        public Single Unk19;
         public Single Unk20;
         public Int32 Flags; }
 
@@ -1149,6 +1226,9 @@ namespace DBtoDBC
         public Int32 FootstepSprayWalk;
         public Int32 Sound;
         public Int32 Flags; }
+    
+    public struct terraintypesoundsRecord {
+        public Int32 Id; }
 
     public struct transportphysicsRecord {
         public Int32 Id;
@@ -1272,11 +1352,22 @@ namespace DBtoDBC
         public Single EffectColor4;
         public UInt32 Texture; } // string
 
+    public struct worldchunksoundsRecord {
+        public Int32 Map;
+        public Int32 ChunkX;
+        public Int32 ChunkY;
+        public Int32 SubChunkX;
+        public Int32 SubChunkY;
+        public Int32 ZoneIntroMusic;
+        public Int32 ZoneMusic;
+        public Int32 SoundAmbience;
+        public Int32 SoundProviderPreference; }
+
     public struct worldmapareaRecord {
         public Int32 Id;
         public Int32 Map;
         public Int32 Area;
-        public UInt32 AreaName; // string
+        public UInt32 InternalName; // string
         public Single LocLeft;
         public Single LocRight;
         public Single LocTop;
@@ -1323,30 +1414,15 @@ namespace DBtoDBC
         public UInt32[] Text;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Description;
-        public Int32 field39;
-        public Int32 field40;
-        public UInt32 field41; // string
-        public Int32 field42;
-        public Int32 field43;
-        public UInt32 field44; // string
-        public Int32 field45;
-        public Int32 field46;
-        public Int32 field47;
-        public Int32 field48;
-        public Int32 field49;
-        public Int32 field50;
-        public Int32 field51;
-        public Int32 field52;
-        public Int32 field53;
-        public Int32 field54;
-        public Int32 field55;
-        public Int32 field56;
-        public Int32 field57;
-        public Int32 field58;
-        public Int32 field59;
-        public Int32 field60;
-        public Int32 field61;
-        public Int32 field62; }
+        public Int32 StateVariable;
+        public Int32 Type;
+        public UInt32 DynamicIcon; // string
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
+        public UInt32[] DynamicTooltip;
+        public Int32 ExtendedUI;
+        public Int32 ExtendedUIStateVariable1;
+        public Int32 ExtendedUIStateVariable2;
+        public Int32 ExtendedUIStateVariable3; }
 
     public struct worldstatezonesoundsRecord {
         public Int32 Id;

@@ -70,6 +70,12 @@ namespace DBtoDBC
             battlemasterlistdbc battlemasterlist = new battlemasterlistdbc();
             battlemasterlist.LoadDB(connection);
             battlemasterlist.SaveDBC("D:/A/DBC/temp/DBFilesClient/BattlemasterList.dbc"); }
+        
+        public static void charstartoutfit(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
+            charstartoutfitdbc charstartoutfit = new charstartoutfitdbc();
+            charstartoutfit.LoadDB(connection);
+            charstartoutfit.SaveDBC("D:/A/DBC/temp/DBFilesClient/CharStartOutfit.dbc"); }
 
         public static void chartitles(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
@@ -220,6 +226,12 @@ namespace DBtoDBC
             holidaysdbc holidays = new holidaysdbc();
             holidays.LoadDB(connection);
             holidays.SaveDBC("D:/A/DBC/temp/DBFilesClient/Holidays.dbc"); }
+        
+        public static void item(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
+            itemdbc item = new itemdbc();
+            item.LoadDB(connection);
+            item.SaveDBC("D:/A/DBC/temp/DBFilesClient/Item.dbc"); }
 
         public static void itembagfamily(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
@@ -268,12 +280,18 @@ namespace DBtoDBC
             lightdbc light = new lightdbc();
             light.LoadDB(connection);
             light.SaveDBC("D:/A/DBC/temp/DBFilesClient/Light.dbc"); }
-
+        
         public static void liquidtype(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
             liquidtypedbc liquidtype = new liquidtypedbc();
             liquidtype.LoadDB(connection);
             liquidtype.SaveDBC("D:/A/DBC/temp/DBFilesClient/Liquidtype.dbc"); }
+
+        public static void lockd(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
+            lockdbc lockd = new lockdbc();
+            lockd.LoadDB(connection);
+            lockd.SaveDBC("D:/A/DBC/temp/DBFilesClient/Lock.dbc"); }
 
         public static void mailtemplate(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
@@ -526,6 +544,12 @@ namespace DBtoDBC
             wmoareatabledbc wmoareatable = new wmoareatabledbc();
             wmoareatable.LoadDB(connection);
             wmoareatable.SaveDBC("D:/A/DBC/temp/DBFilesClient/WMOAreaTable.dbc"); }
+
+        public static void worldmaparea(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
+            worldmapareadbc worldmaparea = new worldmapareadbc();
+            worldmaparea.LoadDB(connection);
+            worldmaparea.SaveDBC("D:/A/DBC/temp/DBFilesClient/WorldMapArea.dbc"); }
 
         public static void worldmapoverlay(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
@@ -785,6 +809,77 @@ namespace DBtoDBC
             groundeffecttexturedbc groundeffecttexture = new groundeffecttexturedbc();
             groundeffecttexture.LoadDB(connection);
             groundeffecttexture.SaveDBC("D:/A/DBC/temp/DBFilesClient/GroundEffectTexture.dbc"); }
+                public static void gtbarbershopcostbase(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtbarbershopcostbasedbc gtbarbershopcostbase = new gtbarbershopcostbasedbc();
+            gtbarbershopcostbase.LoadDB(connection);
+            gtbarbershopcostbase.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtBarberShopCostBase.dbc"); }
+
+        public static void gtchancetomeleecrit(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtchancetomeleecritdbc gtchancetomeleecrit = new gtchancetomeleecritdbc();
+            gtchancetomeleecrit.LoadDB(connection);
+            gtchancetomeleecrit.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtChanceToMeleeCrit.dbc"); }
+
+        public static void gtchancetomeleecritbase(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtchancetomeleecritbasedbc gtchancetomeleecritbase = new gtchancetomeleecritbasedbc();
+            gtchancetomeleecritbase.LoadDB(connection);
+            gtchancetomeleecritbase.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtChanceToMeleeCritBase.dbc"); }
+
+        public static void gtchancetospellcrit(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtchancetospellcritdbc gtchancetospellcrit = new gtchancetospellcritdbc();
+            gtchancetospellcrit.LoadDB(connection);
+            gtchancetospellcrit.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtChanceToSpellCrit.dbc"); }
+
+        public static void gtchancetospellcritbase(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtchancetospellcritbasedbc gtchancetospellcritbase = new gtchancetospellcritbasedbc();
+            gtchancetospellcritbase.LoadDB(connection);
+            gtchancetospellcritbase.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtChanceToSpellCritBase.dbc"); }
+
+        public static void gtcombatratings(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtcombatratingsdbc gtcombatratings = new gtcombatratingsdbc();
+            gtcombatratings.LoadDB(connection);
+            gtcombatratings.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtCombatRatings.dbc"); }
+
+        public static void gtnpcmanacostscaler(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtnpcmanacostscalerdbc gtnpcmanacostscaler = new gtnpcmanacostscalerdbc();
+            gtnpcmanacostscaler.LoadDB(connection);
+            gtnpcmanacostscaler.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtNPCManaCostScaler.dbc"); }
+
+        public static void gtoctclasscombatratingscalar(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtoctclasscombatratingscalardbc gtoctclasscombatratingscalar = new gtoctclasscombatratingscalardbc();
+            gtoctclasscombatratingscalar.LoadDB(connection);
+            gtoctclasscombatratingscalar.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtOCTClassCombatRatingScalar.dbc"); }
+
+        public static void gtoctregenhp(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtoctregenhpdbc gtoctregenhp = new gtoctregenhpdbc();
+            gtoctregenhp.LoadDB(connection);
+            gtoctregenhp.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtOCTRegenHP.dbc"); }
+
+        public static void gtoctregenmp(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtoctregenmpdbc gtoctregenmp = new gtoctregenmpdbc();
+            gtoctregenmp.LoadDB(connection);
+            gtoctregenmp.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtOCTRegenMP.dbc"); }
+
+        public static void gtregenhpperspt(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtregenhppersptdbc gtregenhpperspt = new gtregenhppersptdbc();
+            gtregenhpperspt.LoadDB(connection);
+            gtregenhpperspt.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtRegenHPPerSpt.dbc"); }
+
+        public static void gtregenmpperspt(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            gtregenmppersptdbc gtregenmpperspt = new gtregenmppersptdbc();
+            gtregenmpperspt.LoadDB(connection);
+            gtregenmpperspt.SaveDBC("D:/A/DBC/temp/DBFilesClient/gtRegenMPPerSpt.dbc"); }
 
         public static void helmetgeosetvisdata(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
@@ -1151,6 +1246,12 @@ namespace DBtoDBC
             spammessagesdbc spammessages = new spammessagesdbc();
             spammessages.LoadDB(connection);
             spammessages.SaveDBC("D:/A/DBC/temp/DBFilesClient/SpamMessages.dbc"); }
+        
+        public static void spellchaineffects(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            spellchaineffectsdbc spellchaineffects = new spellchaineffectsdbc();
+            spellchaineffects.LoadDB(connection);
+            spellchaineffects.SaveDBC("D:/A/DBC/temp/DBFilesClient/SpellChainEffects.dbc"); }
 
         public static void spelldescriptionvariables(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
@@ -1253,6 +1354,12 @@ namespace DBtoDBC
             terraintypedbc terraintype = new terraintypedbc();
             terraintype.LoadDB(connection);
             terraintype.SaveDBC("D:/A/DBC/temp/DBFilesClient/TerrainType.dbc"); }
+        
+        public static void terraintypesounds(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
+            terraintypesoundsdbc terraintypesounds = new terraintypesoundsdbc();
+            terraintypesounds.LoadDB(connection);
+            terraintypesounds.SaveDBC("D:/A/DBC/temp/DBFilesClient/TerrainTypeSounds.dbc"); }
 
         public static void transportphysics(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
@@ -1320,11 +1427,12 @@ namespace DBtoDBC
             weather.LoadDB(connection);
             weather.SaveDBC("D:/A/DBC/temp/DBFilesClient/Weather.dbc"); }
 
-        public static void worldmaparea(MySqlConnection connection) {
+        public static void worldchunksounds(MySqlConnection connection) {
+            return; // NON ELLE FAIT WOWERROR
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
-            worldmapareadbc worldmaparea = new worldmapareadbc();
-            worldmaparea.LoadDB(connection);
-            worldmaparea.SaveDBC("D:/A/DBC/temp/DBFilesClient/WorldMapArea.dbc"); }
+            worldchunksoundsdbc worldchunksounds = new worldchunksoundsdbc();
+            worldchunksounds.LoadDB(connection);
+            worldchunksounds.SaveDBC("D:/A/DBC/temp/DBFilesClient/WorldChunkSounds.dbc"); }
 
         public static void worldmapcontinent(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
@@ -1342,7 +1450,7 @@ namespace DBtoDBC
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
             worldstateuidbc worldstateui = new worldstateuidbc();
             worldstateui.LoadDB(connection);
-            worldstateui.SaveDBC("D:/A/DBC/temp/DBFilesClient/WorldStateuUI.dbc"); }
+            worldstateui.SaveDBC("D:/A/DBC/temp/DBFilesClient/WorldStateUI.dbc"); }
 
         public static void worldstatezonesounds(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);

@@ -125,6 +125,42 @@ namespace DBtoDBC
     public struct groundeffecttextureBody {
         public groundeffecttextureMap[] records; };
 
+        public struct gtbarbershopcostbaseBody {
+        public gtbarbershopcostbaseMap[] records; };
+
+    public struct gtchancetomeleecritBody {
+        public gtchancetomeleecritMap[] records; };
+
+    public struct gtchancetomeleecritbaseBody {
+        public gtchancetomeleecritbaseMap[] records; };
+
+    public struct gtchancetospellcritBody {
+        public gtchancetospellcritMap[] records; };
+
+    public struct gtchancetospellcritbaseBody {
+        public gtchancetospellcritbaseMap[] records; };
+
+    public struct gtcombatratingsBody {
+        public gtcombatratingsMap[] records; };
+
+    public struct gtnpcmanacostscalerBody {
+        public gtnpcmanacostscalerMap[] records; };
+
+    public struct gtoctclasscombatratingscalarBody {
+        public gtoctclasscombatratingscalarMap[] records; };
+
+    public struct gtoctregenhpBody {
+        public gtoctregenhpMap[] records; };
+
+    public struct gtoctregenmpBody {
+        public gtoctregenmpMap[] records; };
+
+    public struct gtregenhppersptBody {
+        public gtregenhppersptMap[] records; };
+
+    public struct gtregenmppersptBody {
+        public gtregenmppersptMap[] records; };
+
     public struct helmetgeosetvisdataBody {
         public helmetgeosetvisdataMap[] records; };
 
@@ -307,6 +343,9 @@ namespace DBtoDBC
 
     public struct spammessagesBody {
         public spammessagesMap[] records; };
+    
+    public struct spellchaineffectsBody {
+        public spellchaineffectsMap[] records; };
 
     public struct spelldescriptionvariablesBody {
         public spelldescriptionvariablesMap[] records; };
@@ -358,6 +397,9 @@ namespace DBtoDBC
 
     public struct terraintypeBody {
         public terraintypeMap[] records; };
+    
+    public struct terraintypesoundsBody {
+        public terraintypesoundsMap[] records; };
 
     public struct transportphysicsBody {
         public transportphysicsMap[] records; };
@@ -392,8 +434,8 @@ namespace DBtoDBC
     public struct weatherBody {
         public weatherMap[] records; };
 
-    public struct worldmapareaBody {
-        public worldmapareaMap[] records; };
+    public struct worldchunksoundsBody {
+        public worldchunksoundsMap[] records; };
 
     public struct worldmapcontinentBody {
         public worldmapcontinentMap[] records; };

@@ -125,7 +125,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM achievementdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Faction, MapId, Previous, Name, Name_loc2, Nameflags, Description, Description_loc2, Category, Points, OrderInGroup, Flags, SpellIcon, Reward, Reward_loc2, Rewardflags, Demands, ReferencedAchievement FROM achievementdbc ORDER BY Id ASC";
+                string query = "SELECT Id, Faction, MapId, Previous, Name, Name_loc2, Description, Description_loc2, Category, Points, OrderInGroup, Flags, SpellIcon, Reward, Reward_loc2, Rewardflags, Demands, ReferencedAchievement FROM achievementdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -472,7 +472,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM areatabledbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, MapId, ParentArea, ExploreFlag, Flags, SoundPreferences, SoundPreferencesUnderwater, SoundAmbience, ZoneMusic, ZoneIntroMusic, ExplorationLevel, Name, Name_loc2, Nameflags, FactionGroup, LiquidTypeWater, LiquidTypeOcean, LiquidTypeMagma, LiquidTypeSlime, MinElevation, AmbientMultiplier, Light FROM areatabledbc ORDER BY Id ASC";
+                string query = "SELECT Id, MapId, ParentArea, ExploreFlag, Flags, SoundPreferences, SoundPreferencesUnderwater, SoundAmbience, ZoneMusic, ZoneIntroMusic, ExplorationLevel, Name, Name_loc2, FactionGroup, LiquidTypeWater, LiquidTypeOcean, LiquidTypeMagma, LiquidTypeSlime, MinElevation, AmbientMultiplier, Light FROM areatabledbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -1026,7 +1026,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM battlemasterlistdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Instance1, Instance2, Instance3, Instance4, Instance5, Instance6, Instance7, Instance8, InstanceType, JoinAsGroup, Name, Name_loc2, Nameflags, MaxGroupSize, HolidayWorldStateId, MinLevel, MaxLevel FROM battlemasterlistdbc ORDER BY Id ASC";
+                string query = "SELECT Id, Instance1, Instance2, Instance3, Instance4, Instance5, Instance6, Instance7, Instance8, InstanceType, JoinAsGroup, Name, Name_loc2, MaxGroupSize, HolidayWorldStateId, MinLevel, MaxLevel FROM battlemasterlistdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -1126,7 +1126,7 @@ namespace DBtoDBC {
 
             return true; } } // battlemasterlist
 
-    public class charstartoutfit {
+    public class charstartoutfitdbc {
         public DBCHeader header;
         public charstartoutfitBody body;
 
@@ -1150,10 +1150,10 @@ namespace DBtoDBC {
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
                     body.records[i].record.Id = reader.GetInt32("Id");
-                    body.records[i].record.Race = reader.GetInt32("Race");
-                    body.records[i].record.Class = reader.GetInt32("Class");
-                    body.records[i].record.Gender = reader.GetInt32("Gender");
-                    body.records[i].record.Unused = reader.GetInt32("Unused");
+                    body.records[i].record.Race = reader.GetByte("Race");
+                    body.records[i].record.Class = reader.GetByte("Class");
+                    body.records[i].record.Gender = reader.GetByte("Gender");
+                    body.records[i].record.Unused = reader.GetByte("Unused");
                     body.records[i].record.ItemId1 = reader.GetInt32("ItemId1");
                     body.records[i].record.ItemId2 = reader.GetInt32("ItemId2");
                     body.records[i].record.ItemId3 = reader.GetInt32("ItemId3");
@@ -2128,7 +2128,7 @@ namespace DBtoDBC {
 
         public bool SaveDBC(string fileName) {
             try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
 
@@ -2137,13 +2137,12 @@ namespace DBtoDBC {
                     if (body.records[i].Texture.Length == 0)
                         body.records[i].record.Texture = 0;
                     else {
-                        int key = body.records[i].Texture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture))
+                            body.records[i].record.Texture = offsetStorage[body.records[i].Texture];
                         else {
                             body.records[i].record.Texture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture);
+                            offsetStorage.Add(body.records[i].Texture, body.records[i].record.Texture);
                             reverseStorage.Add(body.records[i].record.Texture, body.records[i].Texture); } } }
 
                 header.string_block_size = (int)stringBlockOffset;
@@ -3926,6 +3925,89 @@ namespace DBtoDBC {
                 return false; }
 
             return true; } } // holidays
+    
+    public class itemdbc {
+        public DBCHeader header;
+        public itemBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM item_template", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT Entry, Class, SubClass, SoundOverrideSubClass, Material, DisplayId, InventoryType, Sheath FROM item_template ORDER BY Entry ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                body.records = new itemMap[rowCount]; // Prepare body
+
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 8;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(itemRecord));
+
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false; 
+                    body.records[i].record.Id = reader.GetInt32("Entry");
+                    body.records[i].record.Class = reader.GetInt32("Class");
+                    body.records[i].record.SubClass = reader.GetInt32("SubClass");
+                    body.records[i].record.SoundOverride = reader.GetInt32("SoundOverrideSubClass");
+                    body.records[i].record.Material = reader.GetInt32("Material");
+                    body.records[i].record.DisplayInfo = reader.GetInt32("DisplayId");
+                    body.records[i].record.InventorySlot = reader.GetInt32("InventoryType");
+                    body.records[i].record.Sheath = reader.GetInt32("Sheath");
+                    i++; }
+                reader.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; }
+
+        public bool SaveDBC(string fileName) {
+            try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j) ;
+
+                header.string_block_size = (int)stringBlockOffset;
+
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(itemRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // item
 
     public class itembagfamilydbc {
         public DBCHeader header;
@@ -5372,7 +5454,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM mapdifficultydbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, MapId, Difficulty, AreaTriggerText, AreaTriggerText_loc2, AreaTriggerTextFlags, ResetTime, MaxPlayers, DifficultyString FROM mapdifficultydbc ORDER BY Id ASC";
+                string query = "SELECT Id, MapId, Difficulty, AreaTriggerText, AreaTriggerText_loc2, ResetTime, MaxPlayers, DifficultyString FROM mapdifficultydbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -6624,7 +6706,7 @@ namespace DBtoDBC {
                     body.records[i].Path = reader.GetString("Path");
                     body.records[i].record.Volume = reader.GetFloat("Volume");
                     body.records[i].record.Flags = reader.GetInt32("Flags");
-                    body.records[i].record.MinDistance = reader.GetInt32("MinDistance");
+                    body.records[i].record.MinDistance = reader.GetFloat("MinDistance");
                     body.records[i].record.DistanceCutOff = reader.GetFloat("DistanceCutOff");
                     body.records[i].record.EAXDef = reader.GetInt32("EAXDef");
                     body.records[i].record.SoundEntriesAdvancedId = reader.GetInt32("SoundEntriesAdvancedId");
@@ -7445,7 +7527,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM spellfocusobjectdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Name, Name_loc2, NameFlags FROM spellfocusobjectdbc ORDER BY Id ASC";
+                string query = "SELECT Id, Name, Name_loc2 FROM spellfocusobjectdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -7834,7 +7916,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM spellrangedbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, MinRangeHostile, MinRangeFriend, MaxRangeHostile, MaxRangeFriend, Type, Name, Name_loc2, NameFlags, Name2, Name2_loc2, Name2Flags FROM spellrangedbc ORDER BY Id ASC";
+                string query = "SELECT Id, MinRangeHostile, MinRangeFriend, MaxRangeHostile, MaxRangeFriend, Type, Name, Name_loc2, Name2, Name2_loc2 FROM spellrangedbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -8027,7 +8109,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM spellshapeshiftformdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, ButtonPosition, Name, Name_loc2, NameFlags, Flags1, CreatureType, Unk1, AttackSpeed, ModelIdAlliance, ModelIdHorde, Unk2, Unk3, StanceSpell1, StanceSpell2, StanceSpell3, StanceSpell4, StanceSpell5, StanceSpell6, StanceSpell7, StanceSpell8 FROM spellshapeshiftformdbc ORDER BY Id ASC";
+                string query = "SELECT Id, ButtonPosition, Name, Name_loc2, Flags1, CreatureType, Unk1, AttackSpeed, ModelIdAlliance, ModelIdHorde, Unk2, Unk3, StanceSpell1, StanceSpell2, StanceSpell3, StanceSpell4, StanceSpell5, StanceSpell6, StanceSpell7, StanceSpell8 FROM spellshapeshiftformdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -8386,7 +8468,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM talenttabdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Name, Name_loc2, NameFlags, SpellIcon, Name14, ClassMask, PetTalentMask, TabPage, InternalName FROM talenttabdbc ORDER BY Id ASC";
+                string query = "SELECT Id, Name, Name_loc2, SpellIcon, Name14, ClassMask, PetTalentMask, TabPage, InternalName FROM talenttabdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -8833,7 +8915,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM totemcategorydbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Name, Name_loc2, NameFlags, CategoryType, CategoryMask FROM totemcategorydbc ORDER BY Id ASC";
+                string query = "SELECT Id, Name, Name_loc2, CategoryType, CategoryMask FROM totemcategorydbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -9103,7 +9185,7 @@ namespace DBtoDBC {
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
                     body.records[i].record.Id = reader.GetInt32("Id");
-                    body.records[i].record.Flags = reader.GetFloat("Flags");
+                    body.records[i].record.Flags = reader.GetInt32("Flags");
                     body.records[i].record.TurnSpeed = reader.GetFloat("TurnSpeed");
                     body.records[i].record.PitchSpeed = reader.GetFloat("PitchSpeed");
                     body.records[i].record.PitchMin = reader.GetFloat("PitchMin");
@@ -9133,8 +9215,8 @@ namespace DBtoDBC {
                     body.records[i].record.MSSLTrgtImpactRadius2 = reader.GetFloat("MSSLTrgtImpactRadius2");
                     body.records[i].MSSLTrgtArcTexture = reader.GetString("MSSLTrgtArcTexture");
                     body.records[i].MSSLTrgtImpactTexture = reader.GetString("MSSLTrgtImpactTexture");
-                    body.records[i].record.MSSLTrgtImpactModel1 = reader.GetInt32("MSSLTrgtImpactModel1");
-                    body.records[i].record.MSSLTrgtImpactModel2 = reader.GetInt32("MSSLTrgtImpactModel2");
+                    body.records[i].MSSLTrgtImpactModel1 = reader.GetString("MSSLTrgtImpactModel1");
+                    body.records[i].MSSLTrgtImpactModel2 = reader.GetString("MSSLTrgtImpactModel2");
                     body.records[i].record.CameraYawOffset = reader.GetFloat("CameraYawOffset");
                     body.records[i].record.UiLocomotionType = reader.GetInt32("UiLocomotionType");
                     body.records[i].record.MSSLTrgtImpactTexRadius = reader.GetFloat("MSSLTrgtImpactTexRadius");
@@ -9180,7 +9262,31 @@ namespace DBtoDBC {
                             body.records[i].record.MSSLTrgtImpactTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].MSSLTrgtImpactTexture) + 1;
                             offsetStorage.Add(key, body.records[i].record.MSSLTrgtImpactTexture);
-                            reverseStorage.Add(body.records[i].record.MSSLTrgtImpactTexture, body.records[i].MSSLTrgtImpactTexture); } } }
+                            reverseStorage.Add(body.records[i].record.MSSLTrgtImpactTexture, body.records[i].MSSLTrgtImpactTexture); } }
+                    // MSSLTrgtImpactModel1
+                    if (body.records[i].MSSLTrgtImpactModel1.Length == 0)
+                        body.records[i].record.MSSLTrgtImpactModel1 = 0;
+                    else {
+                        int key = body.records[i].MSSLTrgtImpactModel1.GetHashCode();
+                        if (offsetStorage.ContainsKey(key))
+                            body.records[i].record.MSSLTrgtImpactModel1 = offsetStorage[key];
+                        else {
+                            body.records[i].record.MSSLTrgtImpactModel1 = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].MSSLTrgtImpactModel1) + 1;
+                            offsetStorage.Add(key, body.records[i].record.MSSLTrgtImpactModel1);
+                            reverseStorage.Add(body.records[i].record.MSSLTrgtImpactModel1, body.records[i].MSSLTrgtImpactModel1); } }
+                    // MSSLTrgtImpactModel2
+                    if (body.records[i].MSSLTrgtImpactModel2.Length == 0)
+                        body.records[i].record.MSSLTrgtImpactModel2 = 0;
+                    else {
+                        int key = body.records[i].MSSLTrgtImpactModel2.GetHashCode();
+                        if (offsetStorage.ContainsKey(key))
+                            body.records[i].record.MSSLTrgtImpactModel2 = offsetStorage[key];
+                        else {
+                            body.records[i].record.MSSLTrgtImpactModel2 = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].MSSLTrgtImpactModel2) + 1;
+                            offsetStorage.Add(key, body.records[i].record.MSSLTrgtImpactModel2);
+                            reverseStorage.Add(body.records[i].record.MSSLTrgtImpactModel2, body.records[i].MSSLTrgtImpactModel2); } } }
 
                 header.string_block_size = (int)stringBlockOffset;
 
@@ -9356,7 +9462,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM wmoareatabledbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, RootId, AdtId, GroupId, SoundProviderPref, SoundProviderPrefUnderwater, AmbienceId, ZoneMusic, IntroSound, Flags, AreaId, Name, Name_loc2, NameFlags FROM wmoareatabledbc ORDER BY Id ASC";
+                string query = "SELECT Id, RootId, AdtId, GroupId, SoundProviderPref, SoundProviderPrefUnderwater, AmbienceId, ZoneMusic, IntroSound, Flags, AreaId, Name, Name_loc2 FROM wmoareatabledbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -9451,6 +9557,102 @@ namespace DBtoDBC {
                 return false; }
 
             return true; } } // wmoareatable
+
+    public class worldmapareadbc {
+        public DBCHeader header;
+        public worldmapareaBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM worldmapareadbc", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT Id, Map, Area, InternalName, LocLeft, LocRight, LocTop, LocBottom, DisplayMap, DungeonMap, ParentMap FROM worldmapareadbc ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new worldmapareaMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 11;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(worldmapareaRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Id = reader.GetInt32("Id");
+                    body.records[i].record.Map = reader.GetInt32("Map");
+                    body.records[i].record.Area = reader.GetInt32("Area");
+                    body.records[i].InternalName = reader.GetString("InternalName");
+                    body.records[i].record.LocLeft = reader.GetFloat("LocLeft");
+                    body.records[i].record.LocRight = reader.GetFloat("LocRight");
+                    body.records[i].record.LocTop = reader.GetFloat("LocTop");
+                    body.records[i].record.LocBottom = reader.GetFloat("LocBottom");
+                    body.records[i].record.DisplayMap = reader.GetInt32("DisplayMap");
+                    body.records[i].record.DefaultDungeonFloor = reader.GetInt32("DungeonMap");
+                    body.records[i].record.ParentWorldMap = reader.GetInt32("ParentMap");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Generate some string offsets...
+                    // AreaName
+                    if (body.records[i].InternalName.Length == 0)
+                        body.records[i].record.InternalName = 0;
+                    else {
+                        int key = body.records[i].InternalName.GetHashCode();
+                        if (offsetStorage.ContainsKey(key))
+                            body.records[i].record.InternalName = offsetStorage[key];
+                        else {
+                            body.records[i].record.InternalName = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].InternalName) + 1;
+                            offsetStorage.Add(key, body.records[i].record.InternalName);
+                            reverseStorage.Add(body.records[i].record.InternalName, body.records[i].InternalName); } } }
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(worldmapareaRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // worldmaparea
 
     public class worldmapoverlaydbc {
         public DBCHeader header;
@@ -9564,7 +9766,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM worldsafelocsdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, MapId, X, Y, Z, Name, Name_loc2, NameFlags FROM worldsafelocsdbc ORDER BY Id ASC";
+                string query = "SELECT Id, MapId, X, Y, Z, Name, Name_loc2 FROM worldsafelocsdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();

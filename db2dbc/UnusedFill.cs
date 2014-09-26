@@ -1264,7 +1264,7 @@ namespace DBtoDBC {
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false;
                     body.records[i].record.Id = reader.GetInt32("Id");
-                    body.records[i].record.SmoothFacingChaseRate = reader.GetInt32("SmoothFacingChaseRate");
+                    body.records[i].record.SmoothFacingChaseRate = reader.GetFloat("SmoothFacingChaseRate");
                     i++; }
                 reader.Close(); }
              catch (Exception ex) {
@@ -2327,8 +2327,8 @@ namespace DBtoDBC {
                     body.records[i].record.Id = reader.GetInt32("Id");
                     body.records[i].record.Xp = reader.GetInt32("Xp");
                     body.records[i].record.Factor = reader.GetFloat("Factor");
-                    body.records[i].record.OutdoorHours = reader.GetInt32("OutdoorHours");
-                    body.records[i].record.InnHours = reader.GetInt32("InnHours");
+                    body.records[i].record.OutdoorHours = reader.GetFloat("OutdoorHours");
+                    body.records[i].record.InnHours = reader.GetFloat("InnHours");
                     body.records[i].record.Threshold = reader.GetInt32("Threshold");
 
                     body.records[i].Name = new string[17];
@@ -3739,6 +3739,907 @@ namespace DBtoDBC {
                 return false; }
 
             return true; } } // groundeffecttexture
+    
+    public class gtbarbershopcostbasedbc {
+        public DBCHeader header;
+        public gtbarbershopcostbaseBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtbarbershopcostbase", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtbarbershopcostbase ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtbarbershopcostbaseMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtbarbershopcostbaseRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtbarbershopcostbaseRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtbarbershopcostbase
+
+    public class gtchancetomeleecritdbc {
+        public DBCHeader header;
+        public gtchancetomeleecritBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtchancetomeleecrit", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtchancetomeleecrit ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtchancetomeleecritMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtchancetomeleecritRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtchancetomeleecritRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtchancetomeleecrit
+
+    public class gtchancetomeleecritbasedbc {
+        public DBCHeader header;
+        public gtchancetomeleecritbaseBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtchancetomeleecritbase", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtchancetomeleecritbase ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtchancetomeleecritbaseMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtchancetomeleecritbaseRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtchancetomeleecritbaseRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtchancetomeleecritbase
+
+    public class gtchancetospellcritdbc {
+        public DBCHeader header;
+        public gtchancetospellcritBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtchancetospellcrit", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtchancetospellcrit ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtchancetospellcritMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtchancetospellcritRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtchancetospellcritRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtchancetospellcrit
+
+    public class gtchancetospellcritbasedbc {
+        public DBCHeader header;
+        public gtchancetospellcritbaseBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtchancetospellcritbase", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtchancetospellcritbase ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtchancetospellcritbaseMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtchancetospellcritbaseRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtchancetospellcritbaseRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtchancetospellcritbase
+
+    public class gtcombatratingsdbc {
+        public DBCHeader header;
+        public gtcombatratingsBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtcombatratings", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtcombatratings ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtcombatratingsMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtcombatratingsRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtcombatratingsRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtcombatratings
+
+    public class gtnpcmanacostscalerdbc {
+        public DBCHeader header;
+        public gtnpcmanacostscalerBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtnpcmanacostscaler", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtnpcmanacostscaler ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtnpcmanacostscalerMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtnpcmanacostscalerRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtnpcmanacostscalerRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtnpcmanacostscaler
+
+    public class gtoctclasscombatratingscalardbc {
+        public DBCHeader header;
+        public gtoctclasscombatratingscalarBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtoctclasscombatratingscalar", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT Id, `Value` FROM gtoctclasscombatratingscalar ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtoctclasscombatratingscalarMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 2;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtoctclasscombatratingscalarRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Id = reader.GetInt32("Id");
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtoctclasscombatratingscalarRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtoctclasscombatratingscalar
+
+    public class gtoctregenhpdbc {
+        public DBCHeader header;
+        public gtoctregenhpBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtoctregenhp", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtoctregenhp ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtoctregenhpMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtoctregenhpRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtoctregenhpRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtoctregenhp
+
+    public class gtoctregenmpdbc {
+        public DBCHeader header;
+        public gtoctregenmpBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtoctregenmp", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtoctregenmp ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtoctregenmpMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtoctregenmpRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtoctregenmpRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtoctregenmp
+
+    public class gtregenhppersptdbc {
+        public DBCHeader header;
+        public gtregenhppersptBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtregenhpperspt", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtregenhpperspt ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtregenhppersptMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtregenhppersptRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtregenhppersptRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtregenhpperspt
+
+    public class gtregenmppersptdbc {
+        public DBCHeader header;
+        public gtregenmppersptBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM gtregenmpperspt", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT `Value` FROM gtregenmpperspt ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new gtregenmppersptMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(gtregenmppersptRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Value = reader.GetFloat("Value");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(gtregenmppersptRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // gtregenmpperspt
 
     public class helmetgeosetvisdatadbc {
         public DBCHeader header;
@@ -5584,7 +6485,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM lightintband", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, UsedValues, TimeValue1, TimeValue2, TimeValue3, TimeValue4, TimeValue5, TimeValue6, TimeValue7, TimeValue8, TimeValue9, TimeValue10, TimeValue11, TimeValue12, TimeValue13, TimeValue14, TimeValue15, TimeValue16, Color1, Color2, Color3, Color4, Color5, Color6, Color7, Color8, Color9, Color10, Color11, Color12, Color13, Color14, Color15, Color16 FROM lightintband ORDER BY Id ASC";
+                string query = "SELECT Id, UsedValues, TimeValue1, TimeValue2, TimeValue3, TimeValue4, TimeValue5, TimeValue6, TimeValue7, TimeValue8, TimeValue9, TimeValue10, TimeValue11, TimeValue12, TimeValue13, TimeValue14, TimeValue15, TimeValue16, Color1_R, Color1_G, Color1_B, Color1_A, Color2_R, Color2_G, Color2_B, Color2_A, Color3_R, Color3_G, Color3_B, Color3_A, Color4_R, Color4_G, Color4_B, Color4_A, Color5_R, Color5_G, Color5_B, Color5_A, Color6_R, Color6_G, Color6_B, Color6_A, Color7_R, Color7_G, Color7_B, Color7_A, Color8_R, Color8_G, Color8_B, Color8_A, Color9_R, Color9_G, Color9_B, Color9_A, Color10_R, Color10_G, Color10_B, Color10_A, Color11_R, Color11_G, Color11_B, Color11_A, Color12_R, Color12_G, Color12_B, Color12_A, Color13_R, Color13_G, Color13_B, Color13_A, Color14_R, Color14_G, Color14_B, Color14_A, Color15_R, Color15_G, Color15_B, Color15_A, Color16_R, Color16_G, Color16_B, Color16_A FROM lightintband ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -5616,22 +6517,38 @@ namespace DBtoDBC {
                     body.records[i].record.TimeValue14 = reader.GetInt32("TimeValue14");
                     body.records[i].record.TimeValue15 = reader.GetInt32("TimeValue15");
                     body.records[i].record.TimeValue16 = reader.GetInt32("TimeValue16");
-                    body.records[i].record.Color1 = reader.GetInt32("Color1");
-                    body.records[i].record.Color2 = reader.GetInt32("Color2");
-                    body.records[i].record.Color3 = reader.GetInt32("Color3");
-                    body.records[i].record.Color4 = reader.GetInt32("Color4");
-                    body.records[i].record.Color5 = reader.GetInt32("Color5");
-                    body.records[i].record.Color6 = reader.GetInt32("Color6");
-                    body.records[i].record.Color7 = reader.GetInt32("Color7");
-                    body.records[i].record.Color8 = reader.GetInt32("Color8");
-                    body.records[i].record.Color9 = reader.GetInt32("Color9");
-                    body.records[i].record.Color10 = reader.GetInt32("Color10");
-                    body.records[i].record.Color11 = reader.GetInt32("Color11");
-                    body.records[i].record.Color12 = reader.GetInt32("Color12");
-                    body.records[i].record.Color13 = reader.GetInt32("Color13");
-                    body.records[i].record.Color14 = reader.GetInt32("Color14");
-                    body.records[i].record.Color15 = reader.GetInt32("Color15");
-                    body.records[i].record.Color16 = reader.GetInt32("Color16");
+                    byte[] Color1 = { reader.GetByte("Color1_R"), reader.GetByte("Color1_G"), reader.GetByte("Color1_B"), reader.GetByte("Color1_A") };
+                    body.records[i].record.Color1 = BitConverter.ToInt32(Color1, 0);
+                    byte[] Color2 = { reader.GetByte("Color2_R"), reader.GetByte("Color2_G"), reader.GetByte("Color2_B"), reader.GetByte("Color2_A") };
+                    body.records[i].record.Color2 = BitConverter.ToInt32(Color2, 0);
+                    byte[] Color3 = { reader.GetByte("Color3_R"), reader.GetByte("Color3_G"), reader.GetByte("Color3_B"), reader.GetByte("Color3_A") };
+                    body.records[i].record.Color3 = BitConverter.ToInt32(Color3, 0);
+                    byte[] Color4 = { reader.GetByte("Color4_R"), reader.GetByte("Color4_G"), reader.GetByte("Color4_B"), reader.GetByte("Color4_A") };
+                    body.records[i].record.Color4 = BitConverter.ToInt32(Color4, 0);
+                    byte[] Color5 = { reader.GetByte("Color5_R"), reader.GetByte("Color5_G"), reader.GetByte("Color5_B"), reader.GetByte("Color5_A") };
+                    body.records[i].record.Color5 = BitConverter.ToInt32(Color5, 0);
+                    byte[] Color6 = { reader.GetByte("Color6_R"), reader.GetByte("Color6_G"), reader.GetByte("Color6_B"), reader.GetByte("Color6_A") };
+                    body.records[i].record.Color6 = BitConverter.ToInt32(Color6, 0);
+                    byte[] Color7 = { reader.GetByte("Color7_R"), reader.GetByte("Color7_G"), reader.GetByte("Color7_B"), reader.GetByte("Color7_A") };
+                    body.records[i].record.Color7 = BitConverter.ToInt32(Color7, 0);
+                    byte[] Color8 = { reader.GetByte("Color8_R"), reader.GetByte("Color8_G"), reader.GetByte("Color8_B"), reader.GetByte("Color8_A") };
+                    body.records[i].record.Color8 = BitConverter.ToInt32(Color8, 0);
+                    byte[] Color9 = { reader.GetByte("Color9_R"), reader.GetByte("Color9_G"), reader.GetByte("Color9_B"), reader.GetByte("Color9_A") };
+                    body.records[i].record.Color9 = BitConverter.ToInt32(Color9, 0);
+                    byte[] Color10 = { reader.GetByte("Color10_R"), reader.GetByte("Color10_G"), reader.GetByte("Color10_B"), reader.GetByte("Color10_A") };
+                    body.records[i].record.Color10 = BitConverter.ToInt32(Color10, 0);
+                    byte[] Color11 = { reader.GetByte("Color11_R"), reader.GetByte("Color11_G"), reader.GetByte("Color11_B"), reader.GetByte("Color11_A") };
+                    body.records[i].record.Color11 = BitConverter.ToInt32(Color11, 0);
+                    byte[] Color12 = { reader.GetByte("Color12_R"), reader.GetByte("Color12_G"), reader.GetByte("Color12_B"), reader.GetByte("Color12_A") };
+                    body.records[i].record.Color12 = BitConverter.ToInt32(Color12, 0);
+                    byte[] Color13 = { reader.GetByte("Color13_R"), reader.GetByte("Color13_G"), reader.GetByte("Color13_B"), reader.GetByte("Color13_A") };
+                    body.records[i].record.Color13 = BitConverter.ToInt32(Color13, 0);
+                    byte[] Color14 = { reader.GetByte("Color14_R"), reader.GetByte("Color14_G"), reader.GetByte("Color14_B"), reader.GetByte("Color14_A") };
+                    body.records[i].record.Color14 = BitConverter.ToInt32(Color14, 0);
+                    byte[] Color15 = { reader.GetByte("Color15_R"), reader.GetByte("Color15_G"), reader.GetByte("Color15_B"), reader.GetByte("Color15_A") };
+                    body.records[i].record.Color15 = BitConverter.ToInt32(Color15, 0);
+                    byte[] Color16 = { reader.GetByte("Color16_R"), reader.GetByte("Color16_G"), reader.GetByte("Color16_B"), reader.GetByte("Color16_A") };
+                    body.records[i].record.Color16 = BitConverter.ToInt32(Color16, 0);
                     i++; }
                 reader.Close(); }
              catch (Exception ex) {
@@ -8063,7 +8980,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM screeneffect", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Name, Type, Color, Edge, BlackWhite, Unk, LightParams, SoundAmbience, ZoneMusic FROM screeneffect ORDER BY Id ASC";
+                string query = "SELECT Id, Name, Type, Color_R, Color_G, Color_B, Color_A, Edge, BlackWhite, Unk, LightParams, SoundAmbience, ZoneMusic FROM screeneffect ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -8080,7 +8997,8 @@ namespace DBtoDBC {
                     body.records[i].record.Id = reader.GetInt32("Id");
                     body.records[i].Name = reader.GetString("Name");
                     body.records[i].record.Type = reader.GetInt32("Type");
-                    body.records[i].record.Color = reader.GetFloat("Color");
+                    byte[] color = { reader.GetByte("Color_R"), reader.GetByte("Color_G"), reader.GetByte("Color_B"), reader.GetByte("Color_A") };
+                    body.records[i].record.Color = BitConverter.ToInt32(color, 0);
                     body.records[i].record.Edge = reader.GetInt32("Edge");
                     body.records[i].record.BlackWhite = reader.GetInt32("BlackWhite");
                     body.records[i].record.Unk = reader.GetInt32("Unk");
@@ -9507,6 +10425,140 @@ namespace DBtoDBC {
 
             return true; } } // spammessages
 
+    public class spellchaineffectsdbc {
+        public DBCHeader header;
+        public spellchaineffectsBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM spellchaineffects", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT Id, AvgSegLen, Width, NoiseScale, TexCoordScale, SegDuration, SegDelay, Texture, Flags, JointCount, JointOffsetRadius, JointsPerMinorJoint, MinorJointsPerMajorJoint, MinorJointScale, MajorJointScale, JointMoveSpeed, JointSmoothness, MinDurationBetweenJointJumps, MaxDurationBetweenJointJumps, WaveHeight, WaveFreq, WaveSpeed, MinWaveAngle, MaxWaveAngle, MinWaveSpin, MaxWaveSpin, ArcHeight, MinArcAngle, MaxArcAngle, MinArcSpin, MaxArcSpin, DelayBetweenEffects, MinFlickerOnDuration, MaxFlickerOnDuration, MinFlickerOffDuration, MaxFlickerOffDuration, PulseSpeed, PulseOnLength, PulseFadeLength, Alpha, Red, Green, Blue, BlendMode, Combo, RenderLayer, TextureLength, WavePhase FROM spellchaineffects ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new spellchaineffectsMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 48;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(spellchaineffectsRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read())
+                { //if (!reader.HasRows) return false;
+                    body.records[i].record.ID = reader.GetInt32("ID");
+                    body.records[i].record.AvgSegLen = reader.GetFloat("AvgSegLen");
+                    body.records[i].record.Width = reader.GetFloat("Width");
+                    body.records[i].record.NoiseScale = reader.GetFloat("NoiseScale");
+                    body.records[i].record.TexCoordScale = reader.GetFloat("TexCoordScale");
+                    body.records[i].record.SegDuration = reader.GetInt32("SegDuration");
+                    body.records[i].record.SegDelay = reader.GetInt32("SegDelay");
+                    body.records[i].Texture = reader.GetString("Texture");
+                    body.records[i].record.Flags = reader.GetInt32("Flags");
+                    body.records[i].record.JointCount = reader.GetInt32("JointCount");
+                    body.records[i].record.JointOffsetRadius = reader.GetFloat("JointOffsetRadius");
+                    body.records[i].record.JointsPerMinorJoint = reader.GetInt32("JointsPerMinorJoint");
+                    body.records[i].record.MinorJointsPerMajorJoint = reader.GetInt32("MinorJointsPerMajorJoint");
+                    body.records[i].record.MinorJointScale = reader.GetFloat("MinorJointScale");
+                    body.records[i].record.MajorJointScale = reader.GetFloat("MajorJointScale");
+                    body.records[i].record.JointMoveSpeed = reader.GetFloat("JointMoveSpeed");
+                    body.records[i].record.JointSmoothness = reader.GetFloat("JointSmoothness");
+                    body.records[i].record.MinDurationBetweenJointJumps = reader.GetFloat("MinDurationBetweenJointJumps");
+                    body.records[i].record.MaxDurationBetweenJointJumps = reader.GetFloat("MaxDurationBetweenJointJumps");
+                    body.records[i].record.WaveHeight = reader.GetFloat("WaveHeight");
+                    body.records[i].record.WaveFreq = reader.GetFloat("WaveFreq");
+                    body.records[i].record.WaveSpeed = reader.GetFloat("WaveSpeed");
+                    body.records[i].record.MinWaveAngle = reader.GetFloat("MinWaveAngle");
+                    body.records[i].record.MaxWaveAngle = reader.GetFloat("MaxWaveAngle");
+                    body.records[i].record.MinWaveSpin = reader.GetFloat("MinWaveSpin");
+                    body.records[i].record.MaxWaveSpin = reader.GetFloat("MaxWaveSpin");
+                    body.records[i].record.ArcHeight = reader.GetFloat("ArcHeight");
+                    body.records[i].record.MinArcAngle = reader.GetFloat("MinArcAngle");
+                    body.records[i].record.MaxArcAngle = reader.GetFloat("MaxArcAngle");
+                    body.records[i].record.MinArcSpin = reader.GetFloat("MinArcSpin");
+                    body.records[i].record.MaxArcSpin = reader.GetFloat("MaxArcSpin");
+                    body.records[i].record.DelayBetweenEffects = reader.GetFloat("DelayBetweenEffects");
+                    body.records[i].record.MinFlickerOnDuration = reader.GetFloat("MinFlickerOnDuration");
+                    body.records[i].record.MaxFlickerOnDuration = reader.GetFloat("MaxFlickerOnDuration");
+                    body.records[i].record.MinFlickerOffDuration = reader.GetFloat("MinFlickerOffDuration");
+                    body.records[i].record.MaxFlickerOffDuration = reader.GetFloat("MaxFlickerOffDuration");
+                    body.records[i].record.PulseSpeed = reader.GetFloat("PulseSpeed");
+                    body.records[i].record.PulseOnLength = reader.GetFloat("PulseOnLength");
+                    body.records[i].record.PulseFadeLength = reader.GetFloat("PulseFadeLength");
+                    body.records[i].record.Alpha = reader.GetByte("Alpha");
+                    body.records[i].record.Red = reader.GetByte("Red");
+                    body.records[i].record.Green = reader.GetByte("Green");
+                    body.records[i].record.Blue = reader.GetByte("Blue");
+                    body.records[i].record.BlendMode = reader.GetByte("BlendMode");
+                    body.records[i].record.Combo = reader.GetInt32("Combo");
+                    body.records[i].record.RenderLayer = reader.GetInt32("RenderLayer");
+                    body.records[i].record.TextureLength = reader.GetFloat("TextureLength");
+                    body.records[i].record.WavePhase = reader.GetFloat("WavePhase");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Generate some string offsets...
+                    // Texture
+                    if (body.records[i].Texture.Length == 0)
+                        body.records[i].record.Texture = 0;
+                    else {
+                        int key = body.records[i].Texture.GetHashCode();
+                        if (offsetStorage.ContainsKey(key))
+                            body.records[i].record.Texture = offsetStorage[key];
+                        else {
+                            body.records[i].record.Texture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture) + 1;
+                            offsetStorage.Add(key, body.records[i].record.Texture);
+                            reverseStorage.Add(body.records[i].record.Texture, body.records[i].Texture); } } }
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(spellchaineffectsRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // spellchaineffects
+
     public class spelldescriptionvariablesdbc {
         public DBCHeader header;
         public spelldescriptionvariablesBody body;
@@ -10372,7 +11424,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM spellvisualkit", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, StartAnimId, AnimId, AnimKitId, HeadEffect, ChestEffect, BaseEffect, LeftHandEffect, RightHandEffect, BreathEffect, LeftWeaponEffect, RightWeaponEffect, SpecialEffect, WorldEffect, Sound, Shake, CharProc, Unk1, Unk2, Unk3, Unk4, Unk5, Unk6, Unk7, Unk8, Unk9, Unk10, Unk11, Unk12, Unk13, Unk14, Unk15, Unk16, Unk17, Unk18, Unk19, Unk20, Flags FROM spellvisualkit ORDER BY Id ASC";
+                string query = "SELECT Id, StartAnimId, AnimId, AnimKitId, HeadEffect, ChestEffect, BaseEffect, LeftHandEffect, RightHandEffect, BreathEffect, LeftWeaponEffect, RightWeaponEffect, SpecialEffect, WorldEffect, Sound, Shake, CharProc, Unk1, Unk2, Unk3, Unk4, Unk51, Unk52, Unk53, Unk54, Unk61, Unk62, Unk63, Unk64, Unk71, Unk72, Unk73, Unk74, Unk8, Unk9, Unk10, Unk11, Unk12, Unk13, Unk14, Unk15, Unk16, Unk17, Unk18, Unk19, Unk20, Flags FROM spellvisualkit ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -10407,21 +11459,24 @@ namespace DBtoDBC {
                     body.records[i].record.Unk2 = reader.GetInt32("Unk2");
                     body.records[i].record.Unk3 = reader.GetInt32("Unk3");
                     body.records[i].record.Unk4 = reader.GetInt32("Unk4");
-                    body.records[i].record.Unk5 = reader.GetFloat("Unk5");
-                    body.records[i].record.Unk6 = reader.GetFloat("Unk6");
-                    body.records[i].record.Unk7 = reader.GetFloat("Unk7");
-                    body.records[i].record.Unk8 = reader.GetInt32("Unk8");
+                    byte[] Unk5 = { reader.GetByte("Unk51"), reader.GetByte("Unk52"), reader.GetByte("Unk53"), reader.GetByte("Unk54") };
+                    body.records[i].record.Unk5 = BitConverter.ToInt32(Unk5, 0);
+                    byte[] Unk6 = { reader.GetByte("Unk61"), reader.GetByte("Unk62"), reader.GetByte("Unk63"), reader.GetByte("Unk64") };
+                    body.records[i].record.Unk6 = BitConverter.ToInt32(Unk6, 0);
+                    byte[] Unk7 = { reader.GetByte("Unk71"), reader.GetByte("Unk72"), reader.GetByte("Unk73"), reader.GetByte("Unk74") };
+                    body.records[i].record.Unk7 = BitConverter.ToInt32(Unk7, 0);
+                    body.records[i].record.Unk8 = reader.GetFloat("Unk8");
                     body.records[i].record.Unk9 = reader.GetFloat("Unk9");
                     body.records[i].record.Unk10 = reader.GetFloat("Unk10");
                     body.records[i].record.Unk11 = reader.GetFloat("Unk11");
-                    body.records[i].record.Unk12 = reader.GetInt32("Unk12");
+                    body.records[i].record.Unk12 = reader.GetFloat("Unk12");
                     body.records[i].record.Unk13 = reader.GetFloat("Unk13");
-                    body.records[i].record.Unk14 = reader.GetInt32("Unk14");
-                    body.records[i].record.Unk15 = reader.GetInt32("Unk15");
-                    body.records[i].record.Unk16 = reader.GetInt32("Unk16");
+                    body.records[i].record.Unk14 = reader.GetFloat("Unk14");
+                    body.records[i].record.Unk15 = reader.GetFloat("Unk15");
+                    body.records[i].record.Unk16 = reader.GetFloat("Unk16");
                     body.records[i].record.Unk17 = reader.GetFloat("Unk17");
-                    body.records[i].record.Unk18 = reader.GetInt32("Unk18");
-                    body.records[i].record.Unk19 = reader.GetInt32("Unk19");
+                    body.records[i].record.Unk18 = reader.GetFloat("Unk18");
+                    body.records[i].record.Unk19 = reader.GetFloat("Unk19");
                     body.records[i].record.Unk20 = reader.GetFloat("Unk20");
                     body.records[i].record.Flags = reader.GetInt32("Flags");
                     i++; }
@@ -11072,10 +12127,20 @@ namespace DBtoDBC {
                 Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
- 
-                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
-                    for (UInt32 j = 0; j < 17; ++j);
- 
+
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Generate some string offsets...
+                    // InternalName
+                    if (body.records[i].Description.Length == 0)
+                        body.records[i].record.Description = 0;
+                    else {
+                        int key = body.records[i].Description.GetHashCode();
+                        if (offsetStorage.ContainsKey(key))
+                            body.records[i].record.Description = offsetStorage[key];
+                        else {
+                            body.records[i].record.Description = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Description) + 1;
+                            offsetStorage.Add(key, body.records[i].record.Description);
+                            reverseStorage.Add(body.records[i].record.Description, body.records[i].Description); } } }
                 header.string_block_size = (int)stringBlockOffset;
  
                 if (File.Exists(fileName))
@@ -11109,6 +12174,81 @@ namespace DBtoDBC {
                 return false; }
 
             return true; } } // terraintype
+    
+    public class terraintypesoundsdbc {
+        public DBCHeader header;
+        public terraintypesoundsBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM terraintypesounds", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT Id FROM terraintypesounds ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new terraintypesoundsMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 1;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(terraintypesoundsRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Id = reader.GetInt32("Id");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(terraintypesoundsRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // terraintypesounds
 
     public class transportphysicsdbc {
         public DBCHeader header;
@@ -11754,6 +12894,13 @@ namespace DBtoDBC {
                     writer.Write(buffer, 0, count);
                     gcHandle.Free(); }
 
+                writer.Write(824980480); // Fck the logic.
+                writer.Write(824980795);
+                writer.Write(824980480);
+                writer.Write(824980795);
+                writer.Write(824981051);
+                writer.Write(858533888);
+
                 UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
                 writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
                 for (int i = 0; i < offsets_stored.Length; ++i)
@@ -12115,41 +13262,39 @@ namespace DBtoDBC {
                 return false; }
 
             return true; } } // weather
-
-    public class worldmapareadbc {
+    
+    public class worldchunksoundsdbc {
         public DBCHeader header;
-        public worldmapareaBody body;
+        public worldchunksoundsBody body;
 
         public bool LoadDB(MySqlConnection connection) {
             try {
-                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM worldmaparea", connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM worldchunksounds", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Map, Area, AreaName, LocLeft, LocRight, LocTop, LocBottom, DisplayMap, DefaultDungeonFloor, ParentWorldMap FROM worldmaparea ORDER BY Id ASC";
+                string query = "SELECT Map, ChunkX, ChunkY, SubChunkX, SubChunkY, ZoneIntroMusic, ZoneMusic, SoundAmbience, SoundProviderPreference FROM worldchunksounds ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
- 
-                body.records = new worldmapareaMap[rowCount]; // Prepare body
+
+                body.records = new worldchunksoundsMap[rowCount]; // Prepare body
  
                 header.magic = 1128416343;
                 header.record_count = rowCount;
-                header.field_count = 11;
-                header.record_size = (UInt32)Marshal.SizeOf(typeof(worldmapareaRecord));
+                header.field_count = 9;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(worldchunksoundsRecord));
  
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false;
-                    body.records[i].record.Id = reader.GetInt32("Id");
                     body.records[i].record.Map = reader.GetInt32("Map");
-                    body.records[i].record.Area = reader.GetInt32("Area");
-                    body.records[i].AreaName = reader.GetString("AreaName");
-                    body.records[i].record.LocLeft = reader.GetFloat("LocLeft");
-                    body.records[i].record.LocRight = reader.GetFloat("LocRight");
-                    body.records[i].record.LocTop = reader.GetFloat("LocTop");
-                    body.records[i].record.LocBottom = reader.GetFloat("LocBottom");
-                    body.records[i].record.DisplayMap = reader.GetInt32("DisplayMap");
-                    body.records[i].record.DefaultDungeonFloor = reader.GetInt32("DefaultDungeonFloor");
-                    body.records[i].record.ParentWorldMap = reader.GetInt32("ParentWorldMap");
+                    body.records[i].record.ChunkX = reader.GetInt32("ChunkX");
+                    body.records[i].record.ChunkY = reader.GetInt32("ChunkY");
+                    body.records[i].record.SubChunkX = reader.GetInt32("SubChunkX");
+                    body.records[i].record.SubChunkY = reader.GetInt32("SubChunkY");
+                    body.records[i].record.ZoneIntroMusic = reader.GetInt32("ZoneIntroMusic");
+                    body.records[i].record.ZoneMusic = reader.GetInt32("ZoneMusic");
+                    body.records[i].record.SoundAmbience = reader.GetInt32("SoundAmbience");
+                    body.records[i].record.SoundProviderPreference = reader.GetInt32("SoundProviderPreference");
                     i++; }
                 reader.Close(); }
              catch (Exception ex) {
@@ -12164,19 +13309,8 @@ namespace DBtoDBC {
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
-                for (UInt32 i = 0; i < header.record_count; ++i) { // Generate some string offsets...
-                    // AreaName
-                    if (body.records[i].AreaName.Length == 0)
-                        body.records[i].record.AreaName = 0;
-                    else {
-                        int key = body.records[i].AreaName.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.AreaName = offsetStorage[key];
-                        else {
-                            body.records[i].record.AreaName = stringBlockOffset;
-                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].AreaName) + 1;
-                            offsetStorage.Add(key, body.records[i].record.AreaName);
-                            reverseStorage.Add(body.records[i].record.AreaName, body.records[i].AreaName); } } }
+                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
+                    for (UInt32 j = 0; j < 17; ++j);
  
                 header.string_block_size = (int)stringBlockOffset;
  
@@ -12192,7 +13326,7 @@ namespace DBtoDBC {
                 gcHandle.Free();
  
                 for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
-                    count = Marshal.SizeOf(typeof(worldmapareaRecord)); // Write main body
+                    count = Marshal.SizeOf(typeof(worldchunksoundsRecord)); // Write main body
                     buffer = new byte[count];
                     gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
                     Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
@@ -12210,7 +13344,7 @@ namespace DBtoDBC {
                 Console.WriteLine(ex.ToString());
                 return false; }
 
-            return true; } } // worldmaparea
+            return true; } } // worldchunksounds
 
     public class worldmapcontinentdbc {
         public DBCHeader header;
@@ -12393,7 +13527,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM worldstateui", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Map, Zone, PhaseShift, Icon, Text, Text_loc2, Description, Description_loc2, field39, field40, field41, field42, field43, field44, field45, field46, field47, field48, field49, field50, field51, field52, field53, field54, field55, field56, field57, field58, field59, field60, field61, field62 FROM worldstateui ORDER BY Description ASC";
+                string query = "SELECT Id, Map, Zone, PhaseShift, Icon, Text, Text_loc2, Description, Description_loc2, StateVariable, Type, DynamicIcon, DynamicTooltip, DynamicTooltip_loc2, ExtendedUI, ExtendedUIStateVariable1, ExtendedUIStateVariable2, ExtendedUIStateVariable3 FROM worldstateui ORDER BY Description ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -12412,40 +13546,27 @@ namespace DBtoDBC {
                     body.records[i].record.Zone = reader.GetInt32("Zone");
                     body.records[i].record.PhaseShift = reader.GetInt32("PhaseShift");
                     body.records[i].Icon = reader.GetString("Icon");
-                    body.records[i].record.field39 = reader.GetInt32("field39");
-                    body.records[i].record.field40 = reader.GetInt32("field40");
-                    body.records[i].field41 = reader.GetString("field41");
-                    body.records[i].record.field42 = reader.GetInt32("field42");
-                    body.records[i].record.field43 = reader.GetInt32("field43");
-                    body.records[i].field44 = reader.GetString("field44");
-                    body.records[i].record.field45 = reader.GetInt32("field45");
-                    body.records[i].record.field46 = reader.GetInt32("field46");
-                    body.records[i].record.field47 = reader.GetInt32("field47");
-                    body.records[i].record.field48 = reader.GetInt32("field48");
-                    body.records[i].record.field49 = reader.GetInt32("field49");
-                    body.records[i].record.field50 = reader.GetInt32("field50");
-                    body.records[i].record.field51 = reader.GetInt32("field51");
-                    body.records[i].record.field52 = reader.GetInt32("field52");
-                    body.records[i].record.field53 = reader.GetInt32("field53");
-                    body.records[i].record.field54 = reader.GetInt32("field54");
-                    body.records[i].record.field55 = reader.GetInt32("field55");
-                    body.records[i].record.field56 = reader.GetInt32("field56");
-                    body.records[i].record.field57 = reader.GetInt32("field57");
-                    body.records[i].record.field58 = reader.GetInt32("field58");
-                    body.records[i].record.field59 = reader.GetInt32("field59");
-                    body.records[i].record.field60 = reader.GetInt32("field60");
-                    body.records[i].record.field61 = reader.GetInt32("field61");
-                    body.records[i].record.field62 = reader.GetInt32("field62");
+                    body.records[i].record.StateVariable = reader.GetInt32("StateVariable");
+                    body.records[i].record.Type = reader.GetInt32("Type");
+                    body.records[i].DynamicIcon = reader.GetString("DynamicIcon");
+                    body.records[i].record.ExtendedUI = reader.GetInt32("ExtendedUI");
+                    body.records[i].record.ExtendedUIStateVariable1 = reader.GetInt32("ExtendedUIStateVariable1");
+                    body.records[i].record.ExtendedUIStateVariable2 = reader.GetInt32("ExtendedUIStateVariable2");
+                    body.records[i].record.ExtendedUIStateVariable3 = reader.GetInt32("ExtendedUIStateVariable3");
 
                     body.records[i].Text = new string[17];
                     body.records[i].Description = new string[17];
+                    body.records[i].DynamicTooltip = new string[17];
                     body.records[i].record.Text = new UInt32[17];
                     body.records[i].record.Description = new UInt32[17];
+                    body.records[i].record.DynamicTooltip = new UInt32[17];
                     for (int loc = 0; loc < 17; ++loc) {
                         body.records[i].Text [loc] = "";
-                        body.records[i].Description [loc] = ""; }
+                        body.records[i].Description [loc] = "";
+                        body.records[i].DynamicTooltip [loc] = ""; }
                     body.records[i].Text [DB2DBC.GlobalLocalization] = reader.GetString(DB2DBC.GlobalLocalization == 2 ? "Text_loc2" : "Text");
                     body.records[i].Description [DB2DBC.GlobalLocalization] = reader.GetString(DB2DBC.GlobalLocalization == 2 ? "Description_loc2" : "Description");
+                    body.records[i].DynamicTooltip [DB2DBC.GlobalLocalization] = reader.GetString(DB2DBC.GlobalLocalization == 2 ? "DynamicTooltip_loc2" : "DynamicTooltip");
 
                     i++; }
                 reader.Close(); }
@@ -12486,7 +13607,19 @@ namespace DBtoDBC {
                                 body.records[i].record.Description[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Description[j]) + 1;
                                 offsetStorage.Add(key, body.records[i].record.Description[j]);
-                                reverseStorage.Add(body.records[i].record.Description[j], body.records[i].Description[j]); } } }
+                                reverseStorage.Add(body.records[i].record.Description[j], body.records[i].Description[j]); } }
+                        // DynamicToolTip
+                        if (body.records[i].DynamicTooltip[j].Length == 0)
+                            body.records[i].record.DynamicTooltip[j] = 0;
+                        else {
+                            int key = body.records[i].DynamicTooltip[j].GetHashCode();
+                            if (offsetStorage.ContainsKey(key))
+                                body.records[i].record.DynamicTooltip[j] = offsetStorage[key];
+                            else {
+                                body.records[i].record.DynamicTooltip[j] = stringBlockOffset;
+                                stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].DynamicTooltip[j]) + 1;
+                                offsetStorage.Add(key, body.records[i].record.DynamicTooltip[j]);
+                                reverseStorage.Add(body.records[i].record.DynamicTooltip[j], body.records[i].DynamicTooltip[j]); } } }
                     // Icon
                     if (body.records[i].Icon.Length == 0)
                         body.records[i].record.Icon = 0;
@@ -12499,30 +13632,18 @@ namespace DBtoDBC {
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Icon) + 1;
                             offsetStorage.Add(key, body.records[i].record.Icon);
                             reverseStorage.Add(body.records[i].record.Icon, body.records[i].Icon); } }
-                    // field41
-                    if (body.records[i].field41.Length == 0)
-                        body.records[i].record.field41 = 0;
+                    // DynamicIcon
+                    if (body.records[i].DynamicIcon.Length == 0)
+                        body.records[i].record.DynamicIcon = 0;
                     else {
-                        int key = body.records[i].field41.GetHashCode();
+                        int key = body.records[i].DynamicIcon.GetHashCode();
                         if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.field41 = offsetStorage[key];
+                            body.records[i].record.DynamicIcon = offsetStorage[key];
                         else {
-                            body.records[i].record.field41 = stringBlockOffset;
-                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].field41) + 1;
-                            offsetStorage.Add(key, body.records[i].record.field41);
-                            reverseStorage.Add(body.records[i].record.field41, body.records[i].field41); } }
-                    // field44
-                    if (body.records[i].field44.Length == 0)
-                        body.records[i].record.field44 = 0;
-                    else {
-                        int key = body.records[i].field44.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.field44 = offsetStorage[key];
-                        else {
-                            body.records[i].record.field44 = stringBlockOffset;
-                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].field44) + 1;
-                            offsetStorage.Add(key, body.records[i].record.field44);
-                            reverseStorage.Add(body.records[i].record.field44, body.records[i].field44); } } }
+                            body.records[i].record.DynamicIcon = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].DynamicIcon) + 1;
+                            offsetStorage.Add(key, body.records[i].record.DynamicIcon);
+                            reverseStorage.Add(body.records[i].record.DynamicIcon, body.records[i].DynamicIcon); } } }
 
                 header.string_block_size = (int)stringBlockOffset;
  
@@ -12801,8 +13922,19 @@ namespace DBtoDBC {
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
-                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
-                    for (UInt32 j = 0; j < 17; ++j);
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Generate some string offsets...
+                    // Name
+                    if (body.records[i].Name.Length == 0)
+                        body.records[i].record.Name = 0;
+                    else {
+                        int key = body.records[i].Name.GetHashCode();
+                        if (offsetStorage.ContainsKey(key))
+                            body.records[i].record.Name = offsetStorage[key];
+                        else {
+                            body.records[i].record.Name = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
+                            offsetStorage.Add(key, body.records[i].record.Name);
+                            reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
  

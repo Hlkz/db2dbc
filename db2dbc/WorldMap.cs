@@ -155,6 +155,9 @@ namespace DBtoDBC
     public struct holidaysMap {
         public holidaysRecord record;
         public string TextureFilename; };
+    
+    public struct itemMap {
+        public itemRecord record; }
 
     public struct itembagfamilyMap {
         public itembagfamilyRecord record;
@@ -362,7 +365,9 @@ namespace DBtoDBC
     public struct vehicleMap {
         public vehicleRecord record;
         public string MSSLTrgtArcTexture;
-        public string MSSLTrgtImpactTexture; };
+        public string MSSLTrgtImpactTexture;
+        public string MSSLTrgtImpactModel1;
+        public string MSSLTrgtImpactModel2; };
 
     public struct vehicleseatMap {
         public vehicleseatRecord record; };
@@ -370,6 +375,10 @@ namespace DBtoDBC
     public struct wmoareatableMap {
         public wmoareatableRecord record;
         public string[] Name; }
+
+    public struct worldmapareaMap {
+        public worldmapareaRecord record;
+        public string InternalName; }
 
     public struct worldmapoverlayMap {
         public worldmapoverlayRecord record;

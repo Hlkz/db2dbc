@@ -167,12 +167,13 @@ namespace DBtoDBC
         public Int32 MinLevel;
         public Int32 MaxLevel; }
 
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct charstartoutfitRecord {
         public Int32 Id;
-        public Int32 Race;
-        public Int32 Class;
-        public Int32 Gender;
-        public Int32 Unused;
+        public Byte Race;
+        public Byte Class;
+        public Byte Gender;
+        public Byte Unused;
         public Int32 ItemId1;
         public Int32 ItemId2;
         public Int32 ItemId3;
@@ -665,6 +666,16 @@ namespace DBtoDBC
         public Int32 Priority;
         public Int32 CalendarFilterType;
         public Int32 Flags; }
+    
+    public struct itemRecord {
+        public Int32 Id;
+        public Int32 Class;
+        public Int32 SubClass;
+        public Int32 SoundOverride;
+        public Int32 Material;
+        public Int32 DisplayInfo;
+        public Int32 InventorySlot;
+        public Int32 Sheath; }
 
     public struct itembagfamilyRecord {
         public Int32 Id;
@@ -1114,7 +1125,7 @@ namespace DBtoDBC
         public UInt32 Path; // string
         public float Volume;
         public Int32 Flags;
-        public Int32 MinDistance;
+        public float MinDistance;
         public float DistanceCutOff;
         public Int32 EAXDef;
         public Int32 SoundEntriesAdvancedId; }
@@ -1538,7 +1549,7 @@ namespace DBtoDBC
 
     public struct vehicleRecord {
         public Int32 Id;
-        public float Flags;
+        public Int32 Flags;
         public float TurnSpeed;
         public float PitchSpeed;
         public float PitchMin;
@@ -1568,8 +1579,8 @@ namespace DBtoDBC
         public float MSSLTrgtImpactRadius2;
         public UInt32 MSSLTrgtArcTexture; // string
         public UInt32 MSSLTrgtImpactTexture; // string
-        public Int32 MSSLTrgtImpactModel1;
-        public Int32 MSSLTrgtImpactModel2;
+        public UInt32 MSSLTrgtImpactModel1; // string
+        public UInt32 MSSLTrgtImpactModel2; // string
         public float CameraYawOffset;
         public Int32 UiLocomotionType;
         public float MSSLTrgtImpactTexRadius;

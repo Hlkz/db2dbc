@@ -119,6 +119,9 @@ namespace DBtoDBC
 
     public struct holidaysBody {
         public holidaysMap[] records; };
+    
+    public struct itemBody {
+        public itemMap[] records; };
 
     public struct itembagfamilyBody {
         public itembagfamilyMap[] records; };
@@ -275,6 +278,9 @@ namespace DBtoDBC
 
     public struct wmoareatableBody {
         public wmoareatableMap[] records; };
+
+    public struct worldmapareaBody {
+        public worldmapareaMap[] records; };
 
     public struct worldmapoverlayBody {
         public worldmapoverlayMap[] records; };

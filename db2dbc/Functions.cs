@@ -31,6 +31,7 @@ namespace DBtoDBC
             DBCExtract.bannedaddons(connection);
             DBCExtract.barbershopstyle(connection);
             DBCExtract.battlemasterlist(connection);
+            DBCExtract.charstartoutfit(connection);
             DBCExtract.chartitles(connection);
             DBCExtract.chatchannels(connection);
             DBCExtract.chrclasses(connection);
@@ -56,6 +57,7 @@ namespace DBtoDBC
             DBCExtract.glyphproperties(connection);
             DBCExtract.glyphslot(connection);
             DBCExtract.holidays(connection);
+            DBCExtract.item(connection);
             DBCExtract.itembagfamily(connection);
             DBCExtract.itemextendedcost(connection);
             DBCExtract.itemlimitcategory(connection);
@@ -65,6 +67,7 @@ namespace DBtoDBC
             DBCExtract.lfgdungeons(connection);
             DBCExtract.light(connection);
             DBCExtract.liquidtype(connection);
+            DBCExtract.lockd(connection);
             DBCExtract.mailtemplate(connection);
             DBCExtract.map(connection);
             DBCExtract.mapdifficulty(connection);
@@ -107,6 +110,7 @@ namespace DBtoDBC
             DBCExtract.vehicle(connection);
             DBCExtract.vehicleseat(connection);
             DBCExtract.wmoareatable(connection);
+            DBCExtract.worldmaparea(connection);
             DBCExtract.worldmapoverlay(connection);
             DBCExtract.worldsafelocsdbc(connection);
         }
@@ -154,6 +158,18 @@ namespace DBtoDBC
             DBCExtract.gmticketcategory(connection);
             DBCExtract.groundeffectdoodad(connection);
             DBCExtract.groundeffecttexture(connection);
+            DBCExtract.gtbarbershopcostbase(connection);
+            DBCExtract.gtchancetomeleecrit(connection);
+            DBCExtract.gtchancetomeleecritbase(connection);
+            DBCExtract.gtchancetospellcrit(connection);
+            DBCExtract.gtchancetospellcritbase(connection);
+            DBCExtract.gtcombatratings(connection);
+            DBCExtract.gtnpcmanacostscaler(connection);
+            DBCExtract.gtoctclasscombatratingscalar(connection);
+            DBCExtract.gtoctregenhp(connection);
+            DBCExtract.gtoctregenmp(connection);
+            DBCExtract.gtregenhpperspt(connection);
+            DBCExtract.gtregenmpperspt(connection);
             DBCExtract.helmetgeosetvisdata(connection);
             DBCExtract.holidaydescriptions(connection);
             DBCExtract.holidaynames(connection);
@@ -215,6 +231,7 @@ namespace DBtoDBC
             DBCExtract.soundsamplepreferences(connection);
             DBCExtract.soundwatertype(connection);
             DBCExtract.spammessages(connection);
+            DBCExtract.spellchaineffects(connection);
             DBCExtract.spelldescriptionvariables(connection);
             DBCExtract.spelldispeltype(connection);
             DBCExtract.spelleffectcamerashakes(connection);
@@ -232,6 +249,7 @@ namespace DBtoDBC
             DBCExtract.stationery(connection);
             DBCExtract.stringlookups(connection);
             DBCExtract.terraintype(connection);
+            DBCExtract.terraintypesounds(connection);
             DBCExtract.transportphysics(connection);
             DBCExtract.uisoundlookups(connection);
             DBCExtract.unitblood(connection);
@@ -243,7 +261,7 @@ namespace DBtoDBC
             DBCExtract.weaponimpactsounds(connection);
             DBCExtract.weaponswingsounds2(connection);
             DBCExtract.weather(connection);
-            DBCExtract.worldmaparea(connection);
+            DBCExtract.worldchunksounds(connection);
             DBCExtract.worldmapcontinent(connection);
             DBCExtract.worldmaptransforms(connection);
             DBCExtract.worldstateui(connection);

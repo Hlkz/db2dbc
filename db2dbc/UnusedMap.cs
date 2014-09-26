@@ -159,6 +159,42 @@ namespace DBtoDBC
     public struct groundeffecttextureMap {
         public groundeffecttextureRecord record; }
 
+        public struct gtbarbershopcostbaseMap {
+        public gtbarbershopcostbaseRecord record; };
+
+    public struct gtchancetomeleecritMap {
+        public gtchancetomeleecritRecord record; };
+
+    public struct gtchancetomeleecritbaseMap {
+        public gtchancetomeleecritbaseRecord record; };
+
+    public struct gtchancetospellcritMap {
+        public gtchancetospellcritRecord record; };
+
+    public struct gtchancetospellcritbaseMap {
+        public gtchancetospellcritbaseRecord record; };
+
+    public struct gtcombatratingsMap {
+        public gtcombatratingsRecord record; };
+
+    public struct gtnpcmanacostscalerMap {
+        public gtnpcmanacostscalerRecord record; };
+
+    public struct gtoctclasscombatratingscalarMap {
+        public gtoctclasscombatratingscalarRecord record; };
+
+    public struct gtoctregenhpMap {
+        public gtoctregenhpRecord record; };
+
+    public struct gtoctregenmpMap {
+        public gtoctregenmpRecord record; };
+
+    public struct gtregenhppersptMap {
+        public gtregenhppersptRecord record; };
+
+    public struct gtregenmppersptMap {
+        public gtregenmppersptRecord record; };
+
     public struct helmetgeosetvisdataMap {
         public helmetgeosetvisdataRecord record; }
 
@@ -397,6 +433,10 @@ namespace DBtoDBC
     public struct spammessagesMap {
         public spammessagesRecord record;
         public string RegEx; }
+    
+    public struct spellchaineffectsMap {
+        public spellchaineffectsRecord record;
+        public string Texture; }
 
     public struct spelldescriptionvariablesMap {
         public spelldescriptionvariablesRecord record;
@@ -465,6 +505,9 @@ namespace DBtoDBC
     public struct terraintypeMap {
         public terraintypeRecord record;
         public string Description; }
+    
+    public struct terraintypesoundsMap {
+        public terraintypesoundsRecord record; }
 
     public struct transportphysicsMap {
         public transportphysicsRecord record; }
@@ -507,9 +550,8 @@ namespace DBtoDBC
         public weatherRecord record;
         public string Texture; }
 
-    public struct worldmapareaMap {
-        public worldmapareaRecord record;
-        public string AreaName; }
+    public struct worldchunksoundsMap {
+        public worldchunksoundsRecord record; }
 
     public struct worldmapcontinentMap {
         public worldmapcontinentRecord record; }
@@ -522,8 +564,8 @@ namespace DBtoDBC
         public string Icon;
         public string[] Text;
         public string[] Description;
-        public string field41;
-        public string field44; }
+        public string DynamicIcon;
+        public string[] DynamicTooltip; }
 
     public struct worldstatezonesoundsMap {
         public worldstatezonesoundsRecord record; }
