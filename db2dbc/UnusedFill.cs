@@ -51,7 +51,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -61,13 +61,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -145,7 +143,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
 
@@ -154,13 +152,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
 
  
@@ -236,7 +232,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -312,7 +308,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -321,13 +317,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -405,7 +399,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -490,7 +484,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -500,13 +494,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -580,7 +572,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -662,7 +654,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -738,7 +730,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -818,7 +810,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -900,7 +892,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -950,7 +942,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM charsections", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Race, Gender, GeneralType, Texture1, Texture2, Texture3, Flags, Type, Variation FROM charsections ORDER BY Id ASC";
+                string query = "SELECT Race, Gender, GeneralType, Type, Variation, Texture1, Texture2, Texture3, Flags FROM charsections ORDER BY Race, Gender, GeneralType, Type, Variation";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -964,7 +956,7 @@ namespace DBtoDBC {
  
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false;
-                    body.records[i].record.Id = reader.GetInt32("Id");
+                    body.records[i].record.Id = (int)i + 1;
                     body.records[i].record.Race = reader.GetInt32("Race");
                     body.records[i].record.Gender = reader.GetInt32("Gender");
                     body.records[i].record.GeneralType = reader.GetInt32("GeneralType");
@@ -984,7 +976,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -993,37 +985,31 @@ namespace DBtoDBC {
                     if (body.records[i].Texture1.Length == 0)
                         body.records[i].record.Texture1 = 0;
                     else {
-                        int key = body.records[i].Texture1.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture1 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture1)) body.records[i].record.Texture1 = offsetStorage[body.records[i].Texture1];
                         else {
                             body.records[i].record.Texture1 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture1) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture1);
+                            offsetStorage.Add(body.records[i].Texture1, body.records[i].record.Texture1);
                             reverseStorage.Add(body.records[i].record.Texture1, body.records[i].Texture1); } }
                     // Texture2
                     if (body.records[i].Texture2.Length == 0)
                         body.records[i].record.Texture2 = 0;
                     else {
-                        int key = body.records[i].Texture2.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture2 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture2)) body.records[i].record.Texture2 = offsetStorage[body.records[i].Texture2];
                         else {
                             body.records[i].record.Texture2 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture2) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture2);
+                            offsetStorage.Add(body.records[i].Texture2, body.records[i].record.Texture2);
                             reverseStorage.Add(body.records[i].record.Texture2, body.records[i].Texture2); } }
                     // Texture3
                     if (body.records[i].Texture3.Length == 0)
                         body.records[i].record.Texture3 = 0;
                     else {
-                        int key = body.records[i].Texture3.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture3 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture3)) body.records[i].record.Texture3 = offsetStorage[body.records[i].Texture3];
                         else {
                             body.records[i].record.Texture3 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture3) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture3);
+                            offsetStorage.Add(body.records[i].Texture3, body.records[i].record.Texture3);
                             reverseStorage.Add(body.records[i].record.Texture3, body.records[i].Texture3); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -1096,7 +1082,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -1105,13 +1091,11 @@ namespace DBtoDBC {
                     if (body.records[i].DirtyWord.Length == 0)
                         body.records[i].record.DirtyWord = 0;
                     else {
-                        int key = body.records[i].DirtyWord.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.DirtyWord = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].DirtyWord)) body.records[i].record.DirtyWord = offsetStorage[body.records[i].DirtyWord];
                         else {
                             body.records[i].record.DirtyWord = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].DirtyWord) + 1;
-                            offsetStorage.Add(key, body.records[i].record.DirtyWord);
+                            offsetStorage.Add(body.records[i].DirtyWord, body.records[i].record.DirtyWord);
                             reverseStorage.Add(body.records[i].record.DirtyWord, body.records[i].DirtyWord); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -1188,7 +1172,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -1197,13 +1181,11 @@ namespace DBtoDBC {
                     if (body.records[i].Filepath.Length == 0)
                         body.records[i].record.Filepath = 0;
                     else {
-                        int key = body.records[i].Filepath.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Filepath = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Filepath)) body.records[i].record.Filepath = offsetStorage[body.records[i].Filepath];
                         else {
                             body.records[i].record.Filepath = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Filepath) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Filepath);
+                            offsetStorage.Add(body.records[i].Filepath, body.records[i].record.Filepath);
                             reverseStorage.Add(body.records[i].record.Filepath, body.records[i].Filepath); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -1275,7 +1257,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -1387,7 +1369,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -1470,7 +1452,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -1480,13 +1462,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -1570,7 +1550,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -1580,25 +1560,21 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
                     // Internal
                     if (body.records[i].Internal.Length == 0)
                         body.records[i].record.Internal = 0;
                     else {
-                        int key = body.records[i].Internal.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Internal = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Internal)) body.records[i].record.Internal = offsetStorage[body.records[i].Internal];
                         else {
                             body.records[i].record.Internal = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Internal) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Internal);
+                            offsetStorage.Add(body.records[i].Internal, body.records[i].record.Internal);
                             reverseStorage.Add(body.records[i].record.Internal, body.records[i].Internal); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -1673,7 +1649,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -1749,7 +1725,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -1758,13 +1734,11 @@ namespace DBtoDBC {
                     if (body.records[i].Word.Length == 0)
                         body.records[i].record.Word = 0;
                     else {
-                        int key = body.records[i].Word.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Word = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Word)) body.records[i].record.Word = offsetStorage[body.records[i].Word];
                         else {
                             body.records[i].record.Word = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Word) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Word);
+                            offsetStorage.Add(body.records[i].Word, body.records[i].record.Word);
                             reverseStorage.Add(body.records[i].record.Word, body.records[i].Word); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -1838,7 +1812,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -1847,13 +1821,11 @@ namespace DBtoDBC {
                     if (body.records[i].DeclinedWord.Length == 0)
                         body.records[i].record.DeclinedWord = 0;
                     else {
-                        int key = body.records[i].DeclinedWord.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.DeclinedWord = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].DeclinedWord)) body.records[i].record.DeclinedWord = offsetStorage[body.records[i].DeclinedWord];
                         else {
                             body.records[i].record.DeclinedWord = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].DeclinedWord) + 1;
-                            offsetStorage.Add(key, body.records[i].record.DeclinedWord);
+                            offsetStorage.Add(body.records[i].DeclinedWord, body.records[i].record.DeclinedWord);
                             reverseStorage.Add(body.records[i].record.DeclinedWord, body.records[i].DeclinedWord); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -1931,7 +1903,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2010,7 +1982,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2092,7 +2064,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2102,13 +2074,11 @@ namespace DBtoDBC {
                         if (body.records[i].Text[j].Length == 0)
                             body.records[i].record.Text[j] = 0;
                         else {
-                            int key = body.records[i].Text[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Text[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Text[j])) body.records[i].record.Text[j] = offsetStorage[body.records[i].Text[j]];
                             else {
                                 body.records[i].record.Text[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Text[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Text[j]);
+                                offsetStorage.Add(body.records[i].Text[j], body.records[i].record.Text[j]);
                                 reverseStorage.Add(body.records[i].record.Text[j], body.records[i].Text[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -2183,7 +2153,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2260,7 +2230,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2347,7 +2317,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2357,13 +2327,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -2443,7 +2411,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2453,25 +2421,21 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
                     // InternalName
                     if (body.records[i].InternalName.Length == 0)
                         body.records[i].record.InternalName = 0;
                     else {
-                        int key = body.records[i].InternalName.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.InternalName = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].InternalName)) body.records[i].record.InternalName = offsetStorage[body.records[i].InternalName];
                         else {
                             body.records[i].record.InternalName = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].InternalName) + 1;
-                            offsetStorage.Add(key, body.records[i].record.InternalName);
+                            offsetStorage.Add(body.records[i].InternalName, body.records[i].record.InternalName);
                             reverseStorage.Add(body.records[i].record.InternalName, body.records[i].InternalName); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -2544,7 +2508,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2553,37 +2517,31 @@ namespace DBtoDBC {
                     if (body.records[i].FileName.Length == 0)
                         body.records[i].record.FileName = 0;
                     else {
-                        int key = body.records[i].FileName.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.FileName = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].FileName)) body.records[i].record.FileName = offsetStorage[body.records[i].FileName];
                         else {
                             body.records[i].record.FileName = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].FileName) + 1;
-                            offsetStorage.Add(key, body.records[i].record.FileName);
+                            offsetStorage.Add(body.records[i].FileName, body.records[i].record.FileName);
                             reverseStorage.Add(body.records[i].record.FileName, body.records[i].FileName); } }
                     // FilePath
                     if (body.records[i].FilePath.Length == 0)
                         body.records[i].record.FilePath = 0;
                     else {
-                        int key = body.records[i].FilePath.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.FilePath = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].FilePath)) body.records[i].record.FilePath = offsetStorage[body.records[i].FilePath];
                         else {
                             body.records[i].record.FilePath = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].FilePath) + 1;
-                            offsetStorage.Add(key, body.records[i].record.FilePath);
+                            offsetStorage.Add(body.records[i].FilePath, body.records[i].record.FilePath);
                             reverseStorage.Add(body.records[i].record.FilePath, body.records[i].FilePath); } }
                     // FileName
                     if (body.records[i].FileName.Length == 0)
                         body.records[i].record.FileName = 0;
                     else {
-                        int key = body.records[i].FileName.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.FileName = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].FileName)) body.records[i].record.FileName = offsetStorage[body.records[i].FileName];
                         else {
                             body.records[i].record.FileName = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].FileName) + 1;
-                            offsetStorage.Add(key, body.records[i].record.FileName);
+                            offsetStorage.Add(body.records[i].FileName, body.records[i].record.FileName);
                             reverseStorage.Add(body.records[i].record.FileName, body.records[i].FileName); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -2655,12 +2613,21 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
-                for (UInt32 i = 0; i < header.record_count; ++i) // Generate some string offsets...
-                    for (UInt32 j = 0; j < 17; ++j);
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Generate some string offsets...
+                    // Texture1
+                    if (body.records[i].FileName.Length == 0)
+                        body.records[i].record.FileName = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].FileName)) body.records[i].record.FileName = offsetStorage[body.records[i].FileName];
+                        else {
+                            body.records[i].record.FileName = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].FileName) + 1;
+                            offsetStorage.Add(body.records[i].FileName, body.records[i].record.FileName);
+                            reverseStorage.Add(body.records[i].record.FileName, body.records[i].FileName); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
  
@@ -2734,7 +2701,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2816,7 +2783,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2825,85 +2792,71 @@ namespace DBtoDBC {
                     if (body.records[i].Texture1.Length == 0)
                         body.records[i].record.Texture1 = 0;
                     else {
-                        int key = body.records[i].Texture1.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture1 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture1)) body.records[i].record.Texture1 = offsetStorage[body.records[i].Texture1];
                         else {
                             body.records[i].record.Texture1 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture1) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture1);
+                            offsetStorage.Add(body.records[i].Texture1, body.records[i].record.Texture1);
                             reverseStorage.Add(body.records[i].record.Texture1, body.records[i].Texture1); } }
                     // Texture2
                     if (body.records[i].Texture2.Length == 0)
                         body.records[i].record.Texture2 = 0;
                     else {
-                        int key = body.records[i].Texture2.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture2 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture2)) body.records[i].record.Texture2 = offsetStorage[body.records[i].Texture2];
                         else {
                             body.records[i].record.Texture2 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture2) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture2);
+                            offsetStorage.Add(body.records[i].Texture2, body.records[i].record.Texture2);
                             reverseStorage.Add(body.records[i].record.Texture2, body.records[i].Texture2); } }
                     // Texture3
                     if (body.records[i].Texture3.Length == 0)
                         body.records[i].record.Texture3 = 0;
                     else {
-                        int key = body.records[i].Texture3.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture3 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture3)) body.records[i].record.Texture3 = offsetStorage[body.records[i].Texture3];
                         else {
                             body.records[i].record.Texture3 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture3) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture3);
+                            offsetStorage.Add(body.records[i].Texture3, body.records[i].record.Texture3);
                             reverseStorage.Add(body.records[i].record.Texture3, body.records[i].Texture3); } }
                     // Model1
                     if (body.records[i].Model1.Length == 0)
                         body.records[i].record.Model1 = 0;
                     else {
-                        int key = body.records[i].Model1.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Model1 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Model1)) body.records[i].record.Model1 = offsetStorage[body.records[i].Model1];
                         else {
                             body.records[i].record.Model1 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Model1) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Model1);
+                            offsetStorage.Add(body.records[i].Model1, body.records[i].record.Model1);
                             reverseStorage.Add(body.records[i].record.Model1, body.records[i].Model1); } }
                     // Model2
                     if (body.records[i].Model2.Length == 0)
                         body.records[i].record.Model2 = 0;
                     else {
-                        int key = body.records[i].Model2.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Model2 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Model2)) body.records[i].record.Model2 = offsetStorage[body.records[i].Model2];
                         else {
                             body.records[i].record.Model2 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Model2) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Model2);
+                            offsetStorage.Add(body.records[i].Model2, body.records[i].record.Model2);
                             reverseStorage.Add(body.records[i].record.Model2, body.records[i].Model2); } }
                     // Model3
                     if (body.records[i].Model3.Length == 0)
                         body.records[i].record.Model3 = 0;
                     else {
-                        int key = body.records[i].Model3.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Model3 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Model3)) body.records[i].record.Model3 = offsetStorage[body.records[i].Model3];
                         else {
                             body.records[i].record.Model3 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Model3) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Model3);
+                            offsetStorage.Add(body.records[i].Model3, body.records[i].record.Model3);
                             reverseStorage.Add(body.records[i].record.Model3, body.records[i].Model3); } }
                     // Model4
                     if (body.records[i].Model4.Length == 0)
                         body.records[i].record.Model4 = 0;
                     else {
-                        int key = body.records[i].Model4.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Model4 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Model4)) body.records[i].record.Model4 = offsetStorage[body.records[i].Model4];
                         else {
                             body.records[i].record.Model4 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Model4) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Model4);
+                            offsetStorage.Add(body.records[i].Model4, body.records[i].record.Model4);
                             reverseStorage.Add(body.records[i].record.Model4, body.records[i].Model4); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -2976,7 +2929,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -2985,13 +2938,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -3069,7 +3020,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3079,13 +3030,11 @@ namespace DBtoDBC {
                         if (body.records[i].Tip[j].Length == 0)
                             body.records[i].record.Tip[j] = 0;
                         else {
-                            int key = body.records[i].Tip[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Tip[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Tip[j])) body.records[i].record.Tip[j] = offsetStorage[body.records[i].Tip[j]];
                             else {
                                 body.records[i].record.Tip[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Tip[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Tip[j]);
+                                offsetStorage.Add(body.records[i].Tip[j], body.records[i].record.Tip[j]);
                                 reverseStorage.Add(body.records[i].record.Tip[j], body.records[i].Tip[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -3165,7 +3114,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3175,13 +3124,11 @@ namespace DBtoDBC {
                         if (body.records[i].Answer[j].Length == 0)
                             body.records[i].record.Answer[j] = 0;
                         else {
-                            int key = body.records[i].Answer[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Answer[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Answer[j])) body.records[i].record.Answer[j] = offsetStorage[body.records[i].Answer[j]];
                             else {
                                 body.records[i].record.Answer[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Answer[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Answer[j]);
+                                offsetStorage.Add(body.records[i].Answer[j], body.records[i].record.Answer[j]);
                                 reverseStorage.Add(body.records[i].record.Answer[j], body.records[i].Answer[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -3253,7 +3200,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3335,7 +3282,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3345,13 +3292,11 @@ namespace DBtoDBC {
                         if (body.records[i].Question[j].Length == 0)
                             body.records[i].record.Question[j] = 0;
                         else {
-                            int key = body.records[i].Question[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Question[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Question[j])) body.records[i].record.Question[j] = offsetStorage[body.records[i].Question[j]];
                             else {
                                 body.records[i].record.Question[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Question[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Question[j]);
+                                offsetStorage.Add(body.records[i].Question[j], body.records[i].record.Question[j]);
                                 reverseStorage.Add(body.records[i].record.Question[j], body.records[i].Question[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -3432,7 +3377,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3514,7 +3459,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3524,13 +3469,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -3603,7 +3546,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3612,13 +3555,11 @@ namespace DBtoDBC {
                     if (body.records[i].Model.Length == 0)
                         body.records[i].record.Model = 0;
                     else {
-                        int key = body.records[i].Model.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Model = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Model)) body.records[i].record.Model = offsetStorage[body.records[i].Model];
                         else {
                             body.records[i].record.Model = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Model) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Model);
+                            offsetStorage.Add(body.records[i].Model, body.records[i].record.Model);
                             reverseStorage.Add(body.records[i].record.Model, body.records[i].Model); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -3699,7 +3640,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3774,7 +3715,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3849,7 +3790,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3924,7 +3865,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -3999,7 +3940,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4074,7 +4015,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4149,7 +4090,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4224,7 +4165,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4300,7 +4241,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4375,7 +4316,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4450,7 +4391,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4525,7 +4466,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4600,7 +4541,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4682,7 +4623,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4764,7 +4705,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4774,13 +4715,11 @@ namespace DBtoDBC {
                         if (body.records[i].Description[j].Length == 0)
                             body.records[i].record.Description[j] = 0;
                         else {
-                            int key = body.records[i].Description[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Description[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Description[j])) body.records[i].record.Description[j] = offsetStorage[body.records[i].Description[j]];
                             else {
                                 body.records[i].record.Description[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Description[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Description[j]);
+                                offsetStorage.Add(body.records[i].Description[j], body.records[i].record.Description[j]);
                                 reverseStorage.Add(body.records[i].record.Description[j], body.records[i].Description[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -4858,7 +4797,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4868,13 +4807,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -4954,7 +4891,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -4964,13 +4901,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -5044,7 +4979,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -5143,7 +5078,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -5152,169 +5087,141 @@ namespace DBtoDBC {
                     if (body.records[i].LeftModel.Length == 0)
                         body.records[i].record.LeftModel = 0;
                     else {
-                        int key = body.records[i].LeftModel.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.LeftModel = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].LeftModel)) body.records[i].record.LeftModel = offsetStorage[body.records[i].LeftModel];
                         else {
                             body.records[i].record.LeftModel = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LeftModel) + 1;
-                            offsetStorage.Add(key, body.records[i].record.LeftModel);
+                            offsetStorage.Add(body.records[i].LeftModel, body.records[i].record.LeftModel);
                             reverseStorage.Add(body.records[i].record.LeftModel, body.records[i].LeftModel); } }
                     // RightModel
                     if (body.records[i].RightModel.Length == 0)
                         body.records[i].record.RightModel = 0;
                     else {
-                        int key = body.records[i].RightModel.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.RightModel = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].RightModel)) body.records[i].record.RightModel = offsetStorage[body.records[i].RightModel];
                         else {
                             body.records[i].record.RightModel = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].RightModel) + 1;
-                            offsetStorage.Add(key, body.records[i].record.RightModel);
+                            offsetStorage.Add(body.records[i].RightModel, body.records[i].record.RightModel);
                             reverseStorage.Add(body.records[i].record.RightModel, body.records[i].RightModel); } }
                     // LeftModelTexture
                     if (body.records[i].LeftModelTexture.Length == 0)
                         body.records[i].record.LeftModelTexture = 0;
                     else {
-                        int key = body.records[i].LeftModelTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.LeftModelTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].LeftModelTexture)) body.records[i].record.LeftModelTexture = offsetStorage[body.records[i].LeftModelTexture];
                         else {
                             body.records[i].record.LeftModelTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LeftModelTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.LeftModelTexture);
+                            offsetStorage.Add(body.records[i].LeftModelTexture, body.records[i].record.LeftModelTexture);
                             reverseStorage.Add(body.records[i].record.LeftModelTexture, body.records[i].LeftModelTexture); } }
                     // RightModelTexture
                     if (body.records[i].RightModelTexture.Length == 0)
                         body.records[i].record.RightModelTexture = 0;
                     else {
-                        int key = body.records[i].RightModelTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.RightModelTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].RightModelTexture)) body.records[i].record.RightModelTexture = offsetStorage[body.records[i].RightModelTexture];
                         else {
                             body.records[i].record.RightModelTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].RightModelTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.RightModelTexture);
+                            offsetStorage.Add(body.records[i].RightModelTexture, body.records[i].record.RightModelTexture);
                             reverseStorage.Add(body.records[i].record.RightModelTexture, body.records[i].RightModelTexture); } }
                     // Icon1
                     if (body.records[i].Icon1.Length == 0)
                         body.records[i].record.Icon1 = 0;
                     else {
-                        int key = body.records[i].Icon1.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Icon1 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Icon1)) body.records[i].record.Icon1 = offsetStorage[body.records[i].Icon1];
                         else {
                             body.records[i].record.Icon1 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Icon1) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Icon1);
+                            offsetStorage.Add(body.records[i].Icon1, body.records[i].record.Icon1);
                             reverseStorage.Add(body.records[i].record.Icon1, body.records[i].Icon1); } }
                     // Icon2
                     if (body.records[i].Icon2.Length == 0)
                         body.records[i].record.Icon2 = 0;
                     else {
-                        int key = body.records[i].Icon2.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Icon2 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Icon2)) body.records[i].record.Icon2 = offsetStorage[body.records[i].Icon2];
                         else {
                             body.records[i].record.Icon2 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Icon2) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Icon2);
+                            offsetStorage.Add(body.records[i].Icon2, body.records[i].record.Icon2);
                             reverseStorage.Add(body.records[i].record.Icon2, body.records[i].Icon2); } }
                     // UpperArmTexture
                     if (body.records[i].UpperArmTexture.Length == 0)
                         body.records[i].record.UpperArmTexture = 0;
                     else {
-                        int key = body.records[i].UpperArmTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.UpperArmTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].UpperArmTexture)) body.records[i].record.UpperArmTexture = offsetStorage[body.records[i].UpperArmTexture];
                         else {
                             body.records[i].record.UpperArmTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].UpperArmTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.UpperArmTexture);
+                            offsetStorage.Add(body.records[i].UpperArmTexture, body.records[i].record.UpperArmTexture);
                             reverseStorage.Add(body.records[i].record.UpperArmTexture, body.records[i].UpperArmTexture); } }
                     // LowerArmTexture
                     if (body.records[i].LowerArmTexture.Length == 0)
                         body.records[i].record.LowerArmTexture = 0;
                     else {
-                        int key = body.records[i].LowerArmTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.LowerArmTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].LowerArmTexture)) body.records[i].record.LowerArmTexture = offsetStorage[body.records[i].LowerArmTexture];
                         else {
                             body.records[i].record.LowerArmTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LowerArmTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.LowerArmTexture);
+                            offsetStorage.Add(body.records[i].LowerArmTexture, body.records[i].record.LowerArmTexture);
                             reverseStorage.Add(body.records[i].record.LowerArmTexture, body.records[i].LowerArmTexture); } }
                     // HandsTexture
                     if (body.records[i].HandsTexture.Length == 0)
                         body.records[i].record.HandsTexture = 0;
                     else {
-                        int key = body.records[i].HandsTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.HandsTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].HandsTexture)) body.records[i].record.HandsTexture = offsetStorage[body.records[i].HandsTexture];
                         else {
                             body.records[i].record.HandsTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].HandsTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.HandsTexture);
+                            offsetStorage.Add(body.records[i].HandsTexture, body.records[i].record.HandsTexture);
                             reverseStorage.Add(body.records[i].record.HandsTexture, body.records[i].HandsTexture); } }
                     // UpperTorsoTexture
                     if (body.records[i].UpperTorsoTexture.Length == 0)
                         body.records[i].record.UpperTorsoTexture = 0;
                     else {
-                        int key = body.records[i].UpperTorsoTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.UpperTorsoTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].UpperTorsoTexture)) body.records[i].record.UpperTorsoTexture = offsetStorage[body.records[i].UpperTorsoTexture];
                         else {
                             body.records[i].record.UpperTorsoTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].UpperTorsoTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.UpperTorsoTexture);
+                            offsetStorage.Add(body.records[i].UpperTorsoTexture, body.records[i].record.UpperTorsoTexture);
                             reverseStorage.Add(body.records[i].record.UpperTorsoTexture, body.records[i].UpperTorsoTexture); } }
                     // LowerTorsoTexture
                     if (body.records[i].LowerTorsoTexture.Length == 0)
                         body.records[i].record.LowerTorsoTexture = 0;
                     else {
-                        int key = body.records[i].LowerTorsoTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.LowerTorsoTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].LowerTorsoTexture)) body.records[i].record.LowerTorsoTexture = offsetStorage[body.records[i].LowerTorsoTexture];
                         else {
                             body.records[i].record.LowerTorsoTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LowerTorsoTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.LowerTorsoTexture);
+                            offsetStorage.Add(body.records[i].LowerTorsoTexture, body.records[i].record.LowerTorsoTexture);
                             reverseStorage.Add(body.records[i].record.LowerTorsoTexture, body.records[i].LowerTorsoTexture); } }
                     // UpperLegTexture
                     if (body.records[i].UpperLegTexture.Length == 0)
                         body.records[i].record.UpperLegTexture = 0;
                     else {
-                        int key = body.records[i].UpperLegTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.UpperLegTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].UpperLegTexture)) body.records[i].record.UpperLegTexture = offsetStorage[body.records[i].UpperLegTexture];
                         else {
                             body.records[i].record.UpperLegTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].UpperLegTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.UpperLegTexture);
+                            offsetStorage.Add(body.records[i].UpperLegTexture, body.records[i].record.UpperLegTexture);
                             reverseStorage.Add(body.records[i].record.UpperLegTexture, body.records[i].UpperLegTexture); } }
                     // LowerLegTexture
                     if (body.records[i].LowerLegTexture.Length == 0)
                         body.records[i].record.LowerLegTexture = 0;
                     else {
-                        int key = body.records[i].LowerLegTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.LowerLegTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].LowerLegTexture)) body.records[i].record.LowerLegTexture = offsetStorage[body.records[i].LowerLegTexture];
                         else {
                             body.records[i].record.LowerLegTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LowerLegTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.LowerLegTexture);
+                            offsetStorage.Add(body.records[i].LowerLegTexture, body.records[i].record.LowerLegTexture);
                             reverseStorage.Add(body.records[i].record.LowerLegTexture, body.records[i].LowerLegTexture); } }
                     // FootTexture
                     if (body.records[i].FootTexture.Length == 0)
                         body.records[i].record.FootTexture = 0;
                     else {
-                        int key = body.records[i].FootTexture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.FootTexture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].FootTexture)) body.records[i].record.FootTexture = offsetStorage[body.records[i].FootTexture];
                         else {
                             body.records[i].record.FootTexture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].FootTexture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.FootTexture);
+                            offsetStorage.Add(body.records[i].FootTexture, body.records[i].record.FootTexture);
                             reverseStorage.Add(body.records[i].record.FootTexture, body.records[i].FootTexture); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -5389,7 +5296,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -5471,7 +5378,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -5481,13 +5388,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -5573,7 +5478,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -5583,13 +5488,11 @@ namespace DBtoDBC {
                         if (body.records[i].Description[j].Length == 0)
                             body.records[i].record.Description[j] = 0;
                         else {
-                            int key = body.records[i].Description[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Description[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Description[j])) body.records[i].record.Description[j] = offsetStorage[body.records[i].Description[j]];
                             else {
                                 body.records[i].record.Description[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Description[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Description[j]);
+                                offsetStorage.Add(body.records[i].Description[j], body.records[i].record.Description[j]);
                                 reverseStorage.Add(body.records[i].record.Description[j], body.records[i].Description[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -5680,7 +5583,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -5690,25 +5593,21 @@ namespace DBtoDBC {
                         if (body.records[i].DisplayName[j].Length == 0)
                             body.records[i].record.DisplayName[j] = 0;
                         else {
-                            int key = body.records[i].DisplayName[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.DisplayName[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].DisplayName[j])) body.records[i].record.DisplayName[j] = offsetStorage[body.records[i].DisplayName[j]];
                             else {
                                 body.records[i].record.DisplayName[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].DisplayName[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.DisplayName[j]);
+                                offsetStorage.Add(body.records[i].DisplayName[j], body.records[i].record.DisplayName[j]);
                                 reverseStorage.Add(body.records[i].record.DisplayName[j], body.records[i].DisplayName[j]); } }
                         // VerboseName
                         if (body.records[i].VerboseName[j].Length == 0)
                             body.records[i].record.VerboseName[j] = 0;
                         else {
-                            int key = body.records[i].VerboseName[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.VerboseName[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].VerboseName[j])) body.records[i].record.VerboseName[j] = offsetStorage[body.records[i].VerboseName[j]];
                             else {
                                 body.records[i].record.VerboseName[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].VerboseName[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.VerboseName[j]);
+                                offsetStorage.Add(body.records[i].VerboseName[j], body.records[i].record.VerboseName[j]);
                                 reverseStorage.Add(body.records[i].record.VerboseName[j], body.records[i].VerboseName[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -5787,7 +5686,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -5797,13 +5696,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -5875,7 +5772,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -5884,13 +5781,11 @@ namespace DBtoDBC {
                     if (body.records[i].Model.Length == 0)
                         body.records[i].record.Model = 0;
                     else {
-                        int key = body.records[i].Model.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Model = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Model)) body.records[i].record.Model = offsetStorage[body.records[i].Model];
                         else {
                             body.records[i].record.Model = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Model) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Model);
+                            offsetStorage.Add(body.records[i].Model, body.records[i].record.Model);
                             reverseStorage.Add(body.records[i].record.Model, body.records[i].Model); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -5966,7 +5861,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6048,7 +5943,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6058,13 +5953,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -6137,7 +6030,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6146,13 +6039,11 @@ namespace DBtoDBC {
                     if (body.records[i].Word.Length == 0)
                         body.records[i].record.Word = 0;
                     else {
-                        int key = body.records[i].Word.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Word = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Word)) body.records[i].record.Word = offsetStorage[body.records[i].Word];
                         else {
                             body.records[i].record.Word = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Word) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Word);
+                            offsetStorage.Add(body.records[i].Word, body.records[i].record.Word);
                             reverseStorage.Add(body.records[i].record.Word, body.records[i].Word); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -6230,7 +6121,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6315,7 +6206,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6325,13 +6216,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -6435,7 +6324,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6559,7 +6448,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6642,7 +6531,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6719,7 +6608,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6728,13 +6617,11 @@ namespace DBtoDBC {
                     if (body.records[i].Model.Length == 0)
                         body.records[i].record.Model = 0;
                     else {
-                        int key = body.records[i].Model.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Model = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Model)) body.records[i].record.Model = offsetStorage[body.records[i].Model];
                         else {
                             body.records[i].record.Model = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Model) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Model);
+                            offsetStorage.Add(body.records[i].Model, body.records[i].record.Model);
                             reverseStorage.Add(body.records[i].record.Model, body.records[i].Model); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -6807,7 +6694,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6885,7 +6772,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -6894,25 +6781,21 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } }
                     // Texture
                     if (body.records[i].Texture.Length == 0)
                         body.records[i].record.Texture = 0;
                     else {
-                        int key = body.records[i].Texture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture)) body.records[i].record.Texture = offsetStorage[body.records[i].Texture];
                         else {
                             body.records[i].record.Texture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture);
+                            offsetStorage.Add(body.records[i].Texture, body.records[i].record.Texture);
                             reverseStorage.Add(body.records[i].record.Texture, body.records[i].Texture); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -7001,7 +6884,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7091,7 +6974,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7101,49 +6984,41 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } }
                         // ItemStateName
                         if (body.records[i].ItemStateName[j].Length == 0)
                             body.records[i].record.ItemStateName[j] = 0;
                         else {
-                            int key = body.records[i].ItemStateName[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.ItemStateName[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].ItemStateName[j])) body.records[i].record.ItemStateName[j] = offsetStorage[body.records[i].ItemStateName[j]];
                             else {
                                 body.records[i].record.ItemStateName[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].ItemStateName[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.ItemStateName[j]);
+                                offsetStorage.Add(body.records[i].ItemStateName[j], body.records[i].record.ItemStateName[j]);
                                 reverseStorage.Add(body.records[i].record.ItemStateName[j], body.records[i].ItemStateName[j]); } }
                         // ProcessName
                         if (body.records[i].ProcessName[j].Length == 0)
                             body.records[i].record.ProcessName[j] = 0;
                         else {
-                            int key = body.records[i].ProcessName[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.ProcessName[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].ProcessName[j])) body.records[i].record.ProcessName[j] = offsetStorage[body.records[i].ProcessName[j]];
                             else {
                                 body.records[i].record.ProcessName[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].ProcessName[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.ProcessName[j]);
+                                offsetStorage.Add(body.records[i].ProcessName[j], body.records[i].record.ProcessName[j]);
                                 reverseStorage.Add(body.records[i].record.ProcessName[j], body.records[i].ProcessName[j]); } } }
                     // InternalName
                     if (body.records[i].InternalName.Length == 0)
                         body.records[i].record.InternalName = 0;
                     else {
-                        int key = body.records[i].InternalName.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.InternalName = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].InternalName)) body.records[i].record.InternalName = offsetStorage[body.records[i].InternalName];
                         else {
                             body.records[i].record.InternalName = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].InternalName) + 1;
-                            offsetStorage.Add(key, body.records[i].record.InternalName);
+                            offsetStorage.Add(body.records[i].InternalName, body.records[i].record.InternalName);
                             reverseStorage.Add(body.records[i].record.InternalName, body.records[i].InternalName); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -7218,7 +7093,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7294,7 +7169,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7371,7 +7246,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7449,7 +7324,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7458,13 +7333,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -7537,7 +7410,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7546,13 +7419,11 @@ namespace DBtoDBC {
                     if (body.records[i].Pattern.Length == 0)
                         body.records[i].record.Pattern = 0;
                     else {
-                        int key = body.records[i].Pattern.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Pattern = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Pattern)) body.records[i].record.Pattern = offsetStorage[body.records[i].Pattern];
                         else {
                             body.records[i].record.Pattern = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Pattern) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Pattern);
+                            offsetStorage.Add(body.records[i].Pattern, body.records[i].record.Pattern);
                             reverseStorage.Add(body.records[i].record.Pattern, body.records[i].Pattern); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -7625,7 +7496,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7634,13 +7505,11 @@ namespace DBtoDBC {
                     if (body.records[i].Pattern.Length == 0)
                         body.records[i].record.Pattern = 0;
                     else {
-                        int key = body.records[i].Pattern.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Pattern = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Pattern)) body.records[i].record.Pattern = offsetStorage[body.records[i].Pattern];
                         else {
                             body.records[i].record.Pattern = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Pattern) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Pattern);
+                            offsetStorage.Add(body.records[i].Pattern, body.records[i].record.Pattern);
                             reverseStorage.Add(body.records[i].record.Pattern, body.records[i].Pattern); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -7715,7 +7584,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7801,7 +7670,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7810,13 +7679,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -7888,7 +7755,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -7897,13 +7764,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -7981,7 +7846,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8057,7 +7922,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8066,13 +7931,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -8146,7 +8009,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8230,7 +8093,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8240,25 +8103,21 @@ namespace DBtoDBC {
                         if (body.records[i].Description[j].Length == 0)
                             body.records[i].record.Description[j] = 0;
                         else {
-                            int key = body.records[i].Description[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Description[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Description[j])) body.records[i].record.Description[j] = offsetStorage[body.records[i].Description[j]];
                             else {
                                 body.records[i].record.Description[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Description[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Description[j]);
+                                offsetStorage.Add(body.records[i].Description[j], body.records[i].record.Description[j]);
                                 reverseStorage.Add(body.records[i].record.Description[j], body.records[i].Description[j]); } } }
                     // Icon
                     if (body.records[i].Icon.Length == 0)
                         body.records[i].record.Icon = 0;
                     else {
-                        int key = body.records[i].Icon.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Icon = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Icon)) body.records[i].record.Icon = offsetStorage[body.records[i].Icon];
                         else {
                             body.records[i].record.Icon = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Icon) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Icon);
+                            offsetStorage.Add(body.records[i].Icon, body.records[i].record.Icon);
                             reverseStorage.Add(body.records[i].record.Icon, body.records[i].Icon); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -8330,7 +8189,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8339,13 +8198,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -8418,7 +8275,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8427,25 +8284,21 @@ namespace DBtoDBC {
                     if (body.records[i].Slot.Length == 0)
                         body.records[i].record.Slot = 0;
                     else {
-                        int key = body.records[i].Slot.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Slot = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Slot)) body.records[i].record.Slot = offsetStorage[body.records[i].Slot];
                         else {
                             body.records[i].record.Slot = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Slot) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Slot);
+                            offsetStorage.Add(body.records[i].Slot, body.records[i].record.Slot);
                             reverseStorage.Add(body.records[i].record.Slot, body.records[i].Slot); } }
                     // Icon
                     if (body.records[i].Icon.Length == 0)
                         body.records[i].record.Icon = 0;
                     else {
-                        int key = body.records[i].Icon.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Icon = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Icon)) body.records[i].record.Icon = offsetStorage[body.records[i].Icon];
                         else {
                             body.records[i].record.Icon = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Icon) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Icon);
+                            offsetStorage.Add(body.records[i].Icon, body.records[i].record.Icon);
                             reverseStorage.Add(body.records[i].record.Icon, body.records[i].Icon); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -8552,7 +8405,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8629,7 +8482,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8638,13 +8491,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -8728,7 +8579,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8738,13 +8589,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -8822,7 +8671,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8832,13 +8681,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -8918,7 +8765,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -8928,13 +8775,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -9015,7 +8860,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9024,13 +8869,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -9108,7 +8951,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9118,13 +8961,11 @@ namespace DBtoDBC {
                         if (body.records[i].Message[j].Length == 0)
                             body.records[i].record.Message[j] = 0;
                         else {
-                            int key = body.records[i].Message[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Message[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Message[j])) body.records[i].record.Message[j] = offsetStorage[body.records[i].Message[j]];
                             else {
                                 body.records[i].record.Message[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Message[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Message[j]);
+                                offsetStorage.Add(body.records[i].Message[j], body.records[i].record.Message[j]);
                                 reverseStorage.Add(body.records[i].record.Message[j], body.records[i].Message[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -9201,7 +9042,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9280,7 +9121,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9363,7 +9204,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9373,13 +9214,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -9457,7 +9296,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9564,7 +9403,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9641,7 +9480,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9725,7 +9564,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9734,13 +9573,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -9834,7 +9671,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9843,13 +9680,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -9921,7 +9756,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -9930,13 +9765,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -10019,7 +9852,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10117,7 +9950,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10126,13 +9959,11 @@ namespace DBtoDBC {
                     if (body.records[i].Description.Length == 0)
                         body.records[i].record.Description = 0;
                     else {
-                        int key = body.records[i].Description.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Description = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Description)) body.records[i].record.Description = offsetStorage[body.records[i].Description];
                         else {
                             body.records[i].record.Description = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Description) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Description);
+                            offsetStorage.Add(body.records[i].Description, body.records[i].record.Description);
                             reverseStorage.Add(body.records[i].record.Description, body.records[i].Description); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -10219,7 +10050,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10297,7 +10128,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10373,7 +10204,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10382,13 +10213,11 @@ namespace DBtoDBC {
                     if (body.records[i].RegEx.Length == 0)
                         body.records[i].record.RegEx = 0;
                     else {
-                        int key = body.records[i].RegEx.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.RegEx = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].RegEx)) body.records[i].record.RegEx = offsetStorage[body.records[i].RegEx];
                         else {
                             body.records[i].record.RegEx = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].RegEx) + 1;
-                            offsetStorage.Add(key, body.records[i].record.RegEx);
+                            offsetStorage.Add(body.records[i].RegEx, body.records[i].record.RegEx);
                             reverseStorage.Add(body.records[i].record.RegEx, body.records[i].RegEx); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -10507,7 +10336,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10516,13 +10345,11 @@ namespace DBtoDBC {
                     if (body.records[i].Texture.Length == 0)
                         body.records[i].record.Texture = 0;
                     else {
-                        int key = body.records[i].Texture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture)) body.records[i].record.Texture = offsetStorage[body.records[i].Texture];
                         else {
                             body.records[i].record.Texture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture);
+                            offsetStorage.Add(body.records[i].Texture, body.records[i].record.Texture);
                             reverseStorage.Add(body.records[i].record.Texture, body.records[i].Texture); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -10594,7 +10421,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10603,13 +10430,11 @@ namespace DBtoDBC {
                     if (body.records[i].Text.Length == 0)
                         body.records[i].record.Text = 0;
                     else {
-                        int key = body.records[i].Text.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Text = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Text)) body.records[i].record.Text = offsetStorage[body.records[i].Text];
                         else {
                             body.records[i].record.Text = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Text) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Text);
+                            offsetStorage.Add(body.records[i].Text, body.records[i].record.Text);
                             reverseStorage.Add(body.records[i].record.Text, body.records[i].Text); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -10690,7 +10515,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10700,25 +10525,21 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
                     // InternalName
                     if (body.records[i].InternalName.Length == 0)
                         body.records[i].record.InternalName = 0;
                     else {
-                        int key = body.records[i].InternalName.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.InternalName = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].InternalName)) body.records[i].record.InternalName = offsetStorage[body.records[i].InternalName];
                         else {
                             body.records[i].record.InternalName = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].InternalName) + 1;
-                            offsetStorage.Add(key, body.records[i].record.InternalName);
+                            offsetStorage.Add(body.records[i].InternalName, body.records[i].record.InternalName);
                             reverseStorage.Add(body.records[i].record.InternalName, body.records[i].InternalName); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -10792,7 +10613,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10868,7 +10689,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10877,13 +10698,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -10961,7 +10780,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -10971,13 +10790,11 @@ namespace DBtoDBC {
                         if (body.records[i].Name[j].Length == 0)
                             body.records[i].record.Name[j] = 0;
                         else {
-                            int key = body.records[i].Name[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Name[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Name[j])) body.records[i].record.Name[j] = offsetStorage[body.records[i].Name[j]];
                             else {
                                 body.records[i].record.Name[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Name[j]);
+                                offsetStorage.Add(body.records[i].Name[j], body.records[i].record.Name[j]);
                                 reverseStorage.Add(body.records[i].record.Name[j], body.records[i].Name[j]); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -11062,7 +10879,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11141,7 +10958,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11150,25 +10967,21 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } }
                     // ScriptBody
                     if (body.records[i].ScriptBody.Length == 0)
                         body.records[i].record.ScriptBody = 0;
                     else {
-                        int key = body.records[i].ScriptBody.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.ScriptBody = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].ScriptBody)) body.records[i].record.ScriptBody = offsetStorage[body.records[i].ScriptBody];
                         else {
                             body.records[i].record.ScriptBody = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].ScriptBody) + 1;
-                            offsetStorage.Add(key, body.records[i].record.ScriptBody);
+                            offsetStorage.Add(body.records[i].ScriptBody, body.records[i].record.ScriptBody);
                             reverseStorage.Add(body.records[i].record.ScriptBody, body.records[i].ScriptBody); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -11270,7 +11083,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11351,7 +11164,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11360,25 +11173,21 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } }
                     // Model
                     if (body.records[i].Model.Length == 0)
                         body.records[i].record.Model = 0;
                     else {
-                        int key = body.records[i].Model.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Model = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Model)) body.records[i].record.Model = offsetStorage[body.records[i].Model];
                         else {
                             body.records[i].record.Model = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Model) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Model);
+                            offsetStorage.Add(body.records[i].Model, body.records[i].record.Model);
                             reverseStorage.Add(body.records[i].record.Model, body.records[i].Model); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -11489,7 +11298,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11566,7 +11375,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11575,13 +11384,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -11661,7 +11468,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11738,7 +11545,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11747,25 +11554,21 @@ namespace DBtoDBC {
                     if (body.records[i].Load.Length == 0)
                         body.records[i].record.Load = 0;
                     else {
-                        int key = body.records[i].Load.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Load = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Load)) body.records[i].record.Load = offsetStorage[body.records[i].Load];
                         else {
                             body.records[i].record.Load = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Load) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Load);
+                            offsetStorage.Add(body.records[i].Load, body.records[i].record.Load);
                             reverseStorage.Add(body.records[i].record.Load, body.records[i].Load); } }
                     // Hold
                     if (body.records[i].Hold.Length == 0)
                         body.records[i].record.Hold = 0;
                     else {
-                        int key = body.records[i].Hold.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Hold = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Hold)) body.records[i].record.Hold = offsetStorage[body.records[i].Hold];
                         else {
                             body.records[i].record.Hold = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Hold) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Hold);
+                            offsetStorage.Add(body.records[i].Hold, body.records[i].record.Hold);
                             reverseStorage.Add(body.records[i].record.Hold, body.records[i].Hold); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -11844,7 +11647,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11854,25 +11657,21 @@ namespace DBtoDBC {
                         if (body.records[i].Text[j].Length == 0)
                             body.records[i].record.Text[j] = 0;
                         else {
-                            int key = body.records[i].Text[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Text[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Text[j])) body.records[i].record.Text[j] = offsetStorage[body.records[i].Text[j]];
                             else {
                                 body.records[i].record.Text[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Text[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Text[j]);
+                                offsetStorage.Add(body.records[i].Text[j], body.records[i].record.Text[j]);
                                 reverseStorage.Add(body.records[i].record.Text[j], body.records[i].Text[j]); } } }
                     // InternalName
                     if (body.records[i].InternalName.Length == 0)
                         body.records[i].record.InternalName = 0;
                     else {
-                        int key = body.records[i].InternalName.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.InternalName = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].InternalName)) body.records[i].record.InternalName = offsetStorage[body.records[i].InternalName];
                         else {
                             body.records[i].record.InternalName = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].InternalName) + 1;
-                            offsetStorage.Add(key, body.records[i].record.InternalName);
+                            offsetStorage.Add(body.records[i].InternalName, body.records[i].record.InternalName);
                             reverseStorage.Add(body.records[i].record.InternalName, body.records[i].InternalName); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -11946,7 +11745,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -11955,13 +11754,11 @@ namespace DBtoDBC {
                     if (body.records[i].Texture.Length == 0)
                         body.records[i].record.Texture = 0;
                     else {
-                        int key = body.records[i].Texture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture)) body.records[i].record.Texture = offsetStorage[body.records[i].Texture];
                         else {
                             body.records[i].record.Texture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture);
+                            offsetStorage.Add(body.records[i].Texture, body.records[i].record.Texture);
                             reverseStorage.Add(body.records[i].record.Texture, body.records[i].Texture); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -12033,7 +11830,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -12042,13 +11839,11 @@ namespace DBtoDBC {
                     if (body.records[i].Model.Length == 0)
                         body.records[i].record.Model = 0;
                     else {
-                        int key = body.records[i].Model.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Model = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Model)) body.records[i].record.Model = offsetStorage[body.records[i].Model];
                         else {
                             body.records[i].record.Model = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Model) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Model);
+                            offsetStorage.Add(body.records[i].Model, body.records[i].record.Model);
                             reverseStorage.Add(body.records[i].record.Model, body.records[i].Model); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -12124,7 +11919,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
 
@@ -12133,13 +11928,11 @@ namespace DBtoDBC {
                     if (body.records[i].Description.Length == 0)
                         body.records[i].record.Description = 0;
                     else {
-                        int key = body.records[i].Description.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Description = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Description)) body.records[i].record.Description = offsetStorage[body.records[i].Description];
                         else {
                             body.records[i].record.Description = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Description) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Description);
+                            offsetStorage.Add(body.records[i].Description, body.records[i].record.Description);
                             reverseStorage.Add(body.records[i].record.Description, body.records[i].Description); } } }
                 header.string_block_size = (int)stringBlockOffset;
  
@@ -12209,7 +12002,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -12294,7 +12087,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -12371,7 +12164,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -12380,13 +12173,11 @@ namespace DBtoDBC {
                     if (body.records[i].InternalName.Length == 0)
                         body.records[i].record.InternalName = 0;
                     else {
-                        int key = body.records[i].InternalName.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.InternalName = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].InternalName)) body.records[i].record.InternalName = offsetStorage[body.records[i].InternalName];
                         else {
                             body.records[i].record.InternalName = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].InternalName) + 1;
-                            offsetStorage.Add(key, body.records[i].record.InternalName);
+                            offsetStorage.Add(body.records[i].InternalName, body.records[i].record.InternalName);
                             reverseStorage.Add(body.records[i].record.InternalName, body.records[i].InternalName); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -12466,7 +12257,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -12475,61 +12266,51 @@ namespace DBtoDBC {
                     if (body.records[i].GroundBlood1.Length == 0)
                         body.records[i].record.GroundBlood1 = 0;
                     else {
-                        int key = body.records[i].GroundBlood1.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.GroundBlood1 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].GroundBlood1)) body.records[i].record.GroundBlood1 = offsetStorage[body.records[i].GroundBlood1];
                         else {
                             body.records[i].record.GroundBlood1 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].GroundBlood1) + 1;
-                            offsetStorage.Add(key, body.records[i].record.GroundBlood1);
+                            offsetStorage.Add(body.records[i].GroundBlood1, body.records[i].record.GroundBlood1);
                             reverseStorage.Add(body.records[i].record.GroundBlood1, body.records[i].GroundBlood1); } }
                     // GroundBlood2
                     if (body.records[i].GroundBlood2.Length == 0)
                         body.records[i].record.GroundBlood2 = 0;
                     else {
-                        int key = body.records[i].GroundBlood2.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.GroundBlood2 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].GroundBlood2)) body.records[i].record.GroundBlood2 = offsetStorage[body.records[i].GroundBlood2];
                         else {
                             body.records[i].record.GroundBlood2 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].GroundBlood2) + 1;
-                            offsetStorage.Add(key, body.records[i].record.GroundBlood2);
+                            offsetStorage.Add(body.records[i].GroundBlood2, body.records[i].record.GroundBlood2);
                             reverseStorage.Add(body.records[i].record.GroundBlood2, body.records[i].GroundBlood2); } }
                     // GroundBlood3
                     if (body.records[i].GroundBlood3.Length == 0)
                         body.records[i].record.GroundBlood3 = 0;
                     else {
-                        int key = body.records[i].GroundBlood3.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.GroundBlood3 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].GroundBlood3)) body.records[i].record.GroundBlood3 = offsetStorage[body.records[i].GroundBlood3];
                         else {
                             body.records[i].record.GroundBlood3 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].GroundBlood3) + 1;
-                            offsetStorage.Add(key, body.records[i].record.GroundBlood3);
+                            offsetStorage.Add(body.records[i].GroundBlood3, body.records[i].record.GroundBlood3);
                             reverseStorage.Add(body.records[i].record.GroundBlood3, body.records[i].GroundBlood3); } }
                     // GroundBlood4
                     if (body.records[i].GroundBlood4.Length == 0)
                         body.records[i].record.GroundBlood4 = 0;
                     else {
-                        int key = body.records[i].GroundBlood4.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.GroundBlood4 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].GroundBlood4)) body.records[i].record.GroundBlood4 = offsetStorage[body.records[i].GroundBlood4];
                         else {
                             body.records[i].record.GroundBlood4 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].GroundBlood4) + 1;
-                            offsetStorage.Add(key, body.records[i].record.GroundBlood4);
+                            offsetStorage.Add(body.records[i].GroundBlood4, body.records[i].record.GroundBlood4);
                             reverseStorage.Add(body.records[i].record.GroundBlood4, body.records[i].GroundBlood4); } }
                     // GroundBlood5
                     if (body.records[i].GroundBlood5.Length == 0)
                         body.records[i].record.GroundBlood5 = 0;
                     else {
-                        int key = body.records[i].GroundBlood5.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.GroundBlood5 = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].GroundBlood5)) body.records[i].record.GroundBlood5 = offsetStorage[body.records[i].GroundBlood5];
                         else {
                             body.records[i].record.GroundBlood5 = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].GroundBlood5) + 1;
-                            offsetStorage.Add(key, body.records[i].record.GroundBlood5);
+                            offsetStorage.Add(body.records[i].GroundBlood5, body.records[i].record.GroundBlood5);
                             reverseStorage.Add(body.records[i].record.GroundBlood5, body.records[i].GroundBlood5); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -12603,7 +12384,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -12679,7 +12460,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -12688,13 +12469,11 @@ namespace DBtoDBC {
                     if (body.records[i].Texture.Length == 0)
                         body.records[i].record.Texture = 0;
                     else {
-                        int key = body.records[i].Texture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture)) body.records[i].record.Texture = offsetStorage[body.records[i].Texture];
                         else {
                             body.records[i].record.Texture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture);
+                            offsetStorage.Add(body.records[i].Texture, body.records[i].record.Texture);
                             reverseStorage.Add(body.records[i].record.Texture, body.records[i].Texture); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -12769,7 +12548,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -12866,7 +12645,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -12954,7 +12733,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13051,7 +12830,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13129,7 +12908,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13211,7 +12990,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13220,13 +12999,11 @@ namespace DBtoDBC {
                     if (body.records[i].Texture.Length == 0)
                         body.records[i].record.Texture = 0;
                     else {
-                        int key = body.records[i].Texture.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Texture = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Texture)) body.records[i].record.Texture = offsetStorage[body.records[i].Texture];
                         else {
                             body.records[i].record.Texture = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Texture) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Texture);
+                            offsetStorage.Add(body.records[i].Texture, body.records[i].record.Texture);
                             reverseStorage.Add(body.records[i].record.Texture, body.records[i].Texture); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -13305,7 +13082,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13393,7 +13170,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13477,7 +13254,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13578,7 +13355,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
 
@@ -13588,61 +13365,51 @@ namespace DBtoDBC {
                         if (body.records[i].Text[j].Length == 0)
                             body.records[i].record.Text[j] = 0;
                         else {
-                            int key = body.records[i].Text[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Text[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Text[j])) body.records[i].record.Text[j] = offsetStorage[body.records[i].Text[j]];
                             else {
                                 body.records[i].record.Text[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Text[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Text[j]);
+                                offsetStorage.Add(body.records[i].Text[j], body.records[i].record.Text[j]);
                                 reverseStorage.Add(body.records[i].record.Text[j], body.records[i].Text[j]); } }
                         // Description
                         if (body.records[i].Description[j].Length == 0)
                             body.records[i].record.Description[j] = 0;
                         else {
-                            int key = body.records[i].Description[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Description[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Description[j])) body.records[i].record.Description[j] = offsetStorage[body.records[i].Description[j]];
                             else {
                                 body.records[i].record.Description[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Description[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Description[j]);
+                                offsetStorage.Add(body.records[i].Description[j], body.records[i].record.Description[j]);
                                 reverseStorage.Add(body.records[i].record.Description[j], body.records[i].Description[j]); } }
                         // DynamicToolTip
                         if (body.records[i].DynamicTooltip[j].Length == 0)
                             body.records[i].record.DynamicTooltip[j] = 0;
                         else {
-                            int key = body.records[i].DynamicTooltip[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.DynamicTooltip[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].DynamicTooltip[j])) body.records[i].record.DynamicTooltip[j] = offsetStorage[body.records[i].DynamicTooltip[j]];
                             else {
                                 body.records[i].record.DynamicTooltip[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].DynamicTooltip[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.DynamicTooltip[j]);
+                                offsetStorage.Add(body.records[i].DynamicTooltip[j], body.records[i].record.DynamicTooltip[j]);
                                 reverseStorage.Add(body.records[i].record.DynamicTooltip[j], body.records[i].DynamicTooltip[j]); } } }
                     // Icon
                     if (body.records[i].Icon.Length == 0)
                         body.records[i].record.Icon = 0;
                     else {
-                        int key = body.records[i].Icon.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Icon = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Icon)) body.records[i].record.Icon = offsetStorage[body.records[i].Icon];
                         else {
                             body.records[i].record.Icon = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Icon) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Icon);
+                            offsetStorage.Add(body.records[i].Icon, body.records[i].record.Icon);
                             reverseStorage.Add(body.records[i].record.Icon, body.records[i].Icon); } }
                     // DynamicIcon
                     if (body.records[i].DynamicIcon.Length == 0)
                         body.records[i].record.DynamicIcon = 0;
                     else {
-                        int key = body.records[i].DynamicIcon.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.DynamicIcon = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].DynamicIcon)) body.records[i].record.DynamicIcon = offsetStorage[body.records[i].DynamicIcon];
                         else {
                             body.records[i].record.DynamicIcon = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].DynamicIcon) + 1;
-                            offsetStorage.Add(key, body.records[i].record.DynamicIcon);
+                            offsetStorage.Add(body.records[i].DynamicIcon, body.records[i].record.DynamicIcon);
                             reverseStorage.Add(body.records[i].record.DynamicIcon, body.records[i].DynamicIcon); } } }
 
                 header.string_block_size = (int)stringBlockOffset;
@@ -13720,7 +13487,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13803,7 +13570,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13813,37 +13580,31 @@ namespace DBtoDBC {
                         if (body.records[i].Text[j].Length == 0)
                             body.records[i].record.Text[j] = 0;
                         else {
-                            int key = body.records[i].Text[j].GetHashCode();
-                            if (offsetStorage.ContainsKey(key))
-                                body.records[i].record.Text[j] = offsetStorage[key];
+                            if (offsetStorage.ContainsKey(body.records[i].Text[j])) body.records[i].record.Text[j] = offsetStorage[body.records[i].Text[j]];
                             else {
                                 body.records[i].record.Text[j] = stringBlockOffset;
                                 stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Text[j]) + 1;
-                                offsetStorage.Add(key, body.records[i].record.Text[j]);
+                                offsetStorage.Add(body.records[i].Text[j], body.records[i].record.Text[j]);
                                 reverseStorage.Add(body.records[i].record.Text[j], body.records[i].Text[j]); } } }
                     // Name
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } }
                     // Name
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -13918,7 +13679,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -13927,13 +13688,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;
@@ -14011,7 +13770,7 @@ namespace DBtoDBC {
  
          public bool SaveDBC(string fileName) {
              try {
-                Dictionary<int, UInt32> offsetStorage = new Dictionary<int, UInt32>();
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
                 Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
                 UInt32 stringBlockOffset = 1; // first character is always \0
  
@@ -14020,13 +13779,11 @@ namespace DBtoDBC {
                     if (body.records[i].Name.Length == 0)
                         body.records[i].record.Name = 0;
                     else {
-                        int key = body.records[i].Name.GetHashCode();
-                        if (offsetStorage.ContainsKey(key))
-                            body.records[i].record.Name = offsetStorage[key];
+                        if (offsetStorage.ContainsKey(body.records[i].Name)) body.records[i].record.Name = offsetStorage[body.records[i].Name];
                         else {
                             body.records[i].record.Name = stringBlockOffset;
                             stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Name) + 1;
-                            offsetStorage.Add(key, body.records[i].record.Name);
+                            offsetStorage.Add(body.records[i].Name, body.records[i].record.Name);
                             reverseStorage.Add(body.records[i].record.Name, body.records[i].Name); } } }
  
                 header.string_block_size = (int)stringBlockOffset;

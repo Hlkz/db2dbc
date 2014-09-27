@@ -9,7 +9,7 @@ namespace DBtoDBC
         static void Main(string[] args)
         {
             string instruc = "all";
-            DB2DBC.GlobalLocalization = 0; // Default localization
+            DB2DBC.GlobalLocalization = 2; // Default localization
 
             if (args != null) {
                 if (args.Length > 0) instruc = args[0]; // Arg 0 is Instruction
