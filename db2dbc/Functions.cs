@@ -83,6 +83,8 @@ namespace DBtoDBC
             DBCExtract.scalingstatvalues(connection);
             DBCExtract.skilllineability(connection);
             DBCExtract.skillline(connection);
+            DBCExtract.skillraceclassinfo(connection);
+            DBCExtract.skilltiers(connection);
             DBCExtract.soundentries(connection);
             DBCExtract.spellcasttimes(connection);
             DBCExtract.spellcategory(connection);
@@ -220,8 +222,6 @@ namespace DBtoDBC
             DBCExtract.sheathesoundlookups(connection);
             DBCExtract.skillcostsdata(connection);
             DBCExtract.skilllinecategory(connection);
-            DBCExtract.skillraceclassinfo(connection);
-            DBCExtract.skilltiers(connection);
             DBCExtract.soundambience(connection);
             DBCExtract.soundemitters(connection);
             DBCExtract.soundentriesadvanced(connection);

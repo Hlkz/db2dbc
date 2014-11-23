@@ -834,51 +834,6 @@ namespace DBtoDBC
         public UInt32[] Name;
         public Int32 DisplayOrder; }
 
-    public struct skillraceclassinfoRecord {
-        public Int32 Id;
-        public Int32 SkillLine;
-        public Int32 Race;
-        public Int32 Class;
-        public Int32 Flags;
-        public Int32 RequiredLevel;
-        public Int32 SkillTierId;
-        public Int32 SkillCostId; }
-
-    public struct skilltiersRecord {
-        public Int32 Id;
-        public Int32 SkillValue1;
-        public Int32 SkillValue2;
-        public Int32 SkillValue3;
-        public Int32 SkillValue4;
-        public Int32 SkillValue5;
-        public Int32 SkillValue6;
-        public Int32 SkillValue7;
-        public Int32 SkillValue8;
-        public Int32 SkillValue9;
-        public Int32 SkillValue10;
-        public Int32 SkillValue11;
-        public Int32 SkillValue12;
-        public Int32 SkillValue13;
-        public Int32 SkillValue14;
-        public Int32 SkillValue15;
-        public Int32 SkillValue16;
-        public Int32 MaxValue1;
-        public Int32 MaxValue2;
-        public Int32 MaxValue3;
-        public Int32 MaxValue4;
-        public Int32 MaxValue5;
-        public Int32 MaxValue6;
-        public Int32 MaxValue7;
-        public Int32 MaxValue8;
-        public Int32 MaxValue9;
-        public Int32 MaxValue0;
-        public Int32 MaxValue11;
-        public Int32 MaxValue12;
-        public Int32 MaxValue13;
-        public Int32 MaxValue14;
-        public Int32 MaxValue15;
-        public Int32 MaxValue16; }
-
     public struct soundambienceRecord {
         public Int32 Id;
         public Int32 SoundDay;

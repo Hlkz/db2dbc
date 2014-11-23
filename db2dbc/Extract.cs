@@ -382,6 +382,18 @@ namespace DBtoDBC
             skilllinedbc skillline = new skilllinedbc();
             skillline.LoadDB(connection);
             skillline.SaveDBC("D:/A/DBC/temp/DBFilesClient/SkillLine.dbc"); }
+        
+        public static void skillraceclassinfo(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
+            skillraceclassinfodbc skillraceclassinfo = new skillraceclassinfodbc();
+            skillraceclassinfo.LoadDB(connection);
+            skillraceclassinfo.SaveDBC("D:/A/DBC/temp/DBFilesClient/SkillRaceClassInfo.dbc"); }
+
+        public static void skilltiers(MySqlConnection connection) {
+            DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
+            skilltiersdbc skilltiers = new skilltiersdbc();
+            skilltiers.LoadDB(connection);
+            skilltiers.SaveDBC("D:/A/DBC/temp/DBFilesClient/SkillTiers.dbc"); }
 
         public static void soundentries(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
@@ -688,7 +700,7 @@ namespace DBtoDBC
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
             declinedwordcasesdbc declinedwordcases = new declinedwordcasesdbc();
             declinedwordcases.LoadDB(connection);
-            declinedwordcases.SaveDBC("D:/A/DBC/temp/DBFilesClient/declinedwordcases.dbc"); }
+            declinedwordcases.SaveDBC("D:/A/DBC/temp/DBFilesClient/DeclinedWordCases.dbc"); }
 
         public static void dungeonmap(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
@@ -809,7 +821,8 @@ namespace DBtoDBC
             groundeffecttexturedbc groundeffecttexture = new groundeffecttexturedbc();
             groundeffecttexture.LoadDB(connection);
             groundeffecttexture.SaveDBC("D:/A/DBC/temp/DBFilesClient/GroundEffectTexture.dbc"); }
-                public static void gtbarbershopcostbase(MySqlConnection connection) {
+
+        public static void gtbarbershopcostbase(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
             gtbarbershopcostbasedbc gtbarbershopcostbase = new gtbarbershopcostbasedbc();
             gtbarbershopcostbase.LoadDB(connection);
@@ -1181,18 +1194,6 @@ namespace DBtoDBC
             skilllinecategory.LoadDB(connection);
             skilllinecategory.SaveDBC("D:/A/DBC/temp/DBFilesClient/SkillLineCategory.dbc"); }
 
-        public static void skillraceclassinfo(MySqlConnection connection) {
-            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
-            skillraceclassinfodbc skillraceclassinfo = new skillraceclassinfodbc();
-            skillraceclassinfo.LoadDB(connection);
-            skillraceclassinfo.SaveDBC("D:/A/DBC/temp/DBFilesClient/SkillRaceClassInfo.dbc"); }
-
-        public static void skilltiers(MySqlConnection connection) {
-            DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
-            skilltiersdbc skilltiers = new skilltiersdbc();
-            skilltiers.LoadDB(connection);
-            skilltiers.SaveDBC("D:/A/DBC/temp/DBFilesClient/SkillTiers.dbc"); }
-
         public static void soundambience(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
             soundambiencedbc soundambience = new soundambiencedbc();
@@ -1428,7 +1429,6 @@ namespace DBtoDBC
             weather.SaveDBC("D:/A/DBC/temp/DBFilesClient/Weather.dbc"); }
 
         public static void worldchunksounds(MySqlConnection connection) {
-            return; // NON ELLE FAIT WOWERROR
             DB2DBC.CheckDatabase(connection, DB2DBC.UnusedDatabase);
             worldchunksoundsdbc worldchunksounds = new worldchunksoundsdbc();
             worldchunksounds.LoadDB(connection);

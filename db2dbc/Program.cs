@@ -25,6 +25,13 @@ namespace DBtoDBC
                 case "spells":
                     Console.WriteLine("Extracting spells dbc.");
                     DB2DBC.ExtractSpells(connection); break;
+                case "world":
+                    Console.WriteLine("Extracting world dbc.");
+                    DB2DBC.ExtractWorld(connection); break;
+                case "unused":
+                    Console.WriteLine("Extracting unused dbc.");
+                    connection.ChangeDatabase(DB2DBC.UnusedDatabase);
+                    DB2DBC.ExtractUnused(connection); break;
                 case "all":
                     Console.WriteLine("Extracting all dbc.");
                     DB2DBC.ExtractAll(connection); break;
