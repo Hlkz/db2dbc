@@ -123,7 +123,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM achievementdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Faction, MapId, Previous, Name, Name_loc2, Description, Description_loc2, Category, Points, OrderInGroup, Flags, SpellIcon, Reward, Reward_loc2, Rewardflags, Demands, ReferencedAchievement FROM achievementdbc ORDER BY Id ASC";
+                string query = "SELECT Id, Faction, MapId, Previous, Name, Name_loc2, Description, Description_loc2, Category, Points, OrderInGroup, Flags, SpellIcon, Reward, Reward_loc2, Demands, ReferencedAchievement FROM achievementdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
