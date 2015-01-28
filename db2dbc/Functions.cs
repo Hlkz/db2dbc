@@ -261,7 +261,7 @@ namespace DBtoDBC
             DBCExtract.weaponimpactsounds(connection);
             DBCExtract.weaponswingsounds2(connection);
             DBCExtract.weather(connection);
-            DBCExtract.worldchunksounds(connection);
+            // DBCExtract.worldchunksounds(connection);
             DBCExtract.worldmapcontinent(connection);
             DBCExtract.worldmaptransforms(connection);
             DBCExtract.worldstateui(connection);
