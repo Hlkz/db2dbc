@@ -6311,7 +6311,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM skilllineabilitydbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, SkillId, SpellId, Racemask, Classemask, RacemaskNot, ClassemaskNot, ReqSkillValue, ForwardSpellId, LearnOnGetSkill, `MaxValue`, MinValue, CharacterPoints1, CharacterPoints2 FROM skilllineabilitydbc ORDER BY Id ASC";
+                string query = "SELECT SkillId, SpellId, Racemask, Classemask, RacemaskNot, ClassemaskNot, ReqSkillValue, ForwardSpellId, LearnOnGetSkill, `MaxValue`, MinValue, CharacterPoints1, CharacterPoints2 FROM skilllineabilitydbc";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -6325,7 +6325,7 @@ namespace DBtoDBC {
 
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
-                    body.records[i].record.Id = reader.GetInt32("Id");
+                    body.records[i].record.Id = (Int32)i + 1;
                     body.records[i].record.SkillId = reader.GetInt32("SkillId");
                     body.records[i].record.SpellId = reader.GetInt32("SpellId");
                     body.records[i].record.Racemask = reader.GetInt32("Racemask");
@@ -8471,7 +8471,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM talenttabdbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Name, Name_loc2, SpellIcon, Name14, ClassMask, PetTalentMask, TabPage, InternalName FROM talenttabdbc ORDER BY Id ASC";
+                string query = "SELECT Id, Name, Name_loc2, SpellIcon, RaceMask, ClassMask, PetTalentMask, TabPage, InternalName FROM talenttabdbc ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -8487,7 +8487,7 @@ namespace DBtoDBC {
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
                     body.records[i].record.Id = reader.GetInt32("Id");
                     body.records[i].record.SpellIcon = reader.GetInt32("SpellIcon");
-                    body.records[i].record.Name14 = reader.GetInt32("Name14");
+                    body.records[i].record.RaceMask = reader.GetInt32("RaceMask");
                     body.records[i].record.ClassMask = reader.GetInt32("ClassMask");
                     body.records[i].record.PetTalentMask = reader.GetInt32("PetTalentMask");
                     body.records[i].record.TabPage = reader.GetInt32("TabPage");

@@ -1527,7 +1527,7 @@ namespace DBtoDBC
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Name;
         public Int32 SpellIcon;
-        public Int32 Name14;
+        public Int32 RaceMask;
         public Int32 ClassMask;
         public Int32 PetTalentMask;
         public Int32 TabPage;
