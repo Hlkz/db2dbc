@@ -46,6 +46,12 @@ namespace DBtoDBC
         public battlemasterlistRecord record;
         public string[] Name; }
 
+    public struct charsectionsMap {
+        public charsectionsRecord record;
+        public string Texture1;
+        public string Texture2;
+        public string Texture3; }
+
     public struct charstartoutfitMap {
         public charstartoutfitRecord record; };
 

@@ -39,12 +39,6 @@ namespace DBtoDBC
     public struct charhairtexturesMap {
         public charhairtexturesRecord record; }
 
-    public struct charsectionsMap {
-        public charsectionsRecord record;
-        public string Texture1;
-        public string Texture2;
-        public string Texture3; }
-
     public struct chatprofanityMap {
         public chatprofanityRecord record;
         public string DirtyWord; }

@@ -13,7 +13,11 @@ namespace DBtoDBC
 
             if (args != null) {
                 if (args.Length > 0) instruc = args[0]; // Arg 0 is Instruction
-                if (args.Length > 1) DB2DBC.GlobalLocalization = Convert.ToUInt32(args[1]); } // Arg 1 is Localization
+                if (args.Length > 1) DB2DBC.GlobalLocalization = Convert.ToUInt32(args[1]); // Arg 1 is Localization
+                if (args.Length > 2) DB2DBC.OutPath = args[2].ToString();} // Arg 2 is OutPath
+
+            //System.IO.Directory.Delete(DB2DBC.OutPath);
+            System.IO.Directory.CreateDirectory(DB2DBC.OutPath);
 
             string connectionString = "SERVER=" + DB2DBC.ConnectionServer + ";DATABASE=" + DB2DBC.WorldDatabase + ";"
                     + "UID=" + DB2DBC.ConnectionUsername + ";PASSWORD=" + DB2DBC.ConnectionPassword + ";";

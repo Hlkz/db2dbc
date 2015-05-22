@@ -88,18 +88,6 @@ namespace DBtoDBC
         public Int32 Unk4;
         public Int32 Unk5; }
 
-    public struct charsectionsRecord {
-        public Int32 Id;
-        public Int32 Race;
-        public Int32 Gender;
-        public Int32 GeneralType;
-        public UInt32 Texture1; // string
-        public UInt32 Texture2; // string
-        public UInt32 Texture3; // string
-        public Int32 Flags;
-        public Int32 Type;
-        public Int32 Variation; }
-
     public struct chatprofanityRecord {
         public Int32 Id;
         public UInt32 DirtyWord; // string

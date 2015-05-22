@@ -11,6 +11,7 @@ namespace DBtoDBC
         public static string ConnectionPassword = "";
         public static string WorldDatabase = "iwpw";
         public static string UnusedDatabase = "iwpu";
+        public static string OutPath = "D:\\A\\DBC\\Output";
 
         public static void CheckDatabase(MySqlConnection connection, string database)
         {
@@ -31,6 +32,7 @@ namespace DBtoDBC
             DBCExtract.bannedaddons(connection);
             DBCExtract.barbershopstyle(connection);
             DBCExtract.battlemasterlist(connection);
+            DBCExtract.charsections(connection);
             DBCExtract.charstartoutfit(connection);
             DBCExtract.chartitles(connection);
             DBCExtract.chatchannels(connection);
@@ -130,7 +132,6 @@ namespace DBtoDBC
             DBCExtract.charbaseinfo(connection);
             DBCExtract.charhairgeosets(connection);
             DBCExtract.charhairtextures(connection);
-            DBCExtract.charsections(connection);
             DBCExtract.chatprofanity(connection);
             DBCExtract.cinematiccamera(connection);
             DBCExtract.creaturemovementinfo(connection);
@@ -261,7 +262,7 @@ namespace DBtoDBC
             DBCExtract.weaponimpactsounds(connection);
             DBCExtract.weaponswingsounds2(connection);
             DBCExtract.weather(connection);
-            // DBCExtract.worldchunksounds(connection);
+            DBCExtract.worldchunksounds(connection);
             DBCExtract.worldmapcontinent(connection);
             DBCExtract.worldmaptransforms(connection);
             DBCExtract.worldstateui(connection);
