@@ -169,6 +169,23 @@ namespace DBtoDBC
         public itembagfamilyRecord record;
         public string[] Name; }
 
+    public struct itemdisplayinfoMap {
+        public itemdisplayinfoRecord record;
+        public string LeftModel;
+        public string RightModel;
+        public string LeftModelTexture;
+        public string RightModelTexture;
+        public string Icon1;
+        public string Icon2;
+        public string UpperArmTexture;
+        public string LowerArmTexture;
+        public string HandsTexture;
+        public string UpperTorsoTexture;
+        public string LowerTorsoTexture;
+        public string UpperLegTexture;
+        public string LowerLegTexture;
+        public string FootTexture; }
+
     public struct itemextendedcostMap {
         public itemextendedcostRecord record; };
 

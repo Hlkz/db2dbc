@@ -694,6 +694,33 @@ namespace DBtoDBC
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 17)]
         public UInt32[] Name; }
 
+    public struct itemdisplayinfoRecord {
+        public Int32 Id;
+        public UInt32 LeftModel; // string
+        public UInt32 RightModel; // string
+        public UInt32 LeftModelTexture; // string
+        public UInt32 RightModelTexture; // string
+        public UInt32 Icon1; // string
+        public UInt32 Icon2; // string
+        public Int32 GeosetGroup1;
+        public Int32 GeosetGroup2;
+        public Int32 GeosetGroup3;
+        public Int32 Flags;
+        public Int32 SpellVisual;
+        public Int32 GroupSound;
+        public Int32 HelmetGeosetVisMale;
+        public Int32 HelmetGeosetVisFemale;
+        public UInt32 UpperArmTexture; // string
+        public UInt32 LowerArmTexture; // string
+        public UInt32 HandsTexture; // string
+        public UInt32 UpperTorsoTexture; // string
+        public UInt32 LowerTorsoTexture; // string
+        public UInt32 UpperLegTexture; // string
+        public UInt32 LowerLegTexture; // string
+        public UInt32 FootTexture; // string
+        public Int32 ItemVisual;
+        public Int32 ParticleColorId; }
+
     public struct itemextendedcostRecord {
         public Int32 Id;
         public Int32 ReqHonorPoints;

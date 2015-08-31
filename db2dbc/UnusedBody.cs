@@ -176,9 +176,6 @@ namespace DBtoDBC
     public struct itemcondextcostsBody {
         public itemcondextcostsMap[] records; };
 
-    public struct itemdisplayinfoBody {
-        public itemdisplayinfoMap[] records; };
-
     public struct itemgroupsoundsBody {
         public itemgroupsoundsMap[] records; };
 

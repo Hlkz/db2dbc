@@ -207,23 +207,6 @@ namespace DBtoDBC
     public struct itemcondextcostsMap {
         public itemcondextcostsRecord record; }
 
-    public struct itemdisplayinfoMap {
-        public itemdisplayinfoRecord record;
-        public string LeftModel;
-        public string RightModel;
-        public string LeftModelTexture;
-        public string RightModelTexture;
-        public string Icon1;
-        public string Icon2;
-        public string UpperArmTexture;
-        public string LowerArmTexture;
-        public string HandsTexture;
-        public string UpperTorsoTexture;
-        public string LowerTorsoTexture;
-        public string UpperLegTexture;
-        public string LowerLegTexture;
-        public string FootTexture; }
-
     public struct itemgroupsoundsMap {
         public itemgroupsoundsRecord record; }
 

@@ -126,6 +126,9 @@ namespace DBtoDBC
     public struct itembagfamilyBody {
         public itembagfamilyMap[] records; };
 
+    public struct itemdisplayinfoBody {
+        public itemdisplayinfoMap[] records; };
+
     public struct itemextendedcostBody {
         public itemextendedcostMap[] records; };
 

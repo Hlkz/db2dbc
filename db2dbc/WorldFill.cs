@@ -4132,6 +4132,244 @@ namespace DBtoDBC {
                 return false; }
 
             return true; } } // itembagfamily
+    
+    public class itemdisplayinfodbc {
+        public DBCHeader header;
+        public itemdisplayinfoBody body;
+
+        public bool LoadDB(MySqlConnection connection) {
+            try {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM itemdisplayinfo", connection);
+                UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
+
+                string query = "SELECT Id, LeftModel, RightModel, LeftModelTexture, RightModelTexture, Icon1, Icon2, GeosetGroup1, GeosetGroup2, GeosetGroup3, Flags, SpellVisual, GroupSound, HelmetGeosetVisMale, HelmetGeosetVisFemale, UpperArmTexture, LowerArmTexture, HandsTexture, UpperTorsoTexture, LowerTorsoTexture, UpperLegTexture, LowerLegTexture, FootTexture, ItemVisual, ParticleColorId FROM itemdisplayinfo ORDER BY Id ASC";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+ 
+                body.records = new itemdisplayinfoMap[rowCount]; // Prepare body
+ 
+                header.magic = 1128416343;
+                header.record_count = rowCount;
+                header.field_count = 25;
+                header.record_size = (UInt32)Marshal.SizeOf(typeof(itemdisplayinfoRecord));
+ 
+                UInt32 i = 0;
+                while (reader.Read()) { //if (!reader.HasRows) return false;
+                    body.records[i].record.Id = reader.GetInt32("Id");
+                    body.records[i].LeftModel = reader.GetString("LeftModel");
+                    body.records[i].RightModel = reader.GetString("RightModel");
+                    body.records[i].LeftModelTexture = reader.GetString("LeftModelTexture");
+                    body.records[i].RightModelTexture = reader.GetString("RightModelTexture");
+                    body.records[i].Icon1 = reader.GetString("Icon1");
+                    body.records[i].Icon2 = reader.GetString("Icon2");
+                    body.records[i].record.GeosetGroup1 = reader.GetInt32("GeosetGroup1");
+                    body.records[i].record.GeosetGroup2 = reader.GetInt32("GeosetGroup2");
+                    body.records[i].record.GeosetGroup3 = reader.GetInt32("GeosetGroup3");
+                    body.records[i].record.Flags = reader.GetInt32("Flags");
+                    body.records[i].record.SpellVisual = reader.GetInt32("SpellVisual");
+                    body.records[i].record.GroupSound = reader.GetInt32("GroupSound");
+                    body.records[i].record.HelmetGeosetVisMale = reader.GetInt32("HelmetGeosetVisMale");
+                    body.records[i].record.HelmetGeosetVisFemale = reader.GetInt32("HelmetGeosetVisFemale");
+                    body.records[i].UpperArmTexture = reader.GetString("UpperArmTexture");
+                    body.records[i].LowerArmTexture = reader.GetString("LowerArmTexture");
+                    body.records[i].HandsTexture = reader.GetString("HandsTexture");
+                    body.records[i].UpperTorsoTexture = reader.GetString("UpperTorsoTexture");
+                    body.records[i].LowerTorsoTexture = reader.GetString("LowerTorsoTexture");
+                    body.records[i].UpperLegTexture = reader.GetString("UpperLegTexture");
+                    body.records[i].LowerLegTexture = reader.GetString("LowerLegTexture");
+                    body.records[i].FootTexture = reader.GetString("FootTexture");
+                    body.records[i].record.ItemVisual = reader.GetInt32("ItemVisual");
+                    body.records[i].record.ParticleColorId = reader.GetInt32("ParticleColorId");
+                    i++; }
+                reader.Close(); }
+             catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+ 
+             return true; }
+ 
+         public bool SaveDBC(string fileName) {
+             try {
+                Dictionary<string, UInt32> offsetStorage = new Dictionary<string, UInt32>();
+                Dictionary<UInt32, string> reverseStorage = new Dictionary<UInt32, string>();
+                UInt32 stringBlockOffset = 1; // first character is always \0
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Generate some string offsets...
+                    // LeftModel
+                    if (body.records[i].LeftModel.Length == 0)
+                        body.records[i].record.LeftModel = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].LeftModel)) body.records[i].record.LeftModel = offsetStorage[body.records[i].LeftModel];
+                        else {
+                            body.records[i].record.LeftModel = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LeftModel) + 1;
+                            offsetStorage.Add(body.records[i].LeftModel, body.records[i].record.LeftModel);
+                            reverseStorage.Add(body.records[i].record.LeftModel, body.records[i].LeftModel); } }
+                    // RightModel
+                    if (body.records[i].RightModel.Length == 0)
+                        body.records[i].record.RightModel = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].RightModel)) body.records[i].record.RightModel = offsetStorage[body.records[i].RightModel];
+                        else {
+                            body.records[i].record.RightModel = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].RightModel) + 1;
+                            offsetStorage.Add(body.records[i].RightModel, body.records[i].record.RightModel);
+                            reverseStorage.Add(body.records[i].record.RightModel, body.records[i].RightModel); } }
+                    // LeftModelTexture
+                    if (body.records[i].LeftModelTexture.Length == 0)
+                        body.records[i].record.LeftModelTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].LeftModelTexture)) body.records[i].record.LeftModelTexture = offsetStorage[body.records[i].LeftModelTexture];
+                        else {
+                            body.records[i].record.LeftModelTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LeftModelTexture) + 1;
+                            offsetStorage.Add(body.records[i].LeftModelTexture, body.records[i].record.LeftModelTexture);
+                            reverseStorage.Add(body.records[i].record.LeftModelTexture, body.records[i].LeftModelTexture); } }
+                    // RightModelTexture
+                    if (body.records[i].RightModelTexture.Length == 0)
+                        body.records[i].record.RightModelTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].RightModelTexture)) body.records[i].record.RightModelTexture = offsetStorage[body.records[i].RightModelTexture];
+                        else {
+                            body.records[i].record.RightModelTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].RightModelTexture) + 1;
+                            offsetStorage.Add(body.records[i].RightModelTexture, body.records[i].record.RightModelTexture);
+                            reverseStorage.Add(body.records[i].record.RightModelTexture, body.records[i].RightModelTexture); } }
+                    // Icon1
+                    if (body.records[i].Icon1.Length == 0)
+                        body.records[i].record.Icon1 = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].Icon1)) body.records[i].record.Icon1 = offsetStorage[body.records[i].Icon1];
+                        else {
+                            body.records[i].record.Icon1 = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Icon1) + 1;
+                            offsetStorage.Add(body.records[i].Icon1, body.records[i].record.Icon1);
+                            reverseStorage.Add(body.records[i].record.Icon1, body.records[i].Icon1); } }
+                    // Icon2
+                    if (body.records[i].Icon2.Length == 0)
+                        body.records[i].record.Icon2 = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].Icon2)) body.records[i].record.Icon2 = offsetStorage[body.records[i].Icon2];
+                        else {
+                            body.records[i].record.Icon2 = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].Icon2) + 1;
+                            offsetStorage.Add(body.records[i].Icon2, body.records[i].record.Icon2);
+                            reverseStorage.Add(body.records[i].record.Icon2, body.records[i].Icon2); } }
+                    // UpperArmTexture
+                    if (body.records[i].UpperArmTexture.Length == 0)
+                        body.records[i].record.UpperArmTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].UpperArmTexture)) body.records[i].record.UpperArmTexture = offsetStorage[body.records[i].UpperArmTexture];
+                        else {
+                            body.records[i].record.UpperArmTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].UpperArmTexture) + 1;
+                            offsetStorage.Add(body.records[i].UpperArmTexture, body.records[i].record.UpperArmTexture);
+                            reverseStorage.Add(body.records[i].record.UpperArmTexture, body.records[i].UpperArmTexture); } }
+                    // LowerArmTexture
+                    if (body.records[i].LowerArmTexture.Length == 0)
+                        body.records[i].record.LowerArmTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].LowerArmTexture)) body.records[i].record.LowerArmTexture = offsetStorage[body.records[i].LowerArmTexture];
+                        else {
+                            body.records[i].record.LowerArmTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LowerArmTexture) + 1;
+                            offsetStorage.Add(body.records[i].LowerArmTexture, body.records[i].record.LowerArmTexture);
+                            reverseStorage.Add(body.records[i].record.LowerArmTexture, body.records[i].LowerArmTexture); } }
+                    // HandsTexture
+                    if (body.records[i].HandsTexture.Length == 0)
+                        body.records[i].record.HandsTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].HandsTexture)) body.records[i].record.HandsTexture = offsetStorage[body.records[i].HandsTexture];
+                        else {
+                            body.records[i].record.HandsTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].HandsTexture) + 1;
+                            offsetStorage.Add(body.records[i].HandsTexture, body.records[i].record.HandsTexture);
+                            reverseStorage.Add(body.records[i].record.HandsTexture, body.records[i].HandsTexture); } }
+                    // UpperTorsoTexture
+                    if (body.records[i].UpperTorsoTexture.Length == 0)
+                        body.records[i].record.UpperTorsoTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].UpperTorsoTexture)) body.records[i].record.UpperTorsoTexture = offsetStorage[body.records[i].UpperTorsoTexture];
+                        else {
+                            body.records[i].record.UpperTorsoTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].UpperTorsoTexture) + 1;
+                            offsetStorage.Add(body.records[i].UpperTorsoTexture, body.records[i].record.UpperTorsoTexture);
+                            reverseStorage.Add(body.records[i].record.UpperTorsoTexture, body.records[i].UpperTorsoTexture); } }
+                    // LowerTorsoTexture
+                    if (body.records[i].LowerTorsoTexture.Length == 0)
+                        body.records[i].record.LowerTorsoTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].LowerTorsoTexture)) body.records[i].record.LowerTorsoTexture = offsetStorage[body.records[i].LowerTorsoTexture];
+                        else {
+                            body.records[i].record.LowerTorsoTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LowerTorsoTexture) + 1;
+                            offsetStorage.Add(body.records[i].LowerTorsoTexture, body.records[i].record.LowerTorsoTexture);
+                            reverseStorage.Add(body.records[i].record.LowerTorsoTexture, body.records[i].LowerTorsoTexture); } }
+                    // UpperLegTexture
+                    if (body.records[i].UpperLegTexture.Length == 0)
+                        body.records[i].record.UpperLegTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].UpperLegTexture)) body.records[i].record.UpperLegTexture = offsetStorage[body.records[i].UpperLegTexture];
+                        else {
+                            body.records[i].record.UpperLegTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].UpperLegTexture) + 1;
+                            offsetStorage.Add(body.records[i].UpperLegTexture, body.records[i].record.UpperLegTexture);
+                            reverseStorage.Add(body.records[i].record.UpperLegTexture, body.records[i].UpperLegTexture); } }
+                    // LowerLegTexture
+                    if (body.records[i].LowerLegTexture.Length == 0)
+                        body.records[i].record.LowerLegTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].LowerLegTexture)) body.records[i].record.LowerLegTexture = offsetStorage[body.records[i].LowerLegTexture];
+                        else {
+                            body.records[i].record.LowerLegTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].LowerLegTexture) + 1;
+                            offsetStorage.Add(body.records[i].LowerLegTexture, body.records[i].record.LowerLegTexture);
+                            reverseStorage.Add(body.records[i].record.LowerLegTexture, body.records[i].LowerLegTexture); } }
+                    // FootTexture
+                    if (body.records[i].FootTexture.Length == 0)
+                        body.records[i].record.FootTexture = 0;
+                    else {
+                        if (offsetStorage.ContainsKey(body.records[i].FootTexture)) body.records[i].record.FootTexture = offsetStorage[body.records[i].FootTexture];
+                        else {
+                            body.records[i].record.FootTexture = stringBlockOffset;
+                            stringBlockOffset += (UInt32)Encoding.UTF8.GetByteCount(body.records[i].FootTexture) + 1;
+                            offsetStorage.Add(body.records[i].FootTexture, body.records[i].record.FootTexture);
+                            reverseStorage.Add(body.records[i].record.FootTexture, body.records[i].FootTexture); } } }
+ 
+                header.string_block_size = (int)stringBlockOffset;
+ 
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(fs);
+                int count = Marshal.SizeOf(typeof(DBCHeader)); // Write header
+                byte[] buffer = new byte[count];
+                GCHandle gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                Marshal.StructureToPtr(header, gcHandle.AddrOfPinnedObject(), true);
+                writer.Write(buffer, 0, count);
+                gcHandle.Free();
+ 
+                for (UInt32 i = 0; i < header.record_count; ++i) { // Write records
+                    count = Marshal.SizeOf(typeof(itemdisplayinfoRecord)); // Write main body
+                    buffer = new byte[count];
+                    gcHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                    Marshal.StructureToPtr(body.records[i].record, gcHandle.AddrOfPinnedObject(), true);
+                    writer.Write(buffer, 0, count);
+                    gcHandle.Free(); }
+
+                UInt32[] offsets_stored = offsetStorage.Values.ToArray<UInt32>();
+                writer.Write(Encoding.UTF8.GetBytes("\0")); // Write string block
+                for (int i = 0; i < offsets_stored.Length; ++i)
+                    writer.Write(Encoding.UTF8.GetBytes(reverseStorage[offsets_stored[i]] + "\0"));
+
+                writer.Close();
+                fs.Close(); }
+            catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                return false; }
+
+            return true; } } // itemdisplayinfo
 
     public class itemextendedcostdbc {
         public DBCHeader header;
