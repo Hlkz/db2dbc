@@ -5809,7 +5809,7 @@ namespace DBtoDBC {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM pvpdifficultydbc", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, MapId, BracketId, MinLevel, MaxLevel, Difficulty FROM pvpdifficultydbc ORDER BY Id ASC";
+                string query = "SELECT MapId, BracketId, MinLevel, MaxLevel, Difficulty FROM pvpdifficultydbc ORDER BY MapId, BracketId, MinLevel, MaxLevel, Difficulty";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -5823,7 +5823,7 @@ namespace DBtoDBC {
 
                 UInt32 i = 0;
                 while (reader.Read()) { //if (!reader.HasRows) return false; 
-                    body.records[i].record.Id = reader.GetInt32("Id");
+                    body.records[i].record.Id = (Int32)(i + 1);
                     body.records[i].record.MapId = reader.GetInt32("MapId");
                     body.records[i].record.BracketId = reader.GetInt32("BracketId");
                     body.records[i].record.MinLevel = reader.GetInt32("MinLevel");
