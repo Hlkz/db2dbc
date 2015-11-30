@@ -207,7 +207,7 @@ namespace DBtoDBC
             DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);
             gameobjectdisplayinfodbc gameobjectdisplayinfo = new gameobjectdisplayinfodbc();
             gameobjectdisplayinfo.LoadDB(connection);
-            gameobjectdisplayinfo.SaveDBC(DB2DBC.OutPath + "\\gameobjectdisplayinfo.dbc"); }
+            gameobjectdisplayinfo.SaveDBC(DB2DBC.OutPath + "\\GameObjectDisplayInfo.dbc"); }
 
         public static void gemproperties(MySqlConnection connection) {
             DB2DBC.CheckDatabase(connection, DB2DBC.WorldDatabase);

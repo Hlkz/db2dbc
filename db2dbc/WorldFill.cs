@@ -9900,10 +9900,10 @@ namespace DBtoDBC {
 
         public bool LoadDB(MySqlConnection connection) {
             try {
-                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM worldmapareadbc", connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM worldmapareadbc WHERE TinyClient", connection);
                 UInt32 rowCount = Convert.ToUInt32(cmd.ExecuteScalar());
 
-                string query = "SELECT Id, Map, Area, InternalName, LocLeft, LocRight, LocTop, LocBottom, DisplayMap, DungeonMap, ParentMap FROM worldmapareadbc ORDER BY Id ASC";
+                string query = "SELECT Id, Map, Area, InternalName, LocLeft, LocRight, LocTop, LocBottom, DisplayMap, DungeonMap, ParentMap FROM worldmapareadbc WHERE TinyClient ORDER BY Id ASC";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
